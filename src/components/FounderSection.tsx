@@ -1,8 +1,9 @@
 import React from 'react';
-import { PhoneIcon, MessageCircleIcon } from 'lucide-react';
+import { PhoneIcon } from 'lucide-react';
 import { brand, whatsappLink, callLink } from '../data/brand';
 import { founderContent } from '../data/site';
 import { Reveal, GoldLine } from './Reveal';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 export function FounderSection() {
   return (
@@ -71,7 +72,7 @@ export function FounderSection() {
                   rel="noreferrer"
                   className="flex h-12 items-center justify-center gap-2 border border-paper/20 px-6 text-[0.68rem] uppercase tracking-micro text-paper/85 transition-colors duration-150 ease-lux hover:border-gold hover:text-gold-bright">
                   
-                  <MessageCircleIcon className="h-4 w-4" aria-hidden="true" />
+                  <WhatsAppIcon className="h-4 w-4 object-contain" />
                   WhatsApp
                 </a>
               </div>

@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import {
   MapPinIcon,
-  MessageCircleIcon,
   PhoneIcon,
   DownloadIcon,
   CalendarCheckIcon,
@@ -27,6 +26,7 @@ import { EnquiryForm } from '../components/EnquiryForm';
 import { ProjectGallery } from '../components/Lightbox';
 import { MobileBottomCTA } from '../components/MobileBottomCTA';
 import { Reveal, GoldLine } from '../components/Reveal';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 
 const confidenceLabel: Record<Confidence, string> = {
   verified: 'Confirmed in supplied material',
@@ -119,7 +119,7 @@ export function ProjectDetail() {
               rel="noreferrer"
               className="flex h-12 items-center justify-center gap-2 bg-gold px-6 text-[0.66rem] uppercase tracking-micro text-ink-900 transition-colors duration-150 ease-lux hover:bg-gold-bright">
               
-              <MessageCircleIcon className="h-4 w-4" aria-hidden="true" />
+              <WhatsAppIcon className="h-4 w-4 object-contain" />
               Enquire Now
             </a>
             <a
@@ -317,7 +317,7 @@ export function ProjectDetail() {
                     rel="noreferrer"
                     className="flex h-12 items-center justify-center gap-2 bg-gold text-[0.66rem] uppercase tracking-micro text-ink-900 transition-colors duration-150 ease-lux hover:bg-gold-bright">
                     
-                    <MessageCircleIcon className="h-4 w-4" aria-hidden="true" />
+                    <WhatsAppIcon className="h-4 w-4 object-contain" />
                     WhatsApp Us
                   </a>
                   <a

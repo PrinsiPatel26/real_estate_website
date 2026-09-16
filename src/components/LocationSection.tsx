@@ -7,14 +7,6 @@ import { gurgaonCorridors } from '../data/site';
 import { SectionHeading } from './SectionHeading';
 import { Reveal, LUX } from './Reveal';
 
-/** Stylised corridor geometry — a diagram of the Gurgaon belt, not a survey map. */
-const ROUTES = [
-'M 4 26 C 26 18, 48 14, 74 8',
-'M 6 72 C 28 58, 52 46, 92 30',
-'M 88 20 C 80 40, 72 58, 64 88',
-'M 34 92 C 44 74, 52 56, 58 30'];
-
-
 export function LocationSection() {
   const [activeId, setActiveId] = useState(projects[0].id);
   const reduce = useReducedMotion();
@@ -49,21 +41,6 @@ export function LocationSection() {
                   </pattern>
                 </defs>
                 <rect width="100" height="100" fill="url(#cr-grid)" />
-                {ROUTES.map((d, index) =>
-                <motion.path
-                  key={d}
-                  d={d}
-                  fill="none"
-                  stroke="#C9A24D"
-                  strokeWidth="0.35"
-                  strokeLinecap="round"
-                  opacity="0.6"
-                  initial={reduce ? undefined : { pathLength: 0 }}
-                  whileInView={reduce ? undefined : { pathLength: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.05, ease: LUX }} />
-
-                )}
               </svg>
 
               <span className="absolute bottom-4 left-4 z-10 text-[0.55rem] uppercase tracking-micro text-paper/30">

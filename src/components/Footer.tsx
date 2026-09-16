@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  MessageCircleIcon,
   PhoneIcon,
   MailIcon,
   FacebookIcon,
@@ -10,6 +9,7 @@ import {
 'lucide-react';
 import { brand, navigation, whatsappLink, callLink, mailLink, DISCLAIMER_SHORT } from '../data/brand';
 import { projects } from '../data/projects';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 const socialIcon: Record<string, typeof FacebookIcon> = {
   Facebook: FacebookIcon,
@@ -110,7 +110,7 @@ export function Footer() {
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 text-paper/70 transition-colors duration-150 ease-lux hover:text-gold-bright">
                   
-                  <MessageCircleIcon className="h-4 w-4 text-gold" aria-hidden="true" />
+                  <WhatsAppIcon className="h-4 w-4 object-contain" />
                   WhatsApp {brand.whatsapp.display}
                 </a>
               </li>

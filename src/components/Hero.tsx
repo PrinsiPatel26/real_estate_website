@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRightIcon, MessageCircleIcon, PhoneIcon } from 'lucide-react';
+import { ArrowRightIcon, PhoneIcon } from 'lucide-react';
 import { brand, whatsappLink, callLink } from '../data/brand';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { heroContent } from '../data/site';
 import { HERO_IMAGE } from '../data/projects';
 import { LUX } from './Reveal';
@@ -105,10 +106,10 @@ export function Hero() {
             href={whatsappLink()}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center justify-center gap-2 border border-gold/40 px-7 text-[0.7rem] uppercase tracking-micro text-gold transition-colors duration-150 ease-lux hover:bg-gold hover:text-ink-900"
+            className="flex items-center justify-center gap-2 px-7 text-[0.7rem] uppercase tracking-micro text-gold transition-colors duration-150 ease-lux hover:bg-gold hover:text-ink-900"
             style={CTA_HEIGHT}>
             
-            <MessageCircleIcon className="h-4 w-4" aria-hidden="true" />
+            <WhatsAppIcon className="h-4 w-4 object-contain" />
             WhatsApp Us
           </a>
         </motion.div>

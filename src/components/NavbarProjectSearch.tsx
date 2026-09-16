@@ -106,7 +106,7 @@ export function NavbarProjectSearch({ onNavigate }: NavbarProjectSearchProps) {
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search projects, locations..."
             aria-label="Search projects and locations"
-            className="h-10 w-[260px] border border-gold/35 bg-ink-900 px-3 text-xs text-paper placeholder:text-paper/45 focus:border-gold focus:outline-none"
+            className="h-10 w-[260px] border-0 bg-ink-900 px-3 text-xs text-paper placeholder:text-paper/45 focus:outline-none"
           />
         </motion.div>
         <button
@@ -146,7 +146,7 @@ export function NavbarProjectSearch({ onNavigate }: NavbarProjectSearchProps) {
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Search projects, locations..."
                 aria-label="Search projects and locations"
-                className="h-11 w-full border border-gold/35 bg-ink-800 pl-10 pr-3 text-sm text-paper placeholder:text-paper/45 focus:border-gold focus:outline-none"
+                className="h-11 w-full border-0 bg-ink-800 pl-10 pr-3 text-sm text-paper placeholder:text-paper/45 focus:outline-none"
               />
               <AnimatePresence>{resultsPanel}</AnimatePresence>
             </div>

@@ -1,6 +1,7 @@
 import React from 'react';
-import { MessageCircleIcon, PhoneIcon, SendIcon } from 'lucide-react';
+import { PhoneIcon, SendIcon } from 'lucide-react';
 import { brand, whatsappLink, callLink } from '../data/brand';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 interface MobileBottomCTAProps {
   projectName: string;
@@ -19,7 +20,7 @@ export function MobileBottomCTA({ projectName, message, onEnquire }: MobileBotto
           className="flex h-16 flex-col items-center justify-center gap-1 border-r border-gold/15 text-gold"
           aria-label={`WhatsApp us about ${projectName}`}>
           
-          <MessageCircleIcon className="h-4 w-4" aria-hidden="true" />
+          <WhatsAppIcon className="h-4 w-4 object-contain" />
           <span className="text-[0.6rem] uppercase tracking-micro">WhatsApp</span>
         </a>
         <a

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { MenuIcon, XIcon, PhoneIcon, MessageCircleIcon } from 'lucide-react';
+import { MenuIcon, XIcon, PhoneIcon } from 'lucide-react';
 import { brand, navigation, whatsappLink, callLink } from '../data/brand';
 import { LUX } from './Reveal';
 import { NavbarProjectSearch } from './NavbarProjectSearch';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 interface NavbarProps {
   /** Home has a full-bleed hero, so the bar starts transparent there only. */
@@ -43,9 +44,9 @@ export function Navbar({ transparentOnTop = false }: NavbarProps) {
       
       <div className="mx-auto flex h-[72px] max-w-shell items-center justify-between gap-4 px-5 sm:h-[78px] lg:h-[82px] lg:px-10">
         <Link to="/" className="flex shrink-0 items-center gap-3" aria-label={`${brand.name} — home`}>
-          <span className="flex h-12 items-center justify-center rounded-sm bg-ink-900 px-2 ring-1 ring-gold/25 sm:h-14 lg:h-16">
+          <span className="flex h-12 items-center justify-center rounded-sm bg-ink-900 px-2 sm:h-14 lg:h-16">
             <img
-              src={brand.logo}
+              src="/logo_c-removebg-preview.png"
               alt={`${brand.name} logo`}
               className="h-full w-auto max-w-[132px] object-contain sm:max-w-[158px] lg:max-w-[180px]" />
             
@@ -95,9 +96,9 @@ export function Navbar({ transparentOnTop = false }: NavbarProps) {
             target="_blank"
             rel="noreferrer"
             aria-label="Chat with Chauhans Realtors on WhatsApp"
-            className="flex h-10 w-10 items-center justify-center border border-gold/30 text-gold transition-colors duration-150 ease-lux hover:border-gold hover:bg-gold hover:text-ink-900">
+            className="flex h-10 w-10 items-center justify-center text-gold transition-colors duration-150 ease-lux hover:bg-gold hover:text-ink-900">
             
-            <MessageCircleIcon className="h-4 w-4" aria-hidden="true" />
+            <WhatsAppIcon className="h-4 w-4 object-contain" />
           </a>
           <NavbarProjectSearch onNavigate={() => setOpen(false)} />
           <Link
@@ -155,9 +156,9 @@ export function Navbar({ transparentOnTop = false }: NavbarProps) {
                 href={whatsappLink()}
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-12 items-center justify-center gap-2 border border-gold/40 text-[0.7rem] uppercase tracking-micro text-gold">
+                className="flex h-12 items-center justify-center gap-2 text-[0.7rem] uppercase tracking-micro text-gold">
                 
-                  <MessageCircleIcon className="h-4 w-4" aria-hidden="true" />
+                  <WhatsAppIcon className="h-4 w-4 object-contain" />
                   WhatsApp Us
                 </a>
                 <a

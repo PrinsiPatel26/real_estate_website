@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRightIcon, MapPinIcon, MessageCircleIcon } from 'lucide-react';
+import { ArrowUpRightIcon, MapPinIcon } from 'lucide-react';
 import type { Project } from '../types/project';
 import { whatsappLink, projectWhatsappMessage } from '../data/brand';
 import { Reveal } from './Reveal';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 interface ProjectCardProps {
   project: Project;
@@ -96,7 +97,7 @@ export function ProjectCard({ project, featured = false, delay = 0 }: ProjectCar
             rel="noreferrer"
             className="inline-flex items-center gap-2 text-[0.66rem] uppercase tracking-micro text-gold transition-colors duration-150 ease-lux hover:text-gold-bright">
             
-            <MessageCircleIcon className="h-3.5 w-3.5" aria-hidden="true" />
+            <WhatsAppIcon className="h-3.5 w-3.5 object-contain" />
             Enquire Now
           </a>
         </div>

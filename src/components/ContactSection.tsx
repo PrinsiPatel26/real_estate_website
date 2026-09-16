@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircleIcon, PhoneIcon, MailIcon, MapPinIcon, ExternalLinkIcon } from 'lucide-react';
+import { PhoneIcon, MailIcon, MapPinIcon, ExternalLinkIcon } from 'lucide-react';
 import {
   brand,
   whatsappLink,
@@ -11,6 +11,7 @@ import {
 import { SectionHeading } from './SectionHeading';
 import { EnquiryForm } from './EnquiryForm';
 import { Reveal } from './Reveal';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 export function ContactSection({ defaultProject = '' }: {defaultProject?: string;}) {
   return (
@@ -52,7 +53,7 @@ export function ContactSection({ defaultProject = '' }: {defaultProject?: string
                     rel="noreferrer"
                     className="group flex items-center gap-4 py-4 transition-colors duration-150 ease-lux hover:text-gold-bright">
                     
-                    <MessageCircleIcon className="h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
+                    <WhatsAppIcon className="h-4 w-4 shrink-0 object-contain" />
                     <span className="min-w-0">
                       <span className="block text-[0.6rem] uppercase tracking-micro text-paper/40">
                         WhatsApp
