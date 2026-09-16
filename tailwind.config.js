@@ -16,7 +16,7 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       letterSpacing: { micro: '0.24em' },
-      maxWidth: { shell: '80rem' },
+      maxWidth: { shell: '87.5rem' },
       transitionTimingFunction: { lux: 'cubic-bezier(0.23, 1, 0.32, 1)' },
     },
   },

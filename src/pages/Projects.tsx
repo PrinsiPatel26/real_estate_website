@@ -25,8 +25,8 @@ export function Projects() {
         image={projects[0].card} />
       
 
-      <section aria-label="All projects" className="bg-ink-800 py-16 sm:py-20 lg:py-24">
-        <div className="mx-auto max-w-shell px-5 lg:px-10">
+      <section aria-label="All projects" className="bg-ink-800 py-14 sm:py-16 lg:py-20">
+        <div className="mx-auto w-[90%] max-w-shell">
           <ProjectGrid projects={projects} />
 
           <Reveal delay={0.05}>

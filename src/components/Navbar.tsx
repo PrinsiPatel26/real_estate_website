@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { MenuIcon, XIcon, PhoneIcon, MessageCircleIcon } from 'lucide-react';
 import { brand, navigation, whatsappLink, callLink } from '../data/brand';
 import { LUX } from './Reveal';
+import { NavbarProjectSearch } from './NavbarProjectSearch';
 
 interface NavbarProps {
   /** Home has a full-bleed hero, so the bar starts transparent there only. */
@@ -40,20 +41,20 @@ export function Navbar({ transparentOnTop = false }: NavbarProps) {
       solid ? 'border-b border-gold/15 bg-ink-900/95 backdrop-blur-sm' : 'bg-transparent'}`
       }>
       
-      <div className="mx-auto flex h-[68px] max-w-shell items-center justify-between gap-4 px-5 sm:h-[76px] lg:px-10">
+      <div className="mx-auto flex h-[72px] max-w-shell items-center justify-between gap-4 px-5 sm:h-[78px] lg:h-[82px] lg:px-10">
         <Link to="/" className="flex shrink-0 items-center gap-3" aria-label={`${brand.name} — home`}>
-          <span className="flex h-10 items-center justify-center rounded-sm bg-ink-900 px-2 ring-1 ring-gold/25 sm:h-11">
+          <span className="flex h-12 items-center justify-center rounded-sm bg-ink-900 px-2 ring-1 ring-gold/25 sm:h-14 lg:h-16">
             <img
               src={brand.logo}
               alt={`${brand.name} logo`}
-              className="h-full w-auto max-w-[104px] object-contain sm:max-w-[124px]" />
+              className="h-full w-auto max-w-[132px] object-contain sm:max-w-[158px] lg:max-w-[180px]" />
             
           </span>
           <span className="hidden xs:block">
-            <span className="block font-display text-[0.95rem] leading-tight text-paper">
+            <span className="block font-display text-[1rem] leading-tight text-paper">
               Chauhans Realtors
             </span>
-            <span className="block text-[0.5rem] uppercase tracking-micro text-gold/70">
+            <span className="block text-[0.52rem] uppercase tracking-micro text-gold/70">
               {brand.tagline}
             </span>
           </span>
@@ -98,6 +99,7 @@ export function Navbar({ transparentOnTop = false }: NavbarProps) {
             
             <MessageCircleIcon className="h-4 w-4" aria-hidden="true" />
           </a>
+          <NavbarProjectSearch onNavigate={() => setOpen(false)} />
           <Link
             to="/contact"
             className="hidden h-10 items-center border border-gold bg-gold px-5 text-[0.68rem] uppercase tracking-micro text-ink-900 transition-colors duration-150 ease-lux hover:bg-gold-bright sm:flex">

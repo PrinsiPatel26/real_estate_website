@@ -14,8 +14,8 @@ import { Reveal } from './Reveal';
 
 export function ContactSection({ defaultProject = '' }: {defaultProject?: string;}) {
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="bg-ink-900 py-20 sm:py-28 lg:py-32">
-      <div className="mx-auto max-w-shell px-5 lg:px-10">
+    <section id="contact" aria-labelledby="contact-heading" className="bg-ink-900 py-16 sm:py-20 lg:py-24">
+      <div className="mx-auto w-[90%] max-w-shell">
         <SectionHeading
           id="contact-heading"
           eyebrow="Contact"
@@ -27,7 +27,7 @@ export function ContactSection({ defaultProject = '' }: {defaultProject?: string
           </p>
         </SectionHeading>
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
+        <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-12">
           <div>
             <Reveal>
               <p className="font-display text-2xl font-light text-paper">{brand.name}</p>

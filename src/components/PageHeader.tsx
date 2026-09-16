@@ -19,7 +19,7 @@ interface PageHeaderProps {
 /** Compact page masthead used on every route other than Home. */
 export function PageHeader({ eyebrow, title, intro, crumbs, image }: PageHeaderProps) {
   return (
-    <section className="relative isolate overflow-hidden border-b border-gold/10 bg-ink-900 pb-14 pt-32 sm:pb-20 sm:pt-40">
+    <section className="relative isolate overflow-hidden border-b border-gold/10 bg-ink-900 pb-12 pt-28 sm:pb-16 sm:pt-32 lg:pt-36">
       {image ?
       <>
           <img src={image} alt="" aria-hidden="true" className="absolute inset-0 -z-10 h-full w-full object-cover" />
@@ -27,7 +27,7 @@ export function PageHeader({ eyebrow, title, intro, crumbs, image }: PageHeaderP
         </> :
       null}
 
-      <div className="mx-auto max-w-shell px-5 lg:px-10">
+      <div className="mx-auto w-[90%] max-w-shell">
         {crumbs?.length ?
         <nav aria-label="Breadcrumb">
             <ol className="flex flex-wrap items-center gap-1.5 text-[0.62rem] uppercase tracking-micro text-paper/40">

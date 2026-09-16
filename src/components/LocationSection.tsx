@@ -21,8 +21,8 @@ export function LocationSection() {
   const active = projects.find((project) => project.id === activeId) ?? projects[0];
 
   return (
-    <section id="location" aria-labelledby="location-heading" className="bg-ink-900 py-20 sm:py-28 lg:py-32">
-      <div className="mx-auto max-w-shell px-5 lg:px-10">
+    <section id="location" aria-labelledby="location-heading" className="bg-ink-900 py-16 sm:py-20 lg:py-24">
+      <div className="mx-auto w-[90%] max-w-shell">
         <SectionHeading
           id="location-heading"
           eyebrow="Explore Gurgaon"
@@ -34,9 +34,9 @@ export function LocationSection() {
           </p>
         </SectionHeading>
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-12">
-          <Reveal>
-            <div className="relative aspect-[4/3] w-full overflow-hidden border border-gold/20 bg-ink-800 sm:aspect-[16/11]">
+        <div className="mt-10 grid gap-8 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-10">
+          <Reveal className="h-full">
+            <div className="relative h-[460px] w-full overflow-hidden border border-gold/20 bg-ink-800 sm:h-[560px] md:h-[660px] lg:h-full lg:min-h-[760px]">
               <svg
                 viewBox="0 0 100 100"
                 preserveAspectRatio="none"
