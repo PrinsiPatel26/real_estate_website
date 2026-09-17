@@ -1,42 +1,49 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowUpRightIcon, MapPinIcon } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowRightIcon, MapPinIcon } from 'lucide-react';
 import type { Project } from '../types/project';
-import { whatsappLink, projectWhatsappMessage } from '../data/brand';
 import { Reveal } from './Reveal';
-import { WhatsAppIcon } from './WhatsAppIcon';
 
-interface ProjectCardProps { project: Project; featured?: boolean; delay?: number; }
+interface ProjectCardProps { project: Project; delay?: number; }
 
-export function ProjectCard({ project, featured = false, delay = 0 }: ProjectCardProps) {
+export function ProjectCard({ project, delay = 0 }: ProjectCardProps) {
+  const navigate = useNavigate();
+
+  const openProject = (event: React.MouseEvent<HTMLElement>) => {
+    if ((event.target as HTMLElement).closest('a')) return;
+    navigate(`/projects/${project.slug}`);
+  };
+
   return (
-    <Reveal as="article" delay={delay} className={`group relative flex flex-col overflow-hidden border border-[#e7e3d8] bg-white ${featured ? 'lg:col-span-2 lg:flex-row' : ''}`}>
-      <span aria-hidden="true" className="pointer-events-none absolute inset-0 z-20 border border-transparent transition-colors duration-200 group-hover:border-[#c9a227]" />
-      <Link to={`/projects/${project.slug}`} className={`relative block overflow-hidden ${featured ? 'aspect-[16/10] lg:aspect-auto lg:w-[58%]' : 'aspect-[4/3]'}`} aria-label={`View details for ${project.name}`}>
-        <img src={project.card} alt={`${project.name} — ${project.location}`} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
-        <span aria-hidden="true" className="absolute inset-0 bg-black/10" />
-        <span className="absolute left-0 top-5 bg-white/90 py-1.5 pl-4 pr-5 text-[0.58rem] uppercase tracking-micro text-[#c9a227]">{project.eyebrow}</span>
+    <Reveal as="article" delay={delay} onClick={openProject} role="link" tabIndex={0} onKeyDown={(event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        navigate(`/projects/${project.slug}`);
+      }
+    }} className="group flex h-full cursor-pointer flex-col border border-[#e5e1d8] bg-white transition-all duration-200 ease-lux hover:-translate-y-1 hover:border-[#c9a227] hover:shadow-[0_12px_28px_rgba(17,17,17,0.08)]">
+      <Link to={`/projects/${project.slug}`} className="relative block aspect-[16/9] overflow-hidden" aria-label={`View details for ${project.name}`}>
+        <img src={project.card} alt={`${project.name} — ${project.location}`} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 ease-lux group-hover:scale-[1.03]" />
+        <span aria-hidden="true" className="absolute inset-0 bg-black/5" />
+        <span className="absolute left-4 top-4 bg-white/95 px-2.5 py-1.5 text-[0.58rem] uppercase tracking-[0.08em] text-[#111111]">Residential</span>
       </Link>
-      <div className={`flex flex-1 flex-col p-6 sm:p-7 ${featured ? 'lg:justify-center lg:p-10' : ''}`}>
-        <p className="text-[0.62rem] uppercase tracking-micro text-ink-900/50">{project.developer}</p>
-        <h3 className={`mt-3 font-display font-light leading-tight text-ink-900 ${featured ? 'text-3xl lg:text-[2.6rem]' : 'text-2xl'}`}><Link to={`/projects/${project.slug}`} className="transition-colors hover:text-[#c9a227]">{project.name}</Link></h3>
-        <p className="mt-3 flex items-start gap-1.5 text-[0.78rem] text-[#c9a227]"><MapPinIcon className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />{project.location}</p>
-        <p className={`mt-4 text-[0.85rem] leading-relaxed text-ink-900/60 ${featured ? 'max-w-lg lg:text-[0.95rem]' : ''}`}>{project.tagline}</p>
-        <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-black/10 pt-5">
-          <div><dt className="text-[0.58rem] uppercase tracking-micro text-ink-900/45">Configuration</dt><dd className="mt-1.5 text-[0.82rem] text-ink-900/80">{project.configuration}</dd></div>
-          <div><dt className="text-[0.58rem] uppercase tracking-micro text-ink-900/45">Price</dt><dd className="mt-1.5 text-[0.82rem] text-[#a98232]">{project.price}</dd></div>
-        </dl>
-        <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-7">
-          <Link to={`/projects/${project.slug}`} className="group/link inline-flex items-center gap-2 text-[0.66rem] uppercase tracking-micro text-ink-900 transition-colors hover:text-[#c9a227]">View Details <ArrowUpRightIcon className="h-3.5 w-3.5" aria-hidden="true" /></Link>
-          <a href={whatsappLink(projectWhatsappMessage(project.name))} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-[0.66rem] uppercase tracking-micro text-[#a98232] hover:text-[#c9a227]"><WhatsAppIcon className="h-3.5 w-3.5 object-contain" />Enquire Now</a>
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <p className="text-[0.58rem] uppercase tracking-[0.12em] text-[#a98232]">{project.eyebrow}</p>
+        <h3 className="mt-2 font-display text-2xl font-light leading-tight text-[#111111]"><Link to={`/projects/${project.slug}`} className="transition-colors hover:text-[#c9a227]">{project.name}</Link></h3>
+        <p className="mt-3 text-[0.86rem] leading-relaxed text-[#666666]">{project.tagline}</p>
+        <div className="mt-5 space-y-3 border-t border-[#e5e1d8] pt-5 text-[0.78rem] text-[#4a4a4a]">
+          <p className="flex items-start gap-2"><MapPinIcon className="mt-0.5 h-4 w-4 shrink-0 text-[#c9a227]" aria-hidden="true" /><span><strong className="font-medium text-[#333333]">Address:</strong> {project.location}</span></p>
+          <p><strong className="font-medium text-[#333333]">Developed By:</strong> {project.developer}</p>
+          <p><strong className="font-medium text-[#333333]">Configuration:</strong> {project.configuration}</p>
+        </div>
+        <div className="mt-5 flex items-end justify-between gap-4 border-t border-[#e5e1d8] pt-5">
+          <p className="text-[0.75rem] text-[#555555]"><span className="block text-[0.58rem] uppercase tracking-[0.12em]">Base Price</span><strong className="mt-1 block font-medium text-[#c9a227]">{project.price || 'Price on Request'}</strong></p>
+          <Link to={`/projects/${project.slug}`} className="group/link inline-flex shrink-0 items-center gap-2 text-[0.66rem] uppercase tracking-[0.16em] text-[#111111] transition-colors hover:text-[#c9a227]">View Details <ArrowRightIcon className="h-3.5 w-3.5 text-[#c9a227] transition-transform duration-200 group-hover/link:translate-x-1" aria-hidden="true" /></Link>
         </div>
       </div>
     </Reveal>
   );
 }
 
-export function ProjectGrid({ projects, featureFirst = true }: { projects: Project[]; featureFirst?: boolean }) {
-  const [first, ...rest] = projects;
-  if (!first) return null;
-  return <div className="grid gap-5 lg:grid-cols-2 lg:gap-6"><ProjectCard project={first} featured={featureFirst} />{rest.map((project, index) => <ProjectCard key={project.slug} project={project} delay={(index + 1) * 0.04} />)}</div>;
+export function ProjectGrid({ projects }: { projects: Project[] }) {
+  return <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{projects.map((project, index) => <ProjectCard key={project.slug} project={project} delay={index * 0.04} />)}</div>;
 }

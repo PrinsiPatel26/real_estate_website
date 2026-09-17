@@ -27,7 +27,7 @@ export function WhyChooseUs() {
     <section
       id="why-chauhan"
       aria-labelledby="why-heading"
-      className="border-y border-[#e7e3d8] bg-[#f8f7f3] py-20 text-[#111111] sm:py-28 lg:py-32">
+      className="border-y border-[#e8e6e0] bg-[#f8f8f6] py-20 text-[#111111] sm:py-28 lg:py-32">
 
       <div className="mx-auto grid max-w-[1300px] gap-14 px-5 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-20 lg:px-10">
         <div>

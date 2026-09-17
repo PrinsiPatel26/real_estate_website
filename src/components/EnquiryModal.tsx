@@ -28,7 +28,7 @@ export function EnquiryModal({ open, onClose }: EnquiryModalProps) {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[9000] flex items-center justify-center overflow-y-auto bg-ink-900/85 p-3 backdrop-blur-sm sm:p-6"
+          className="fixed inset-0 z-[9000] flex items-center justify-center overflow-y-auto bg-[#111111]/70 p-3 backdrop-blur-sm sm:p-6"
           initial={reduce ? undefined : { opacity: 0 }}
           animate={reduce ? undefined : { opacity: 1 }}
           exit={reduce ? undefined : { opacity: 0 }}
@@ -39,7 +39,7 @@ export function EnquiryModal({ open, onClose }: EnquiryModalProps) {
             if (event.target === event.currentTarget) onClose();
           }}>
           <motion.div
-            className="relative my-auto w-full max-w-5xl overflow-y-auto border border-gold/25 bg-ink-900 shadow-2xl shadow-black/50 sm:max-h-[90vh]"
+            className="relative my-auto w-full max-w-5xl overflow-y-auto border border-[#e8e6e0] bg-white shadow-[0_25px_80px_rgba(17,17,17,0.12)] sm:max-h-[90vh]"
             initial={reduce ? undefined : { opacity: 0, y: 18, scale: 0.98 }}
             animate={reduce ? undefined : { opacity: 1, y: 0, scale: 1 }}
             exit={reduce ? undefined : { opacity: 0, y: 18, scale: 0.98 }}>
@@ -47,25 +47,25 @@ export function EnquiryModal({ open, onClose }: EnquiryModalProps) {
               type="button"
               onClick={onClose}
               aria-label="Close enquiry form"
-              className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center border border-gold/50 text-gold transition-colors hover:bg-gold hover:text-ink-900">
+              className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center border border-[#e8e6e0] text-[#111111] transition-colors hover:bg-[#c9a227] hover:text-[#111111]">
               <XIcon className="h-4 w-4" aria-hidden="true" />
             </button>
             <div className="grid lg:grid-cols-[0.8fr_1.2fr]">
-              <div className="hidden border-r border-gold/15 bg-ink-800 p-10 lg:block">
-                <p className="eyebrow text-gold">Chauhan Realtors</p>
-                <h2 id="enquiry-modal-title" className="mt-5 max-w-sm font-display text-4xl font-light leading-tight text-paper">
+              <div className="hidden border-r border-[#e8e6e0] bg-[#f8f8f6] p-10 lg:block">
+                <p className="eyebrow text-[#c9a227]">Chauhan Realtors</p>
+                <h2 id="enquiry-modal-title" className="mt-5 max-w-sm font-display text-4xl font-light leading-tight text-[#111111]">
                   Find Your Next Address
                 </h2>
-                <p className="mt-6 max-w-sm text-sm leading-relaxed text-paper/60">
+                <p className="mt-6 max-w-sm text-sm leading-relaxed text-[#666666]">
                   Tell us what you&apos;re looking for and our property consultant will get in touch with you.
                 </p>
                 <img src="/image-1.png" alt="Dharmendra Pratap Singh, Founder" className="mt-10 aspect-[4/5] w-full object-cover object-top" />
               </div>
               <div className="p-5 pt-16 sm:p-8 sm:pt-16 lg:p-10">
                 <div className="lg:hidden">
-                  <p className="eyebrow text-gold">Chauhan Realtors</p>
-                  <h2 className="mt-4 font-display text-3xl font-light text-paper">Find Your Next Address</h2>
-                  <p className="mt-3 text-sm leading-relaxed text-paper/60">Tell us what you&apos;re looking for and our property consultant will get in touch with you.</p>
+                  <p className="eyebrow text-[#c9a227]">Chauhan Realtors</p>
+                  <h2 className="mt-4 font-display text-3xl font-light text-[#111111]">Find Your Next Address</h2>
+                  <p className="mt-3 text-sm leading-relaxed text-[#666666]">Tell us what you&apos;re looking for and our property consultant will get in touch with you.</p>
                 </div>
                 <div className="mt-6 lg:mt-0">
                   <EnquiryForm source="enquiry-modal" />

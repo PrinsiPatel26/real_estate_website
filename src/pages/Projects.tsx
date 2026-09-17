@@ -25,17 +25,17 @@ export function Projects() {
         image={projects[0].card} />
       
 
-      <section aria-label="All projects" className="bg-ink-800 py-14 sm:py-16 lg:py-20">
+      <section aria-label="All projects" className="bg-white py-14 sm:py-16 lg:py-20">
         <div className="mx-auto w-[90%] max-w-shell">
           <ProjectGrid projects={projects} />
 
           <Reveal delay={0.05}>
-            <div className="mt-12 border-l border-gold/40 pl-5 sm:pl-6">
-              <h2 className="eyebrow text-gold">Before you rely on any detail</h2>
-              <p className="mt-3 max-w-3xl text-[0.78rem] leading-relaxed text-paper/50">
+            <div className="mt-12 border-l border-[#c9a227] pl-5 sm:pl-6">
+              <h2 className="eyebrow text-[#c9a227]">Before you rely on any detail</h2>
+              <p className="mt-3 max-w-3xl text-[0.78rem] leading-relaxed text-[#666666]">
                 {DISCLAIMER_SHORT}
               </p>
-              <p className="mt-3 max-w-3xl text-[0.78rem] leading-relaxed text-paper/50">
+              <p className="mt-3 max-w-3xl text-[0.78rem] leading-relaxed text-[#666666]">
                 {DISCLAIMER_VISUALS}
               </p>
             </div>

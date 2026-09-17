@@ -25,7 +25,7 @@ export function SectionHeading({
     <div className={isCenter ? 'mx-auto max-w-2xl text-center' : 'max-w-2xl'}>
       {eyebrow ?
       <Reveal>
-          <p className="eyebrow text-gold">{eyebrow}</p>
+          <p className="eyebrow text-[#c9a227]">{eyebrow}</p>
         </Reveal> :
       null}
       <Reveal delay={0.05}>
@@ -34,12 +34,12 @@ export function SectionHeading({
       <Reveal delay={0.08}>
         <Heading
           id={id}
-          className="mt-6 font-display text-[2rem] font-light leading-[1.08] tracking-tight text-paper sm:text-[2.6rem] lg:text-[3.1rem]">
+          className="mt-6 font-display text-[2.2rem] font-light leading-[1.02] tracking-[-0.03em] text-[#111111] sm:text-[2.9rem] lg:text-[3.5rem]">
           
           {lines.map((line, index) =>
           <span key={line} className="block">
               {index === lines.length - 1 && lines.length > 1 ?
-            <span className="italic text-gold-bright">{line}</span> :
+            <span className="italic text-[#c9a227]">{line}</span> :
 
             line
             }
@@ -49,7 +49,7 @@ export function SectionHeading({
       </Reveal>
       {children ?
       <Reveal delay={0.12}>
-          <div className="mt-6 text-[0.95rem] leading-relaxed text-paper/60">{children}</div>
+          <div className="mt-6 text-[0.95rem] leading-relaxed text-[#666666]">{children}</div>
         </Reveal> :
       null}
     </div>);

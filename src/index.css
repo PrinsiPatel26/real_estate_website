@@ -1,5 +1,5 @@
 /* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS - DO NOT DELETE THIS COMMENT */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 /* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED - DO NOT DELETE THIS COMMENT */
 @import 'tailwindcss/base';
@@ -8,30 +8,64 @@
 
 /* END TAILWIND IMPORTS - ALL OTHER CSS MUST GO BELOW THIS LINE */
 
+:root {
+  --color-background: #f8f8f6;
+  --color-surface: #ffffff;
+  --color-ink: #111111;
+  --color-muted: #666666;
+  --color-gold: #c9a227;
+  --color-gold-light: #e5d29a;
+  --color-border: #e8e6e0;
+  --color-ink-strong: #0b0b0b;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
+  background: var(--color-background);
 }
 body {
-  background-color: #0a0a0a;
-  color: #f5f3ee;
-  font-family: Inter, system-ui, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-ink);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
   overflow-x: hidden;
+  letter-spacing: -0.01em;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+a {
+  text-decoration: none;
 }
 .eyebrow {
   font-size: 0.62rem;
   line-height: 1.2;
   text-transform: uppercase;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.22em;
 }
 :focus-visible {
-  outline: 2px solid #e5c36a;
+  outline: 2px solid #d4af37;
   outline-offset: 3px;
 }
 ::selection {
-  background: #c9a24d;
-  color: #0a0a0a;
+  background: #c9a227;
+  color: #111111;
+}
+
+/* Keep supporting copy readable across the light premium surfaces. */
+[class~="text-[#666666]"] {
+  color: #444444 !important;
+}
+[class~="text-[#777777]"] {
+  color: #555555 !important;
+}
+[class~="text-[#111111]/65"] {
+  color: rgb(17 17 17 / 0.82) !important;
+}
+[class~="text-[#111111]/75"] {
+  color: rgb(17 17 17 / 0.88) !important;
 }
 @media (prefers-reduced-motion: reduce) {
   html {

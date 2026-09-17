@@ -14,6 +14,7 @@ import { WhyChooseUs } from '../components/WhyChooseUs';
 import { ContactSection } from '../components/ContactSection';
 import { ServicesSection } from '../components/ServicesSection';
 import { ApproachSection } from '../components/ApproachSection';
+import { PropertyPurchaseSection } from '../components/PropertyPurchaseSection';
 import { TestimonialsSection } from '../components/TestimonialsSection';
 import { BlogSection } from '../components/BlogSection';
 import { Reveal } from '../components/Reveal';
@@ -35,7 +36,7 @@ export function Home() {
       <section
         id="featured-projects"
         aria-labelledby="featured-heading"
-        className="border-t border-black/10 bg-[#fafaf8] py-20 text-ink-900 sm:py-28 lg:py-32">
+        className="border-t border-[#e8e6e0] bg-[#fafaf8] py-20 text-[#111111] sm:py-28 lg:py-32">
         
         <div className="mx-auto max-w-shell px-5 lg:px-10">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -52,7 +53,7 @@ export function Home() {
             <Reveal delay={0.1}>
               <Link
                 to="/projects"
-                className="group inline-flex items-center gap-2 border border-gold/40 px-6 py-3.5 text-[0.68rem] uppercase tracking-micro text-gold transition-colors duration-150 ease-lux hover:bg-gold hover:text-ink-900">
+                className="group inline-flex items-center gap-2 border border-[#c9a227] px-6 py-3.5 text-[0.68rem] uppercase tracking-[0.2em] text-[#c9a227] transition-colors duration-150 ease-lux hover:bg-[#c9a227] hover:text-[#111111]">
                 
                 All Projects
                 <ArrowRightIcon
@@ -68,13 +69,14 @@ export function Home() {
           </div>
 
           <Reveal delay={0.05}>
-            <p className="mt-8 max-w-3xl text-[0.7rem] leading-relaxed text-paper/40">
+            <p className="mt-8 max-w-3xl text-[0.7rem] leading-relaxed text-[#666666]">
               {DISCLAIMER_VISUALS}
             </p>
           </Reveal>
         </div>
       </section>
 
+      <PropertyPurchaseSection />
       <WhyChooseUs />
       <ServicesSection />
       <ApproachSection />

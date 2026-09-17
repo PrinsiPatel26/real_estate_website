@@ -10,18 +10,18 @@ export function NotFound() {
   });
 
   return (
-    <main className="flex min-h-[70svh] w-full items-center justify-center bg-ink-900 px-5 py-32">
+    <main className="flex min-h-[70svh] w-full items-center justify-center bg-white px-5 py-32">
       <div className="max-w-md text-center">
-        <p className="eyebrow text-gold">404</p>
-        <h1 className="mt-6 font-display text-[2.4rem] font-light leading-tight text-paper">
+        <p className="eyebrow text-[#c9a227]">404</p>
+        <h1 className="mt-6 font-display text-[2.4rem] font-light leading-tight text-[#111111]">
           This page is not available.
         </h1>
-        <p className="mt-5 text-[0.9rem] leading-relaxed text-paper/55">
+        <p className="mt-5 text-[0.9rem] leading-relaxed text-[#666666]">
           The address you followed may have changed. Our current projects are all listed together.
         </p>
         <Link
           to="/projects"
-          className="group mt-9 inline-flex h-12 items-center gap-2 bg-gold px-7 text-[0.68rem] uppercase tracking-micro text-ink-900 transition-colors duration-150 ease-lux hover:bg-gold-bright">
+          className="group mt-9 inline-flex h-12 items-center gap-2 bg-[#c9a227] px-7 text-[0.68rem] uppercase tracking-[0.2em] text-[#111111] transition-colors duration-150 ease-lux hover:bg-[#d4af37]">
           
           View Projects
           <ArrowRightIcon

@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { CheckIcon, AlertCircleIcon, Loader2Icon } from 'lucide-react';
-import { projectOptions } from '../data/projects';
+import { whatsappLink } from '../data/brand';
 import { configurationOptions, budgetOptions, callbackOptions } from '../data/site';
-import { submitLead } from '../utils/leadService';
 import { LUX } from './Reveal';
 
 interface EnquiryFormProps {
-  defaultProject?: string;
   source?: string;
   id?: string;
 }
@@ -16,7 +14,6 @@ interface Values {
   fullName: string;
   phone: string;
   email: string;
-  project: string;
   configuration: string;
   budget: string;
   callbackTime: string;
@@ -25,11 +22,10 @@ interface Values {
 
 type Errors = Partial<Record<keyof Values, string>>;
 
-const emptyValues = (defaultProject: string): Values => ({
+const emptyValues = (): Values => ({
   fullName: '',
   phone: '',
   email: '',
-  project: defaultProject,
   configuration: '',
   budget: '',
   callbackTime: '',
@@ -40,19 +36,18 @@ function validate(values: Values): Errors {
   const errors: Errors = {};
   if (values.fullName.trim().length < 2) errors.fullName = 'Please enter your full name.';
   const digits = values.phone.replace(/\D/g, '');
-  if (digits.length < 10 || digits.length > 13) {
-    errors.phone = 'Please enter a valid phone number with at least 10 digits.';
+  if (!/^(?:91)?[6-9]\d{9}$/.test(digits)) {
+    errors.phone = 'Please enter a valid phone number.';
   }
   if (values.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.email.trim())) {
     errors.email = 'Please enter a valid email address.';
   }
-  if (!values.project) errors.project = 'Please select a project.';
   return errors;
 }
 
 const fieldClass =
-'h-12 w-full border border-paper/15 bg-ink-800 px-4 text-sm text-paper placeholder:text-paper/35 transition-colors duration-150 ease-lux focus:border-gold focus:outline-none';
-const labelClass = 'mb-2 block text-[0.62rem] uppercase tracking-micro text-paper/55';
+'h-12 w-full border border-[#e8e6e0] bg-white px-4 text-sm text-[#111111] placeholder:text-[#666666] transition-colors duration-150 ease-lux focus:border-[#c9a227] focus:outline-none';
+const labelClass = 'mb-2 block text-[0.62rem] uppercase tracking-[0.2em] text-[#666666]';
 
 function FieldError({ id, message }: {id: string;message?: string;}) {
   if (!message) return null;
@@ -64,10 +59,10 @@ function FieldError({ id, message }: {id: string;message?: string;}) {
 
 }
 
-export function EnquiryForm({ defaultProject = '', source = 'website', id }: EnquiryFormProps) {
-  const [values, setValues] = useState<Values>(emptyValues(defaultProject));
+export function EnquiryForm({ source = 'website', id }: EnquiryFormProps) {
+  const [values, setValues] = useState<Values>(emptyValues());
   const [errors, setErrors] = useState<Errors>({});
-  const [status, setStatus] = useState<'idle' | 'sending' | 'done'>('idle');
+  const [status, setStatus] = useState<'idle' | 'opening' | 'done'>('idle');
   const reduce = useReducedMotion();
 
   const update =
@@ -86,18 +81,26 @@ export function EnquiryForm({ defaultProject = '', source = 'website', id }: Enq
       document.getElementById(`enquiry-${keys[0]}`)?.focus();
       return;
     }
-    setStatus('sending');
-    await submitLead({
-      fullName: values.fullName.trim(),
-      phone: values.phone.trim(),
-      email: values.email.trim() || undefined,
-      project: values.project,
-      configuration: values.configuration || undefined,
-      budget: values.budget || undefined,
-      callbackTime: values.callbackTime || undefined,
-      message: values.message.trim() || undefined,
-      source
-    });
+    setStatus('opening');
+    const whatsappMessage = [
+      'Hello Chauhan Realtors,',
+      '',
+      'I would like to request a callback regarding a property.',
+      '',
+      `Name: ${values.fullName.trim()}`,
+      `Phone: ${values.phone.trim()}`,
+      `Email: ${values.email.trim() || 'Not provided'}`,
+      `Preferred Configuration: ${values.configuration || 'Not specified'}`,
+      `Budget: ${values.budget || 'Not specified'}`,
+      `Preferred Callback Time: ${values.callbackTime || 'Not specified'}`,
+      '',
+      'Message:',
+      values.message.trim() || 'No additional message provided.',
+      '',
+      'Thank you.'
+    ].join('\n');
+
+    window.open(whatsappLink(whatsappMessage), '_blank', 'noopener,noreferrer');
     setStatus('done');
   };
 
@@ -109,25 +112,24 @@ export function EnquiryForm({ defaultProject = '', source = 'website', id }: Enq
         initial={reduce ? undefined : { opacity: 0, y: 12 }}
         animate={reduce ? undefined : { opacity: 1, y: 0 }}
         transition={{ duration: 0.25, ease: LUX }}
-        className="border border-gold/30 bg-ink-800 p-8 text-center sm:p-12">
+        className="border border-[#e8e6e0] bg-[#f8f8f6] p-8 text-center sm:p-12">
         
-        <span className="mx-auto flex h-14 w-14 items-center justify-center border border-gold text-gold">
+        <span className="mx-auto flex h-14 w-14 items-center justify-center border border-[#c9a227] text-[#c9a227]">
           <CheckIcon className="h-6 w-6" aria-hidden="true" />
         </span>
-        <h3 className="mt-6 font-display text-2xl font-light text-paper sm:text-3xl">
-          Thank you. Our property consultant will contact you shortly.
+        <h3 className="mt-6 font-display text-2xl font-light text-[#111111] sm:text-3xl">
+          Opening WhatsApp
         </h3>
-        <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-paper/55">
-          Your enquiry for <span className="text-gold-bright">{values.project}</span> has been
-          recorded. If it is urgent, WhatsApp or call us and we will respond right away.
+        <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-[#666666]">
+          Your callback details are ready in a WhatsApp message.
         </p>
         <button
           type="button"
           onClick={() => {
-            setValues(emptyValues(defaultProject));
+            setValues(emptyValues());
             setStatus('idle');
           }}
-          className="mt-8 border border-gold/40 px-6 py-3 text-[0.65rem] uppercase tracking-micro text-gold transition-colors duration-150 ease-lux hover:bg-gold hover:text-ink-900">
+          className="mt-8 border border-[#c9a227] px-6 py-3 text-[0.65rem] uppercase tracking-[0.2em] text-[#c9a227] transition-colors duration-150 ease-lux hover:bg-[#c9a227] hover:text-[#111111]">
           
           Submit another enquiry
         </button>
@@ -136,9 +138,9 @@ export function EnquiryForm({ defaultProject = '', source = 'website', id }: Enq
   }
 
   return (
-    <form id={id} onSubmit={onSubmit} noValidate className="border border-paper/10 bg-ink-800/70 p-6 sm:p-8">
-      <h3 className="font-display text-2xl font-light text-paper">Request a Callback</h3>
-      <p className="mt-2 text-sm text-paper/55">
+    <form id={id} onSubmit={onSubmit} noValidate className="border border-[#e8e6e0] bg-white p-6 sm:p-8">
+      <h3 className="font-display text-2xl font-light text-[#111111]">Request a Callback</h3>
+      <p className="mt-2 text-sm text-[#666666]">
         Share a few details and we will come back with a shortlist, current availability and
         verified project information.
       </p>
@@ -197,28 +199,6 @@ export function EnquiryForm({ defaultProject = '', source = 'website', id }: Enq
             placeholder="you@email.com" />
           
           <FieldError id="error-email" message={errors.email} />
-        </div>
-
-        <div>
-          <label className={labelClass} htmlFor="enquiry-project">
-            Preferred Project <span className="text-gold">*</span>
-          </label>
-          <select
-            id="enquiry-project"
-            value={values.project}
-            onChange={update('project')}
-            aria-invalid={Boolean(errors.project)}
-            aria-describedby={errors.project ? 'error-project' : undefined}
-            className={fieldClass}>
-            
-            <option value="">Select a project</option>
-            {projectOptions.map((option) =>
-            <option key={option} value={option}>
-                {option}
-              </option>
-            )}
-          </select>
-          <FieldError id="error-project" message={errors.project} />
         </div>
 
         <div>
@@ -282,7 +262,7 @@ export function EnquiryForm({ defaultProject = '', source = 'website', id }: Enq
             rows={4}
             value={values.message}
             onChange={update('message')}
-            className="w-full border border-paper/15 bg-ink-800 px-4 py-3 text-sm text-paper placeholder:text-paper/35 transition-colors duration-150 ease-lux focus:border-gold focus:outline-none"
+            className="w-full border border-[#e8e6e0] bg-white px-4 py-3 text-sm text-[#111111] placeholder:text-[#666666] transition-colors duration-150 ease-lux focus:border-[#c9a227] focus:outline-none"
             placeholder="Anything specific we should know — timeline, floor preference, family requirement." />
           
         </div>
@@ -290,21 +270,21 @@ export function EnquiryForm({ defaultProject = '', source = 'website', id }: Enq
 
       <button
         type="submit"
-        disabled={status === 'sending'}
-        className="mt-8 flex w-full items-center justify-center gap-2 bg-gold text-[0.7rem] uppercase tracking-micro text-ink-900 transition-colors duration-150 ease-lux hover:bg-gold-bright disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto sm:px-10"
+        disabled={status === 'opening'}
+        className="mt-8 flex w-full items-center justify-center gap-2 bg-[#c9a227] text-[0.7rem] uppercase tracking-[0.2em] text-[#111111] transition-colors duration-150 ease-lux hover:bg-[#d4af37] disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto sm:px-10"
         style={{ height: '3.25rem' }}>
         
-        {status === 'sending' ?
+        {status === 'opening' ?
         <>
             <Loader2Icon className="h-4 w-4 animate-spin" aria-hidden="true" />
-            Sending
+        Opening WhatsApp
           </> :
 
         'Request a Callback'
         }
       </button>
 
-      <p className="mt-4 text-[0.68rem] leading-relaxed text-paper/40">
+      <p className="mt-4 text-[0.68rem] leading-relaxed text-[#666666]">
         By submitting this form you agree to be contacted about your property enquiry. We do not
         share your details with third parties.
       </p>

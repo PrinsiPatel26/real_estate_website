@@ -54,7 +54,7 @@ export function NavbarProjectSearch({ onNavigate }: NavbarProjectSearchProps) {
       animate={reduce ? undefined : { opacity: 1, y: 0 }}
       exit={reduce ? undefined : { opacity: 0, y: -6 }}
       transition={{ duration: 0.18, ease: LUX }}
-      className="absolute right-0 top-[calc(100%+10px)] z-[60] w-[min(360px,calc(100vw-2.5rem))] border border-gold/25 bg-ink-900 shadow-2xl shadow-black/30">
+      className="absolute right-0 top-[calc(100%+10px)] z-[60] w-[min(360px,calc(100vw-2.5rem))] border border-[#e8e6e0] bg-white shadow-[0_20px_60px_rgba(17,17,17,0.08)]">
       {results.length > 0 ? (
         <div className="max-h-[min(60vh,360px)] overflow-y-auto">
           {results.map((project) => (
@@ -65,17 +65,17 @@ export function NavbarProjectSearch({ onNavigate }: NavbarProjectSearchProps) {
                 close();
                 onNavigate?.();
               }}
-              className="flex gap-3 border-b border-gold/10 p-3 last:border-b-0 transition-colors hover:bg-gold/10">
+              className="flex gap-3 border-b border-[#e8e6e0] p-3 last:border-b-0 transition-colors hover:bg-[#f8f8f6]">
               <img
                 src={project.card}
                 alt=""
                 className="h-12 w-16 shrink-0 object-cover"
               />
               <span className="min-w-0">
-                <span className="block truncate font-display text-lg leading-tight text-paper">
+                <span className="block truncate font-display text-lg leading-tight text-[#111111]">
                   {project.name}
                 </span>
-                <span className="mt-1 block truncate text-[0.62rem] uppercase tracking-micro text-gold/75">
+                <span className="mt-1 block truncate text-[0.62rem] uppercase tracking-[0.2em] text-[#c9a227]">
                   {project.location}
                 </span>
               </span>
@@ -84,8 +84,8 @@ export function NavbarProjectSearch({ onNavigate }: NavbarProjectSearchProps) {
         </div>
       ) : (
         <div className="px-4 py-5">
-          <p className="font-display text-xl text-paper">No projects found</p>
-          <p className="mt-1 text-xs text-paper/50">Try another project name or location.</p>
+          <p className="font-display text-xl text-[#111111]">No projects found</p>
+          <p className="mt-1 text-xs text-[#666666]">Try another project name or location.</p>
         </div>
       )}
     </motion.div>
@@ -106,7 +106,7 @@ export function NavbarProjectSearch({ onNavigate }: NavbarProjectSearchProps) {
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search projects, locations..."
             aria-label="Search projects and locations"
-            className="h-10 w-[260px] border-0 bg-ink-900 px-3 text-xs text-paper placeholder:text-paper/45 focus:outline-none"
+            className="h-10 w-[260px] border-0 bg-white px-3 text-xs text-[#111111] placeholder:text-[#666666] focus:outline-none"
           />
         </motion.div>
         <button
@@ -136,9 +136,9 @@ export function NavbarProjectSearch({ onNavigate }: NavbarProjectSearchProps) {
             animate={reduce ? undefined : { opacity: 1, y: 0 }}
             exit={reduce ? undefined : { opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: LUX }}
-            className="absolute inset-x-0 top-full border-t border-gold/15 bg-ink-900 p-4 shadow-2xl shadow-black/30 sm:hidden">
+            className="absolute inset-x-0 top-full border-t border-[#e8e6e0] bg-white p-4 shadow-[0_20px_60px_rgba(17,17,17,0.08)] sm:hidden">
             <div className="relative">
-              <SearchIcon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gold" aria-hidden="true" />
+              <SearchIcon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#c9a227]" aria-hidden="true" />
               <input
                 ref={inputRef}
                 type="search"
@@ -146,7 +146,7 @@ export function NavbarProjectSearch({ onNavigate }: NavbarProjectSearchProps) {
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Search projects, locations..."
                 aria-label="Search projects and locations"
-                className="h-11 w-full border-0 bg-ink-800 pl-10 pr-3 text-sm text-paper placeholder:text-paper/45 focus:outline-none"
+                className="h-11 w-full border-0 bg-[#f8f8f6] pl-10 pr-3 text-sm text-[#111111] placeholder:text-[#666666] focus:outline-none"
               />
               <AnimatePresence>{resultsPanel}</AnimatePresence>
             </div>

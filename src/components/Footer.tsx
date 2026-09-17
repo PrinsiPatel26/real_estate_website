@@ -7,9 +7,8 @@ import {
   InstagramIcon,
   LinkedinIcon } from
 'lucide-react';
-import { brand, navigation, whatsappLink, callLink, mailLink, DISCLAIMER_SHORT } from '../data/brand';
+import { brand, navigation, callLink, mailLink, DISCLAIMER_SHORT } from '../data/brand';
 import { projects } from '../data/projects';
-import { WhatsAppIcon } from './WhatsAppIcon';
 
 const socialIcon: Record<string, typeof FacebookIcon> = {
   Facebook: FacebookIcon,
@@ -25,19 +24,19 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-black/10 bg-white text-ink-900">
+    <footer className="border-t border-[#e8e6e0] bg-white text-[#111111]">
       <div className="mx-auto max-w-shell px-5 py-16 lg:px-10 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <span className="inline-flex items-center rounded-sm bg-white px-3 py-2 ring-1 ring-gold/30">
+            <span className="inline-flex items-center rounded-sm bg-white px-3 py-2 ring-1 ring-[#e8e6e0]">
               <img
                 src={brand.logo}
                 alt={`${brand.name} logo`}
                 className="h-14 w-auto max-w-[170px] object-contain" />
               
             </span>
-            <p className="mt-5 font-display text-lg italic text-gold-bright">{brand.tagline}</p>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-paper/55">
+            <p className="mt-5 font-display text-lg italic text-[#c9a227]">{brand.tagline}</p>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-[#666666]">
               Premium residential guidance across Gurgaon — curated opportunities, transparent
               information and personal assistance from the first conversation to possession.
             </p>
@@ -51,7 +50,7 @@ export function Footer() {
                       target="_blank"
                       rel="noreferrer"
                       aria-label={`${brand.name} on ${item.label} — ${item.handle}`}
-                      className="flex h-10 w-10 items-center justify-center border border-gold/25 text-gold transition-colors duration-150 ease-lux hover:border-gold hover:bg-gold hover:text-ink-900">
+                      className="flex h-10 w-10 items-center justify-center border border-[#e8e6e0] text-[#c9a227] transition-colors duration-150 ease-lux hover:border-[#c9a227] hover:bg-[#c9a227] hover:text-[#111111]">
                       
                       <Icon className="h-4 w-4" aria-hidden="true" />
                     </a>
@@ -62,13 +61,13 @@ export function Footer() {
           </div>
 
           <nav aria-label="Footer navigation">
-            <h2 className="eyebrow text-gold">Navigation</h2>
+            <h2 className="eyebrow text-[#c9a227]">Navigation</h2>
             <ul className="mt-5 space-y-3">
               {navigation.map((item) =>
               <li key={item.to}>
                   <Link
                   to={item.to}
-                  className="text-sm text-ink-900/65 transition-colors duration-150 ease-lux hover:text-gold">
+                  className="text-sm text-[#111111]/65 transition-colors duration-150 ease-lux hover:text-[#c9a227]">
                   
                     {item.label}
                   </Link>
@@ -78,13 +77,13 @@ export function Footer() {
           </nav>
 
           <nav aria-label="Projects">
-            <h2 className="eyebrow text-gold">Projects</h2>
+            <h2 className="eyebrow text-[#c9a227]">Projects</h2>
             <ul className="mt-5 space-y-3">
               {projects.map((project) =>
               <li key={project.slug}>
                   <Link
                   to={`/projects/${project.slug}`}
-                  className="text-sm text-ink-900/65 transition-colors duration-150 ease-lux hover:text-gold">
+                  className="text-sm text-[#111111]/65 transition-colors duration-150 ease-lux hover:text-[#c9a227]">
                   
                     {project.name}
                   </Link>
@@ -94,8 +93,8 @@ export function Footer() {
           </nav>
 
           <div>
-            <h2 className="eyebrow text-gold">Contact</h2>
-            <address className="mt-5 space-y-1 text-sm not-italic leading-relaxed text-paper/60">
+            <h2 className="eyebrow text-[#c9a227]">Contact</h2>
+            <address className="mt-5 space-y-1 text-sm not-italic leading-relaxed text-[#666666]">
               {brand.office.lines.map((line) =>
               <span key={line} className="block">
                   {line}
@@ -105,30 +104,19 @@ export function Footer() {
             <ul className="mt-5 space-y-3 text-sm">
               <li>
                 <a
-                  href={whatsappLink()}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-paper/70 transition-colors duration-150 ease-lux hover:text-gold-bright">
-                  
-                  <WhatsAppIcon className="h-4 w-4 object-contain" />
-                  WhatsApp {brand.whatsapp.display}
-                </a>
-              </li>
-              <li>
-                <a
                   href={callLink(brand.founder.phone)}
-                  className="inline-flex items-center gap-2 text-paper/70 transition-colors duration-150 ease-lux hover:text-gold-bright">
+                  className="inline-flex items-center gap-2 text-[#111111]/75 transition-colors duration-150 ease-lux hover:text-[#c9a227]">
                   
-                  <PhoneIcon className="h-4 w-4 text-gold" aria-hidden="true" />
+                  <PhoneIcon className="h-4 w-4 text-[#c9a227]" aria-hidden="true" />
                   {brand.founder.phoneDisplay}
                 </a>
               </li>
               <li>
                 <a
                   href={mailLink()}
-                  className="inline-flex items-start gap-2 break-all text-paper/70 transition-colors duration-150 ease-lux hover:text-gold-bright">
+                  className="inline-flex items-start gap-2 break-all text-[#111111]/75 transition-colors duration-150 ease-lux hover:text-[#c9a227]">
                   
-                  <MailIcon className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden="true" />
+                  <MailIcon className="mt-0.5 h-4 w-4 shrink-0 text-[#c9a227]" aria-hidden="true" />
                   {brand.email}
                 </a>
               </li>
@@ -136,16 +124,16 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 border-t border-gold/10 pt-8">
-          <p className="max-w-4xl text-[0.7rem] leading-relaxed text-paper/40">{DISCLAIMER_SHORT}</p>
+        <div className="mt-14 border-t border-[#e8e6e0] pt-8">
+          <p className="max-w-4xl text-[0.7rem] leading-relaxed text-[#666666]">{DISCLAIMER_SHORT}</p>
           <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-[0.7rem] text-paper/45">© 2026 Chauhan Realtors. All Rights Reserved.</p>
+            <p className="text-[0.7rem] text-[#666666]">© 2026 Chauhan Realtors. All Rights Reserved.</p>
             <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
               {legalLinks.map((item) =>
               <li key={item.to}>
                   <Link
                   to={item.to}
-                  className="text-[0.7rem] text-paper/45 transition-colors duration-150 ease-lux hover:text-gold">
+                  className="text-[0.7rem] text-[#666666] transition-colors duration-150 ease-lux hover:text-[#c9a227]">
                   
                     {item.label}
                   </Link>

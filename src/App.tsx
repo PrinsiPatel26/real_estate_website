@@ -15,6 +15,7 @@ import { Services } from './pages/Services';
 import { Blog } from './pages/Blog';
 import { BlogDetail } from './pages/BlogDetail';
 import { Contact } from './pages/Contact';
+import { Reviews } from './pages/Reviews';
 import { Legal } from './pages/Legal';
 import { NotFound } from './pages/NotFound';
 
@@ -33,11 +34,11 @@ function Shell() {
 
   return (
     <div
-      className="flex min-h-screen w-full flex-col bg-ink-900 pb-20 md:pb-0">
+      className="flex min-h-screen w-full flex-col bg-[#f8f8f6] text-[#111111] pb-20 md:pb-0">
       
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:bg-gold focus:px-4 focus:py-2 focus:text-[0.7rem] focus:uppercase focus:tracking-micro focus:text-ink-900">
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:bg-[#c9a227] focus:px-4 focus:py-2 focus:text-[0.7rem] focus:uppercase focus:tracking-[0.2em] focus:text-[#111111]">
         
         Skip to content
       </a>
@@ -58,6 +59,7 @@ function Shell() {
           <Route path="/why-chauhan" element={<WhyChauhan />} />
           <Route path="/location" element={<Location />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/reviews" element={<Reviews />} />
           <Route path="/legal/:doc" element={<Legal />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -8,12 +8,12 @@ import { Reveal, GoldLine } from './Reveal';
 
 export function AboutSection({ showLink = true }: {showLink?: boolean;}) {
   return (
-    <section id="about" aria-labelledby="about-heading" className="bg-white py-20 text-ink-900 sm:py-28 lg:py-32">
+    <section id="about" aria-labelledby="about-heading" className="bg-white py-20 text-[#111111] sm:py-28 lg:py-32">
       <div className="mx-auto max-w-shell px-5 lg:px-10">
         <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-20">
           <Reveal direction="left">
             <figure>
-              <div className="border border-gold/25 p-2.5 sm:p-3">
+              <div className="border border-[#e8e6e0] bg-[#f8f8f6] p-2.5 sm:p-3">
                 <img
                   src={brand.founder.photo}
                   alt={`${brand.founder.name}, ${brand.founder.designation} of Chauhan Realtors, at the company office`}
@@ -22,9 +22,9 @@ export function AboutSection({ showLink = true }: {showLink?: boolean;}) {
                 
               </div>
               <figcaption className="mt-5 flex items-baseline gap-4">
-                <span className="block h-px w-8 shrink-0 bg-gold" aria-hidden="true" />
-                <span className="text-[0.78rem] leading-relaxed text-paper/55">
-                  <span className="block text-paper">{brand.founder.name}</span>
+                <span className="block h-px w-8 shrink-0 bg-[#c9a227]" aria-hidden="true" />
+                <span className="text-[0.78rem] leading-relaxed text-[#666666]">
+                  <span className="block text-[#111111]">{brand.founder.name}</span>
                   {brand.founder.role}
                 </span>
               </figcaption>
@@ -44,10 +44,10 @@ export function AboutSection({ showLink = true }: {showLink?: boolean;}) {
               {aboutContent.pillars.map((pillar, index) =>
               <Reveal as="li" key={pillar.title} delay={index * 0.04}>
                   <GoldLine width="1.75rem" />
-                  <h3 className="mt-4 text-[0.68rem] uppercase tracking-micro text-gold-bright">
+                  <h3 className="mt-4 text-[0.68rem] uppercase tracking-[0.2em] text-[#c9a227]">
                     {pillar.title}
                   </h3>
-                  <p className="mt-2 text-[0.82rem] leading-relaxed text-paper/55">{pillar.text}</p>
+                  <p className="mt-2 text-[0.82rem] leading-relaxed text-[#666666]">{pillar.text}</p>
                 </Reveal>
               )}
             </ul>
@@ -56,7 +56,7 @@ export function AboutSection({ showLink = true }: {showLink?: boolean;}) {
             <Reveal delay={0.1}>
                 <Link
                 to="/about"
-                className="group mt-10 inline-flex items-center gap-2 border-b border-gold/40 pb-1.5 text-[0.68rem] uppercase tracking-micro text-gold transition-colors duration-150 ease-lux hover:border-gold hover:text-gold-bright">
+                className="group mt-10 inline-flex items-center gap-2 border-b border-[#d4af37]/60 pb-1.5 text-[0.68rem] uppercase tracking-[0.2em] text-[#c9a227] transition-colors duration-150 ease-lux hover:border-[#c9a227] hover:text-[#111111]">
                 
                   More about the firm
                   <ArrowRightIcon

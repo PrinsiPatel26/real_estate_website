@@ -78,7 +78,7 @@ export const legalPages = {
     sections: [
     {
       heading: 'Information we collect',
-      body: 'We collect only the details you choose to submit through an enquiry form — your name, phone number, email address, preferred project and any message or preference you share.'
+      body: 'We collect only the details you choose to submit through an enquiry form — your name, phone number, email address and any message or preference you share.'
     },
     {
       heading: 'How we use it',
