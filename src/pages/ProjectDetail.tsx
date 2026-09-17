@@ -24,7 +24,6 @@ import type { Confidence } from '../types/project';
 import { PageHeader } from '../components/PageHeader';
 import { EnquiryForm } from '../components/EnquiryForm';
 import { ProjectGallery } from '../components/Lightbox';
-import { MobileBottomCTA } from '../components/MobileBottomCTA';
 import { Reveal, GoldLine } from '../components/Reveal';
 import { WhatsAppIcon } from '../components/WhatsAppIcon';
 
@@ -70,8 +69,8 @@ export function ProjectDetail() {
   // Hooks must run unconditionally, so SEO is applied before the redirect guard.
   useSeo({
     title: project ?
-    project.name + ' | Chauhans Realtors, Gurgaon' :
-    'Project | Chauhans Realtors',
+    project.name + ' | Chauhan Realtors, Gurgaon' :
+    'Project | Chauhan Realtors',
     description: project ? project.tagline : 'Premium residential projects across Gurgaon.',
     image: project ? project.card : undefined
   });
@@ -248,19 +247,6 @@ export function ProjectDetail() {
                   Corridors and landmarks are listed by name only. We do not publish travel times
                   or distances that have not been confirmed.
                 </p>
-                <div className="mt-6 border border-gold/20">
-                  <iframe
-                    title={'Map showing the area around ' + project.name}
-                    src={
-                    'https://www.google.com/maps?q=' +
-                    encodeURIComponent(project.location) +
-                    '&output=embed'
-                    }
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="block h-64 w-full grayscale-[0.4] sm:h-80" />
-                  
-                </div>
               </Block>
 
               <Reveal>
@@ -383,11 +369,6 @@ export function ProjectDetail() {
         </div>
       </div>
 
-      <MobileBottomCTA
-        projectName={project.name}
-        message={enquireMessage}
-        onEnquire={scrollToForm} />
-      
     </>);
 
 }

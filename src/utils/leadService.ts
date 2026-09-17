@@ -25,6 +25,6 @@ export interface LeadResult {
  */
 export async function submitLead(payload: LeadPayload): Promise<LeadResult> {
   await new Promise((resolve) => setTimeout(resolve, 700));
-  console.info('[Chauhans Realtors] enquiry captured', payload);
+  console.info('[Chauhan Realtors] enquiry captured', payload);
   return { ok: true, reference: `CR-${Date.now().toString().slice(-6)}` };
 }

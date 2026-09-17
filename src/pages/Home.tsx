@@ -11,15 +11,18 @@ import { ProjectGrid } from '../components/ProjectCard';
 import { SectionHeading } from '../components/SectionHeading';
 import { FounderSection } from '../components/FounderSection';
 import { WhyChooseUs } from '../components/WhyChooseUs';
-import { LocationSection } from '../components/LocationSection';
 import { ContactSection } from '../components/ContactSection';
+import { ServicesSection } from '../components/ServicesSection';
+import { ApproachSection } from '../components/ApproachSection';
+import { TestimonialsSection } from '../components/TestimonialsSection';
+import { BlogSection } from '../components/BlogSection';
 import { Reveal } from '../components/Reveal';
 
 export function Home() {
   useSeo({
-    title: 'Chauhans Realtors | Premium Real Estate in Gurgaon',
+    title: 'Chauhan Realtors | Premium Real Estate in Gurgaon',
     description:
-    'Chauhans Realtors helps you discover premium residential properties and investment opportunities across Gurgaon with trusted, personalised real estate guidance.',
+    'Chauhan Realtors helps you discover premium residential properties and investment opportunities across Gurgaon with trusted, personalised real estate guidance.',
     image: HERO_IMAGE
   });
 
@@ -32,7 +35,7 @@ export function Home() {
       <section
         id="featured-projects"
         aria-labelledby="featured-heading"
-        className="border-t border-gold/10 bg-ink-800 py-20 sm:py-28 lg:py-32">
+        className="border-t border-black/10 bg-[#fafaf8] py-20 text-ink-900 sm:py-28 lg:py-32">
         
         <div className="mx-auto max-w-shell px-5 lg:px-10">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -72,9 +75,12 @@ export function Home() {
         </div>
       </section>
 
-      <FounderSection />
       <WhyChooseUs />
-      <LocationSection />
+      <ServicesSection />
+      <ApproachSection />
+      <FounderSection />
+      <TestimonialsSection />
+      <BlogSection />
       <ContactSection />
     </>);
 

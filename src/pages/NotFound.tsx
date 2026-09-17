@@ -5,7 +5,7 @@ import { useSeo } from '../hooks/useSeo';
 
 export function NotFound() {
   useSeo({
-    title: 'Page not found | Chauhans Realtors',
+    title: 'Page not found | Chauhan Realtors',
     description: 'The page you were looking for is not available.'
   });
 

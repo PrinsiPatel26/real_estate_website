@@ -10,7 +10,7 @@ export function FounderSection() {
     <section
       id="founder"
       aria-labelledby="founder-heading"
-      className="border-y border-gold/10 bg-ink-900 py-20 sm:py-28 lg:py-32">
+      className="border-y border-black/10 bg-[#fafaf8] py-20 text-ink-900 sm:py-28 lg:py-32">
       
       <div className="mx-auto max-w-shell px-5 lg:px-10">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
@@ -84,7 +84,7 @@ export function FounderSection() {
               <div className="rounded-sm border border-gold/30 p-2.5 sm:p-3.5">
                 <img
                   src={brand.founder.photo}
-                  alt={`${brand.founder.name}, Founder of Chauhans Realtors, seated at his office desk`}
+                  alt={`${brand.founder.name}, Founder of Chauhan Realtors, seated at his office desk`}
                   loading="lazy"
                   className="aspect-[3/2] w-full rounded-sm object-cover" />
                 

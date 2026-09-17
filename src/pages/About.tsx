@@ -11,16 +11,16 @@ import { Reveal } from '../components/Reveal';
 
 export function About() {
   useSeo({
-    title: 'About | Chauhans Realtors — Premium Real Estate in Gurgaon',
+    title: 'About | Chauhan Realtors — Premium Real Estate in Gurgaon',
     description:
-    'Chauhans Realtors is a founder-led real estate consultancy in Gurgaon, combining market understanding, personalised guidance and transparent communication.',
+    'Chauhan Realtors is a founder-led real estate consultancy in Gurgaon, combining market understanding, personalised guidance and transparent communication.',
     image: brand.founder.photo
   });
 
   return (
     <>
       <PageHeader
-        eyebrow="About Chauhans Realtors"
+          eyebrow="About Chauhan Realtors"
         title="A relationship built on trust, not a transaction."
         intro="We are a founder-led consultancy working with a deliberately short list of Gurgaon residential projects, so that every recommendation is informed and every claim is checked."
         crumbs={[{ label: 'Home', to: '/' }, { label: 'About' }]} />
@@ -78,7 +78,7 @@ export function About() {
           <Reveal delay={0.06}>
             <p className="mt-6 max-w-3xl text-[0.72rem] leading-relaxed text-paper/40">
               These figures are attributed developer information presented in material supplied to
-              us by M3M India. They are not achievements of Chauhans Realtors. {DISCLAIMER_SHORT}
+              us by M3M India. They are not achievements of Chauhan Realtors. {DISCLAIMER_SHORT}
             </p>
           </Reveal>
         </div>

@@ -3,12 +3,17 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { WhatsAppButton } from './components/WhatsAppButton';
+import { MobileBottomCTA } from './components/MobileBottomCTA';
+import { EnquiryModal } from './components/EnquiryModal';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Projects } from './pages/Projects';
 import { ProjectDetail } from './pages/ProjectDetail';
-import { WhyChauhans } from './pages/WhyChauhans';
+import { WhyChauhan } from './pages/WhyChauhan';
 import { Location } from './pages/Location';
+import { Services } from './pages/Services';
+import { Blog } from './pages/Blog';
+import { BlogDetail } from './pages/BlogDetail';
 import { Contact } from './pages/Contact';
 import { Legal } from './pages/Legal';
 import { NotFound } from './pages/NotFound';
@@ -24,14 +29,11 @@ function ScrollToTop() {
 function Shell() {
   const { pathname } = useLocation();
   const isHome = pathname === '/';
-  const isProjectDetail = pathname.startsWith('/projects/');
+  const [enquiryOpen, setEnquiryOpen] = React.useState(false);
 
   return (
     <div
-      className={
-      'flex min-h-screen w-full flex-col bg-ink-900 ' + (
-      isProjectDetail ? 'pb-16 sm:pb-0' : '')
-      }>
+      className="flex min-h-screen w-full flex-col bg-ink-900 pb-20 md:pb-0">
       
       <a
         href="#main"
@@ -40,15 +42,20 @@ function Shell() {
         Skip to content
       </a>
 
-      <Navbar transparentOnTop={isHome} />
+      <Navbar transparentOnTop={isHome} onEnquire={() => setEnquiryOpen(true)} />
 
       <main id="main" className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/properties" element={<Projects />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />
-          <Route path="/why-chauhans" element={<WhyChauhans />} />
+          <Route path="/properties/:slug" element={<ProjectDetail />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
+          <Route path="/why-chauhan" element={<WhyChauhan />} />
           <Route path="/location" element={<Location />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/legal/:doc" element={<Legal />} />
@@ -58,8 +65,9 @@ function Shell() {
 
       <Footer />
 
-      {/* Lifted on project pages so it never collides with the sticky mobile CTA bar. */}
-      <WhatsAppButton raised={isProjectDetail} />
+      <WhatsAppButton />
+      <MobileBottomCTA />
+      <EnquiryModal open={enquiryOpen} onClose={() => setEnquiryOpen(false)} />
     </div>);
 
 }

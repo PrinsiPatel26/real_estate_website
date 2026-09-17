@@ -8,7 +8,7 @@ import { Reveal, GoldLine } from './Reveal';
 
 export function AboutSection({ showLink = true }: {showLink?: boolean;}) {
   return (
-    <section id="about" aria-labelledby="about-heading" className="bg-ink-900 py-20 sm:py-28 lg:py-32">
+    <section id="about" aria-labelledby="about-heading" className="bg-white py-20 text-ink-900 sm:py-28 lg:py-32">
       <div className="mx-auto max-w-shell px-5 lg:px-10">
         <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-20">
           <Reveal direction="left">
@@ -16,7 +16,7 @@ export function AboutSection({ showLink = true }: {showLink?: boolean;}) {
               <div className="border border-gold/25 p-2.5 sm:p-3">
                 <img
                   src={brand.founder.photo}
-                  alt={`${brand.founder.name}, ${brand.founder.designation} of Chauhans Realtors, at the company office`}
+                  alt={`${brand.founder.name}, ${brand.founder.designation} of Chauhan Realtors, at the company office`}
                   loading="lazy"
                   className="aspect-[4/3] w-full rounded-sm object-cover" />
                 

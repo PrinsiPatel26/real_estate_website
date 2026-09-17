@@ -6,9 +6,9 @@ import { ContactSection } from '../components/ContactSection';
 
 export function Location() {
   useSeo({
-    title: 'Location | Chauhans Realtors - Gurgaon Corridors We Cover',
+    title: 'Location | Chauhan Realtors - Gurgaon Corridors We Cover',
     description:
-    'Explore the Gurgaon corridors Chauhans Realtors works across - Dwarka Expressway, Golf Course Extension Road, SPR, New Gurugram, Manesar and more.'
+    'Explore the Gurgaon corridors Chauhan Realtors works across - Dwarka Expressway, Golf Course Extension Road, SPR, New Gurugram, Manesar and more.'
   });
 
   return (

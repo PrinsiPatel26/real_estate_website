@@ -10,9 +10,10 @@ import { WhatsAppIcon } from './WhatsAppIcon';
 interface NavbarProps {
   /** Home has a full-bleed hero, so the bar starts transparent there only. */
   transparentOnTop?: boolean;
+  onEnquire?: () => void;
 }
 
-export function Navbar({ transparentOnTop = false }: NavbarProps) {
+export function Navbar({ transparentOnTop = false, onEnquire }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const location = useLocation();
@@ -44,16 +45,16 @@ export function Navbar({ transparentOnTop = false }: NavbarProps) {
       
       <div className="mx-auto flex h-[72px] max-w-shell items-center justify-between gap-4 px-5 sm:h-[78px] lg:h-[82px] lg:px-10">
         <Link to="/" className="flex shrink-0 items-center gap-3" aria-label={`${brand.name} — home`}>
-          <span className="flex h-12 items-center justify-center rounded-sm bg-ink-900 px-2 sm:h-14 lg:h-16">
+          <span className="flex h-12 items-center justify-center rounded-sm bg-white px-2 sm:h-14 lg:h-16">
             <img
-              src="/logo_c-removebg-preview.png"
+              src={brand.logo}
               alt={`${brand.name} logo`}
               className="h-full w-auto max-w-[132px] object-contain sm:max-w-[158px] lg:max-w-[180px]" />
             
           </span>
           <span className="hidden xs:block">
-            <span className="block font-display text-[1rem] leading-tight text-paper">
-              Chauhans Realtors
+            <span className="block font-display text-[1rem] leading-tight text-ink-900">
+              Chauhan Realtors
             </span>
             <span className="block text-[0.52rem] uppercase tracking-micro text-gold/70">
               {brand.tagline}
@@ -69,7 +70,7 @@ export function Navbar({ transparentOnTop = false }: NavbarProps) {
                 to={item.to}
                 className={({ isActive }) =>
                 `group relative block py-2 text-[0.7rem] uppercase tracking-micro transition-colors duration-150 ease-lux ${
-                isActive ? 'text-gold-bright' : 'text-paper/70 hover:text-paper'}`
+                isActive ? 'text-gold' : 'text-ink-900/70 hover:text-ink-900'}`
 
                 }>
                 
@@ -95,18 +96,27 @@ export function Navbar({ transparentOnTop = false }: NavbarProps) {
             href={whatsappLink()}
             target="_blank"
             rel="noreferrer"
-            aria-label="Chat with Chauhans Realtors on WhatsApp"
-            className="flex h-10 w-10 items-center justify-center text-gold transition-colors duration-150 ease-lux hover:bg-gold hover:text-ink-900">
-            
+            aria-label="Chat with Chauhan Realtors on WhatsApp"
+            className="hidden h-10 items-center gap-2 border border-gold/30 px-3 text-[0.62rem] uppercase tracking-micro text-gold transition-colors duration-150 ease-lux hover:border-gold hover:bg-gold hover:text-ink-900 lg:flex">
             <WhatsAppIcon className="h-4 w-4 object-contain" />
+            WhatsApp
+          </a>
+          <a
+            href={callLink(brand.founder.phone)}
+            aria-label="Call Chauhan Realtors"
+            className="hidden h-10 items-center gap-2 border border-gold/30 px-3 text-[0.62rem] uppercase tracking-micro text-paper/80 transition-colors duration-150 ease-lux hover:border-gold hover:text-gold lg:flex">
+            <PhoneIcon className="h-4 w-4" aria-hidden="true" />
+            Call
           </a>
           <NavbarProjectSearch onNavigate={() => setOpen(false)} />
-          <Link
-            to="/contact"
+          <button
+            type="button"
+            onClick={onEnquire}
+            aria-label="Open enquiry form"
             className="hidden h-10 items-center border border-gold bg-gold px-5 text-[0.68rem] uppercase tracking-micro text-ink-900 transition-colors duration-150 ease-lux hover:bg-gold-bright sm:flex">
-            
+
             Enquire Now
-          </Link>
+          </button>
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
@@ -146,12 +156,13 @@ export function Navbar({ transparentOnTop = false }: NavbarProps) {
               )}
               </ul>
               <div className="mt-6 grid gap-3">
-                <Link
-                to="/contact"
+                <button
+                type="button"
+                onClick={onEnquire}
                 className="flex h-12 items-center justify-center bg-gold text-[0.7rem] uppercase tracking-micro text-ink-900">
                 
                   Enquire Now
-                </Link>
+                </button>
                 <a
                 href={whatsappLink()}
                 target="_blank"

@@ -1,6 +1,6 @@
 export const heroContent = {
-  eyebrow: 'Chauhans Realtors',
-  headingLines: ['Where Exceptional', 'Properties Meet', 'Exceptional Living.'],
+  eyebrow: 'Chauhan Realtors',
+  headingLines: ['Building Trust.', 'Creating Future.'],
   supporting:
   'Discover carefully selected residential opportunities across Gurgaon with guidance built around trust, transparency and long-term value.'
 };
@@ -13,9 +13,9 @@ export const heroStats = [
 
 
 export const aboutContent = {
-  eyebrow: 'About Chauhans Realtors',
+  eyebrow: 'About Chauhan Realtors',
   headingLines: ['More Than Property.', 'A Relationship Built On Trust.'],
-  body: 'Chauhans Realtors is focused on helping homebuyers and investors discover premium real estate opportunities across Gurgaon. Our approach combines market understanding, personalised guidance and transparent communication to make every property decision simpler and more confident.',
+  body: 'Chauhan Realtors is focused on helping homebuyers and investors discover premium real estate opportunities across Gurgaon. Our approach combines market understanding, personalised guidance and transparent communication to make every property decision simpler and more confident.',
   pillars: [
   { title: 'Founder Led', text: 'Every enquiry is handled with the founder’s direct involvement.' },
   { title: 'Trust', text: 'We would rather lose a sale than overstate a project.' },
@@ -28,11 +28,11 @@ export const aboutContent = {
 export const founderContent = {
   eyebrow: 'Meet The Founder',
   statement:
-  'At Chauhans Realtors, we believe that real estate is not simply about property. It is about trust, informed decisions and creating a future that feels right.',
+  'At Chauhan Realtors, we believe that real estate is not simply about property. It is about trust, informed decisions and creating a future that feels right.',
   quote: ['Building trust is not a statement.', 'It is a responsibility.']
 };
 
-export const whyChauhans = [
+export const whyChauhan = [
 { number: '01', title: 'Trust', text: 'Clear and transparent communication.' },
 { number: '02', title: 'Curated Opportunities', text: 'Carefully selected property opportunities.' },
 { number: '03', title: 'Personalised Guidance', text: 'Property recommendations based on buyer requirements.' },
@@ -74,7 +74,7 @@ export const legalPages = {
   privacy: {
     title: 'Privacy Policy',
     intro:
-    'This policy explains what information Chauhans Realtors collects through this website and how it is used.',
+    'This policy explains what information Chauhan Realtors collects through this website and how it is used.',
     sections: [
     {
       heading: 'Information we collect',
@@ -100,7 +100,7 @@ export const legalPages = {
     sections: [
     {
       heading: 'Nature of this website',
-      body: 'This website is an information and enquiry platform operated by Chauhans Realtors, a real estate consultancy. Chauhans Realtors is not the promoter or developer of the projects presented here.'
+      body: 'This website is an information and enquiry platform operated by Chauhan Realtors, a real estate consultancy. Chauhan Realtors is not the promoter or developer of the projects presented here.'
     },
     {
       heading: 'No offer or contract',

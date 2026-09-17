@@ -1,13 +1,6 @@
 import React from 'react';
 import { PhoneIcon, MailIcon, MapPinIcon, ExternalLinkIcon } from 'lucide-react';
-import {
-  brand,
-  whatsappLink,
-  callLink,
-  mailLink,
-  mapsEmbedSrc,
-  mapsDirectionsLink } from
-'../data/brand';
+import { brand, whatsappLink, callLink, mailLink, mapsDirectionsLink } from '../data/brand';
 import { SectionHeading } from './SectionHeading';
 import { EnquiryForm } from './EnquiryForm';
 import { Reveal } from './Reveal';
@@ -15,7 +8,7 @@ import { WhatsAppIcon } from './WhatsAppIcon';
 
 export function ContactSection({ defaultProject = '' }: {defaultProject?: string;}) {
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="bg-ink-900 py-16 sm:py-20 lg:py-24">
+    <section id="contact" aria-labelledby="contact-heading" className="bg-white py-16 text-ink-900 sm:py-20 lg:py-24">
       <div className="mx-auto w-[90%] max-w-shell">
         <SectionHeading
           id="contact-heading"
@@ -120,14 +113,8 @@ export function ContactSection({ defaultProject = '' }: {defaultProject?: string
             </Reveal>
 
             <Reveal delay={0.14}>
-              <div className="mt-8 border border-gold/20">
-                <iframe
-                  title="Chauhans Realtors office location — SVH Metro Street, Sector 84, Gurgaon"
-                  src={mapsEmbedSrc}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="block h-56 w-full grayscale-[0.4] sm:h-64" />
-                
+              <div className="mt-8 border border-gold/20 p-5">
+                <p className="text-sm leading-relaxed text-paper/60">Visit our office at SVH Metro Street, Sector 84, Gurgaon.</p>
               </div>
               <a
                 href={mapsDirectionsLink}

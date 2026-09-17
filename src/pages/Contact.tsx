@@ -5,9 +5,9 @@ import { ContactSection } from '../components/ContactSection';
 
 export function Contact() {
   useSeo({
-    title: 'Contact | Chauhans Realtors, Sector 84 Gurgaon',
+    title: 'Contact | Chauhan Realtors, Sector 84 Gurgaon',
     description:
-    'Speak with Chauhans Realtors about premium residential opportunities in Gurgaon. WhatsApp, call or email us, or request a callback from our office in Sector 84.'
+    'Speak with Chauhan Realtors about premium residential opportunities in Gurgaon. WhatsApp, call or email us, or request a callback from our office in Sector 84.'
   });
 
   return (

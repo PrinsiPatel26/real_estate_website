@@ -9,9 +9,9 @@ import { Reveal } from '../components/Reveal';
 
 export function Projects() {
   useSeo({
-    title: 'Projects | Chauhans Realtors — Premium Gurgaon Residences',
+    title: 'Projects | Chauhan Realtors — Premium Gurgaon Residences',
     description:
-    'Explore premium residential projects across Gurgaon curated by Chauhans Realtors — M3M GIC Forestia, Ganga Nine Zero, Smartworld Wellness, ATS HomeKraft and Wall Senior Living.',
+    'Explore premium residential projects across Gurgaon curated by Chauhan Realtors — M3M GIC Forestia, Ganga Nine Zero, Smartworld Wellness, ATS HomeKraft and Wall Senior Living.',
     image: projects[0].card
   });
 

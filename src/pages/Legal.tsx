@@ -16,7 +16,7 @@ export function Legal() {
   const page = legalPages[key];
 
   useSeo({
-    title: page.title + ' | Chauhans Realtors',
+    title: page.title + ' | Chauhan Realtors',
     description: page.intro
   });
 
@@ -47,7 +47,7 @@ export function Legal() {
 
           <Reveal delay={0.08}>
             <p className="mt-16 border-t border-gold/10 pt-8 text-[0.72rem] leading-relaxed text-paper/40">
-              Chauhans Realtors is a real estate consultancy and is not the promoter or developer of
+              Chauhan Realtors is a real estate consultancy and is not the promoter or developer of
               the projects presented on this website. For any project, the particulars recorded with
               the Haryana Real Estate Regulatory Authority at haryanarera.gov.in should be treated
               as the controlling source.

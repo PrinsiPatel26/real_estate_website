@@ -25,11 +25,11 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-gold/15 bg-ink-900">
+    <footer className="border-t border-black/10 bg-white text-ink-900">
       <div className="mx-auto max-w-shell px-5 py-16 lg:px-10 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <span className="inline-flex items-center rounded-sm bg-ink-800 px-3 py-2 ring-1 ring-gold/20">
+            <span className="inline-flex items-center rounded-sm bg-white px-3 py-2 ring-1 ring-gold/30">
               <img
                 src={brand.logo}
                 alt={`${brand.name} logo`}
@@ -62,13 +62,13 @@ export function Footer() {
           </div>
 
           <nav aria-label="Footer navigation">
-            <h2 className="eyebrow text-gold/80">Navigation</h2>
+            <h2 className="eyebrow text-gold">Navigation</h2>
             <ul className="mt-5 space-y-3">
               {navigation.map((item) =>
               <li key={item.to}>
                   <Link
                   to={item.to}
-                  className="text-sm text-paper/60 transition-colors duration-150 ease-lux hover:text-gold-bright">
+                  className="text-sm text-ink-900/65 transition-colors duration-150 ease-lux hover:text-gold">
                   
                     {item.label}
                   </Link>
@@ -78,13 +78,13 @@ export function Footer() {
           </nav>
 
           <nav aria-label="Projects">
-            <h2 className="eyebrow text-gold/80">Projects</h2>
+            <h2 className="eyebrow text-gold">Projects</h2>
             <ul className="mt-5 space-y-3">
               {projects.map((project) =>
               <li key={project.slug}>
                   <Link
                   to={`/projects/${project.slug}`}
-                  className="text-sm text-paper/60 transition-colors duration-150 ease-lux hover:text-gold-bright">
+                  className="text-sm text-ink-900/65 transition-colors duration-150 ease-lux hover:text-gold">
                   
                     {project.name}
                   </Link>
@@ -94,7 +94,7 @@ export function Footer() {
           </nav>
 
           <div>
-            <h2 className="eyebrow text-gold/80">Contact</h2>
+            <h2 className="eyebrow text-gold">Contact</h2>
             <address className="mt-5 space-y-1 text-sm not-italic leading-relaxed text-paper/60">
               {brand.office.lines.map((line) =>
               <span key={line} className="block">
@@ -139,7 +139,7 @@ export function Footer() {
         <div className="mt-14 border-t border-gold/10 pt-8">
           <p className="max-w-4xl text-[0.7rem] leading-relaxed text-paper/40">{DISCLAIMER_SHORT}</p>
           <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-[0.7rem] text-paper/45">© 2026 Chauhans Realtors. All Rights Reserved.</p>
+            <p className="text-[0.7rem] text-paper/45">© 2026 Chauhan Realtors. All Rights Reserved.</p>
             <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
               {legalLinks.map((item) =>
               <li key={item.to}>
