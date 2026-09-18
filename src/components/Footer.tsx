@@ -24,11 +24,11 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-[#e8e6e0] bg-white text-[#111111]">
+    <footer className="border-t border-[#d4af37]/30 bg-[#0a0a0a] text-white">
       <div className="mx-auto max-w-shell px-5 py-16 lg:px-10 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <span className="inline-flex items-center rounded-sm bg-white px-3 py-2 ring-1 ring-[#e8e6e0]">
+            <span className="inline-flex items-center rounded-sm bg-[#f5f3ee] px-3 py-2 ring-1 ring-[#d4af37]/30">
               <img
                 src={brand.logo}
                 alt={`${brand.name} logo`}
@@ -36,7 +36,7 @@ export function Footer() {
               
             </span>
             <p className="mt-5 font-display text-lg italic text-[#c9a227]">{brand.tagline}</p>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-[#666666]">
+              <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/60">
               Premium residential guidance across Gurgaon — curated opportunities, transparent
               information and personal assistance from the first conversation to possession.
             </p>
@@ -50,7 +50,7 @@ export function Footer() {
                       target="_blank"
                       rel="noreferrer"
                       aria-label={`${brand.name} on ${item.label} — ${item.handle}`}
-                      className="flex h-10 w-10 items-center justify-center border border-[#e8e6e0] text-[#c9a227] transition-colors duration-150 ease-lux hover:border-[#c9a227] hover:bg-[#c9a227] hover:text-[#111111]">
+                      className="flex h-10 w-10 items-center justify-center border border-[#d4af37]/30 text-[#d8b968] transition-colors duration-150 ease-lux hover:border-[#d4af37] hover:bg-[#c9a24a] hover:text-[#0a0a0a]">
                       
                       <Icon className="h-4 w-4" aria-hidden="true" />
                     </a>
@@ -67,7 +67,7 @@ export function Footer() {
               <li key={item.to}>
                   <Link
                   to={item.to}
-                  className="text-sm text-[#111111]/65 transition-colors duration-150 ease-lux hover:text-[#c9a227]">
+                  className="text-sm text-white/60 transition-colors duration-150 ease-lux hover:text-[#d8b968]">
                   
                     {item.label}
                   </Link>
@@ -83,7 +83,7 @@ export function Footer() {
               <li key={project.slug}>
                   <Link
                   to={`/projects/${project.slug}`}
-                  className="text-sm text-[#111111]/65 transition-colors duration-150 ease-lux hover:text-[#c9a227]">
+                  className="text-sm text-white/60 transition-colors duration-150 ease-lux hover:text-[#d8b968]">
                   
                     {project.name}
                   </Link>
@@ -94,7 +94,7 @@ export function Footer() {
 
           <div>
             <h2 className="eyebrow text-[#c9a227]">Contact</h2>
-            <address className="mt-5 space-y-1 text-sm not-italic leading-relaxed text-[#666666]">
+            <address className="mt-5 space-y-1 text-sm not-italic leading-relaxed text-white/60">
               {brand.office.lines.map((line) =>
               <span key={line} className="block">
                   {line}
@@ -105,7 +105,7 @@ export function Footer() {
               <li>
                 <a
                   href={callLink(brand.founder.phone)}
-                  className="inline-flex items-center gap-2 text-[#111111]/75 transition-colors duration-150 ease-lux hover:text-[#c9a227]">
+                  className="inline-flex items-center gap-2 text-white/80 transition-colors duration-150 ease-lux hover:text-[#d8b968]">
                   
                   <PhoneIcon className="h-4 w-4 text-[#c9a227]" aria-hidden="true" />
                   {brand.founder.phoneDisplay}
@@ -114,7 +114,7 @@ export function Footer() {
               <li>
                 <a
                   href={mailLink()}
-                  className="inline-flex items-start gap-2 break-all text-[#111111]/75 transition-colors duration-150 ease-lux hover:text-[#c9a227]">
+                  className="inline-flex items-start gap-2 break-all text-white/80 transition-colors duration-150 ease-lux hover:text-[#d8b968]">
                   
                   <MailIcon className="mt-0.5 h-4 w-4 shrink-0 text-[#c9a227]" aria-hidden="true" />
                   {brand.email}
@@ -124,16 +124,16 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 border-t border-[#e8e6e0] pt-8">
-          <p className="max-w-4xl text-[0.7rem] leading-relaxed text-[#666666]">{DISCLAIMER_SHORT}</p>
+        <div className="mt-14 border-t border-[#d4af37]/25 pt-8">
+          <p className="max-w-4xl text-[0.7rem] leading-relaxed text-white/45">{DISCLAIMER_SHORT}</p>
           <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-[0.7rem] text-[#666666]">© 2026 Chauhan Realtors. All Rights Reserved.</p>
+            <p className="text-[0.7rem] text-white/45">© 2026 Chauhan Realtors. All Rights Reserved.</p>
             <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
               {legalLinks.map((item) =>
               <li key={item.to}>
                   <Link
                   to={item.to}
-                  className="text-[0.7rem] text-[#666666] transition-colors duration-150 ease-lux hover:text-[#c9a227]">
+                  className="text-[0.7rem] text-white/45 transition-colors duration-150 ease-lux hover:text-[#d8b968]">
                   
                     {item.label}
                   </Link>

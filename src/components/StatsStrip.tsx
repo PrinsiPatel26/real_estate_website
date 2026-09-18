@@ -7,7 +7,7 @@ const icons = [LayersIcon, MapPinIcon, UserCheckIcon, CarFrontIcon];
 
 export function StatsStrip() {
   return (
-    <section aria-label="How we work" className="relative z-10 border-y border-black/10 bg-white">
+    <section aria-label="How we work" className="relative z-10 border-y border-[#d4af37]/25 bg-[#0a0a0a] text-white">
       <div className="mx-auto max-w-shell px-5 lg:px-10">
         <ul className="grid sm:grid-cols-2 lg:grid-cols-4">
           {heroStats.map((stat, index) => {
@@ -23,10 +23,10 @@ export function StatsStrip() {
                 index === 3 ? 'sm:border-l' : ''}`
                 }>
                 
-                <Icon className="mt-0.5 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
+                <Icon className="mt-0.5 h-5 w-5 shrink-0 text-[#c9a24a]" aria-hidden="true" />
                 <div className="min-w-0 pr-4">
-                  <h3 className="font-display text-lg leading-snug text-ink-900">{stat.title}</h3>
-                  <p className="mt-1.5 text-[0.8rem] leading-relaxed text-ink-900/60">{stat.text}</p>
+                  <h3 className="font-display text-lg leading-snug text-white">{stat.title}</h3>
+                  <p className="mt-1.5 text-[0.8rem] leading-relaxed text-white/55">{stat.text}</p>
                 </div>
               </Reveal>);
 

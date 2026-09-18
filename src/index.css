@@ -9,14 +9,18 @@
 /* END TAILWIND IMPORTS - ALL OTHER CSS MUST GO BELOW THIS LINE */
 
 :root {
-  --color-background: #f8f8f6;
-  --color-surface: #ffffff;
-  --color-ink: #111111;
-  --color-muted: #666666;
-  --color-gold: #c9a227;
-  --color-gold-light: #e5d29a;
-  --color-border: #e8e6e0;
-  --color-ink-strong: #0b0b0b;
+  --color-background: #f5f3ee;
+  --color-surface: #f5f3ee;
+  --color-ink: #151515;
+  --color-text-primary: #151515;
+  --color-text-secondary: #4e4b45;
+  --color-text-muted: #78736a;
+  --color-heading: #0a0a0a;
+  --color-muted: #78736a;
+  --color-gold: #c9a24a;
+  --color-gold-light: #d8b968;
+  --color-border: rgba(201, 162, 74, 0.25);
+  --color-ink-strong: #0a0a0a;
 }
 
 html {
@@ -29,8 +33,34 @@ body {
   background-color: var(--color-background);
   color: var(--color-ink);
   font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-weight: 400;
   overflow-x: hidden;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-heading);
+}
+button {
+  font-weight: 600;
+}
+label,
+nav a {
+  font-weight: 500;
+}
+input,
+select,
+textarea {
+  color: var(--color-text-primary);
+  font-weight: 400;
+}
+::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
 }
 img {
   display: block;
@@ -43,29 +73,70 @@ a {
   font-size: 0.62rem;
   line-height: 1.2;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
 }
 :focus-visible {
   outline: 2px solid #d4af37;
   outline-offset: 3px;
 }
 ::selection {
-  background: #c9a227;
-  color: #111111;
+  background: #c9a24a;
+  color: #0a0a0a;
 }
+
+/* Shared editorial surfaces. Components retain their existing structure and behavior. */
+[class~="bg-[#f8f8f6]"] { background-color: #f5f3ee !important; }
+[class~="bg-[#fafaf8]"] { background-color: #f5f3ee !important; }
+[class~="bg-white"] { background-color: #f5f3ee !important; }
+[class~="border-[#e8e6e0]"] { border-color: rgba(201, 162, 74, 0.25) !important; }
+[class~="border-[#e5e1d8]"] { border-color: rgba(201, 162, 74, 0.25) !important; }
+[class~="text-[#c9a227]"] { color: #c9a24a !important; }
+[class~="text-[#d4af37]"] { color: #d8b968 !important; }
+[class~="bg-[#c9a227]"] { background-color: #c9a24a !important; }
+[class~="bg-[#d4af37]"] { background-color: #c9a24a !important; }
+[class~="hover\:bg-[#c9a227]"]:hover { background-color: #d8b968 !important; }
+[class~="hover\:bg-[#d4af37]"]:hover { background-color: #d8b968 !important; }
+[class~="text-[#666666]"] { color: #4e4b45 !important; }
+[class~="text-[#777777]"] { color: #78736a !important; }
+[class~="text-[#111111]"] { color: #151515 !important; }
+[class~="text-[#111111]/65"] { color: rgba(21, 21, 21, 0.68) !important; }
+[class~="text-[#111111]/75"] { color: rgba(21, 21, 21, 0.82) !important; }
+[class~="text-[#071a3d]"] { color: #0a0a0a !important; }
+[class~="text-[#64748b]"] { color: #5f5a50 !important; }
+[class~="text-[#f4b400]"] { color: #c9a24a !important; }
+[class~="bg-[#fff5d6]"] { background-color: #eee6d2 !important; }
+[class~="border-[#e5e7eb]"] { border-color: rgba(201, 162, 74, 0.25) !important; }
+[class~="bg-[#f4b400]"] { background-color: #c9a24a !important; }
+[class~="bg-[#dbe2ea]"] { background-color: #d7d0c2 !important; }
+[class~="border-[#f4b400]"] { border-color: #c9a24a !important; }
+[class~="hover\:border-[#f4b400]"]:hover { border-color: #c9a24a !important; }
+
+.font-display { letter-spacing: -0.015em; }
+.gold-line { background-color: #c9a24a; }
 
 /* Keep supporting copy readable across the light premium surfaces. */
 [class~="text-[#666666]"] {
-  color: #444444 !important;
+  color: var(--color-text-secondary) !important;
+}
+[class~="text-[#111111]"] {
+  color: var(--color-text-primary) !important;
+}
+h1[class~="text-[#111111]"],
+h2[class~="text-[#111111]"],
+h3[class~="text-[#111111]"],
+h4[class~="text-[#111111]"],
+h5[class~="text-[#111111]"],
+h6[class~="text-[#111111]"] {
+  color: var(--color-heading) !important;
 }
 [class~="text-[#777777]"] {
-  color: #555555 !important;
+  color: var(--color-text-muted) !important;
 }
 [class~="text-[#111111]/65"] {
-  color: rgb(17 17 17 / 0.82) !important;
+  color: var(--color-text-secondary) !important;
 }
 [class~="text-[#111111]/75"] {
-  color: rgb(17 17 17 / 0.88) !important;
+  color: var(--color-text-primary) !important;
 }
 @media (prefers-reduced-motion: reduce) {
   html {

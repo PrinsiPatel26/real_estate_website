@@ -7,12 +7,12 @@ export default {
     extend: {
       screens: { xs: '420px' },
       colors: {
-        ink: { DEFAULT: '#111111', 900: '#0B0B0B', 800: '#171717', 700: '#1b1b1b' },
-        paper: '#FFFFFF',
-        gold: { DEFAULT: '#C9A227', bright: '#D4AF37', soft: '#E5D29A', muted: '#8D6D16' },
-        stone: '#F8F8F6',
-        border: '#E8E6E0',
-        muted: '#666666',
+        ink: { DEFAULT: '#151515', 900: '#0A0A0A', 800: '#151515', 700: '#222222' },
+        paper: '#F5F3EE',
+        gold: { DEFAULT: '#C9A24A', bright: '#D8B968', soft: '#E7D5A4', muted: '#8A6D2F' },
+        stone: '#F5F3EE',
+        border: '#D8C28A',
+        muted: '#78736A',
       },
       fontFamily: {
         display: ['"Cormorant Garamond"', 'Georgia', 'serif'],

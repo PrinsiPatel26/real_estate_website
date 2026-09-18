@@ -39,7 +39,7 @@ export function Navbar({ transparentOnTop = false, onEnquire }: NavbarProps) {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-200 ease-lux ${
-      solid ? 'border-b border-[#d4af37]/15 bg-[rgba(5,8,10,0.82)] shadow-[0_10px_30px_rgba(0,0,0,0.25)] backdrop-blur-md' : 'border-b border-[#d4af37]/15 bg-[rgba(5,8,10,0.72)] backdrop-blur-md'}
+      solid ? 'border-b border-[#d4af37]/25 bg-[#0a0a0a] shadow-[0_10px_30px_rgba(0,0,0,0.2)]' : 'border-b border-[#d4af37]/25 bg-[rgba(10,10,10,0.84)] backdrop-blur-md'}
       `}>
       
       <div className="mx-auto flex h-[72px] max-w-shell items-center justify-between gap-4 px-5 sm:h-[78px] lg:h-[82px] lg:px-10">

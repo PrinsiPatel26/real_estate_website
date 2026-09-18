@@ -9,7 +9,7 @@ interface WhatsAppButtonProps {
 
 export function WhatsAppButton({ message = GENERAL_WHATSAPP_MESSAGE, raised = false }: WhatsAppButtonProps) {
   return (
-    <div className={`group fixed bottom-4 right-4 z-[9999] md:bottom-6 md:right-6 ${raised ? 'md:bottom-6' : ''}`}>
+    <div className={`group fixed bottom-4 right-4 z-[9999] hidden md:block md:bottom-6 md:right-6 ${raised ? 'md:bottom-6' : ''}`}>
       <a
         href={whatsappLink(message)}
         target="_blank"

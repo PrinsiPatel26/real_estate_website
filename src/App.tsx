@@ -34,7 +34,7 @@ function Shell() {
 
   return (
     <div
-      className="flex min-h-screen w-full flex-col bg-[#f8f8f6] text-[#111111] pb-20 md:pb-0">
+      className="flex min-h-screen w-full flex-col bg-[#f8f8f6] text-[#111111] pb-[calc(88px+env(safe-area-inset-bottom))] md:pb-0">
       
       <a
         href="#main"
