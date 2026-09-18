@@ -9,11 +9,11 @@ export function FounderSection() {
     <section
       id="founder"
       aria-labelledby="founder-heading"
-      className="border-y border-[#e8e6e0] bg-[#f8f8f6] py-20 text-[#111111] sm:py-28 lg:py-32">
+      className="border-y border-[#e8e6e0] bg-[#f8f8f6] py-14 text-[#111111] sm:py-20 lg:py-24">
       
       <div className="mx-auto max-w-shell px-5 lg:px-10">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          <div className="order-2 lg:order-1">
+        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
+          <div className="order-1">
             <Reveal>
               <p className="eyebrow text-[#c9a227]">{founderContent.eyebrow}</p>
             </Reveal>
@@ -23,24 +23,25 @@ export function FounderSection() {
             <Reveal delay={0.08}>
               <h2
                 id="founder-heading"
-                className="mt-6 font-display text-[2rem] font-light leading-tight text-[#111111] sm:text-[2.6rem]">
+                className="mt-6 font-display text-[2.25rem] font-medium leading-[1.12] text-[#111111] sm:text-[2.75rem] lg:whitespace-nowrap">
                 
                 {brand.founder.name}
               </h2>
-              <p className="mt-2 text-[0.68rem] uppercase tracking-[0.2em] text-[#c9a227]">
-                {brand.founder.role}
+              <p className="mt-3 text-[0.68rem] uppercase tracking-[0.2em] text-[#c9a227]">
+                <span className="block">{brand.founder.designation}</span>
+                <span className="mt-1 block">{brand.name}</span>
               </p>
             </Reveal>
 
             <Reveal delay={0.12}>
-              <blockquote className="relative mt-9 pl-10">
+              <blockquote className="relative mt-8 max-w-xl pl-10">
                 <span
                   aria-hidden="true"
                   className="absolute left-0 top-0 font-display text-[4.5rem] leading-[0.7] text-[#c9a227]/35">
                   
                   &ldquo;
                 </span>
-                <p className="font-display text-2xl font-light italic leading-snug text-[#111111] sm:text-[1.9rem]">
+                <p className="font-display text-[1.5rem] font-medium leading-[1.4] text-[#111111] sm:text-[1.85rem]">
                   {founderContent.quote.map((line) =>
                   <span key={line} className="block">
                       {line}
@@ -51,7 +52,7 @@ export function FounderSection() {
             </Reveal>
 
             <Reveal delay={0.16}>
-              <p className="mt-8 max-w-xl text-[0.9rem] leading-relaxed text-[#666666]">
+              <p className="mt-7 max-w-[550px] text-[0.95rem] leading-[1.7] text-[#666666]">
                 {founderContent.statement}
               </p>
             </Reveal>
@@ -69,9 +70,9 @@ export function FounderSection() {
             </Reveal>
           </div>
 
-          <Reveal direction="right" className="order-1 lg:order-2">
+          <Reveal direction="right" className="order-2">
             <figure>
-              <div className="rounded-sm border border-[#e8e6e0] bg-white p-2.5 sm:p-3.5">
+              <div className="rounded-sm border border-[#c9a227]/25 bg-[#efeee9] p-2.5 sm:p-3.5">
                 <img
                   src={brand.founder.photo}
                   alt={`${brand.founder.name}, Founder of Chauhan Realtors, seated at his office desk`}
@@ -80,7 +81,7 @@ export function FounderSection() {
                 
               </div>
               <figcaption className="mt-4 text-center text-[0.62rem] uppercase tracking-[0.2em] text-[#666666]">
-                {brand.founder.name} · {brand.founder.designation}
+                {brand.founder.name} <span className="px-1 text-[#c9a227]">|</span> {brand.founder.designation}
               </figcaption>
             </figure>
           </Reveal>

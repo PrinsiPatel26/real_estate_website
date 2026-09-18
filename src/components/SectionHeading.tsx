@@ -39,7 +39,7 @@ export function SectionHeading({
           {lines.map((line, index) =>
           <span key={line} className="block">
               {index === lines.length - 1 && lines.length > 1 ?
-            <span className="italic text-[#c9a227]">{line}</span> :
+            <span className="text-[#c9a227]">{line}</span> :
 
             line
             }

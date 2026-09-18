@@ -65,7 +65,7 @@ export function Hero() {
               transition={{ duration: 0.3, delay: 0.14 + index * 0.07, ease: LUX }}>
               
                 {index === heroContent.headingLines.length - 1 ?
-              <span className="italic text-[#d4af37]">{line}</span> :
+              <span className="text-[#d4af37]">{line}</span> :
 
               line
               }

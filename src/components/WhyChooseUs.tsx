@@ -39,7 +39,7 @@ export function WhyChooseUs() {
           <Reveal delay={0.05}>
             <h2 id="why-heading" className="mt-6 max-w-xl font-display text-[2.35rem] font-light leading-[1.02] text-[#111111] sm:text-[3rem] lg:text-[3.45rem]">
               Why Choose
-              <span className="block italic text-[#c9a24d]">Chauhan Realtors?</span>
+              <span className="block text-[#c9a24d]">Chauhan Realtors?</span>
             </h2>
           </Reveal>
 

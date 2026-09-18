@@ -1,5 +1,5 @@
 /* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS - DO NOT DELETE THIS COMMENT */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 /* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED - DO NOT DELETE THIS COMMENT */
 @import 'tailwindcss/base';
@@ -9,11 +9,19 @@
 /* END TAILWIND IMPORTS - ALL OTHER CSS MUST GO BELOW THIS LINE */
 
 :root {
-  --color-background: #f5f3ee;
-  --color-surface: #f5f3ee;
+  --page-bg: #e7e6e2;
+  --section-bg: #e3e2de;
+  --surface-bg: #efeee9;
+  --card-bg: #f1f0ec;
+  --text-primary: #151515;
+  --text-secondary: #4e4b45;
+  --border-subtle: rgba(35, 33, 28, 0.14);
+  --overlay-dark: rgba(0, 0, 0, 0.2);
+  --color-background: var(--page-bg);
+  --color-surface: var(--surface-bg);
   --color-ink: #151515;
-  --color-text-primary: #151515;
-  --color-text-secondary: #4e4b45;
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
   --color-text-muted: #78736a;
   --color-heading: #0a0a0a;
   --color-muted: #78736a;
@@ -30,9 +38,10 @@ html {
   background: var(--color-background);
 }
 body {
-  background-color: var(--color-background);
+  background-color: var(--page-bg);
+  background-image: linear-gradient(rgba(18, 18, 16, 0.025), rgba(18, 18, 16, 0.025));
   color: var(--color-ink);
-  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-weight: 400;
   overflow-x: hidden;
   letter-spacing: 0;
@@ -44,6 +53,20 @@ h4,
 h5,
 h6 {
   color: var(--color-heading);
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+}
+button,
+input,
+select,
+textarea,
+label,
+nav,
+nav a,
+footer,
+address {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
 }
 button {
   font-weight: 600;
@@ -85,11 +108,13 @@ a {
 }
 
 /* Shared editorial surfaces. Components retain their existing structure and behavior. */
-[class~="bg-[#f8f8f6]"] { background-color: #f5f3ee !important; }
-[class~="bg-[#fafaf8]"] { background-color: #f5f3ee !important; }
-[class~="bg-white"] { background-color: #f5f3ee !important; }
-[class~="border-[#e8e6e0]"] { border-color: rgba(201, 162, 74, 0.25) !important; }
-[class~="border-[#e5e1d8]"] { border-color: rgba(201, 162, 74, 0.25) !important; }
+[class~="bg-[#f8f8f6]"] { background-color: var(--section-bg) !important; }
+[class~="bg-[#fafaf8]"] { background-color: var(--section-bg) !important; }
+[class~="bg-[#faf9f6]"] { background-color: var(--card-bg) !important; }
+[class~="bg-[#f5f3ee]"] { background-color: var(--surface-bg) !important; }
+[class~="bg-white"] { background-color: var(--surface-bg) !important; }
+[class~="border-[#e8e6e0]"] { border-color: var(--border-subtle) !important; }
+[class~="border-[#e5e1d8]"] { border-color: var(--border-subtle) !important; }
 [class~="text-[#c9a227]"] { color: #c9a24a !important; }
 [class~="text-[#d4af37]"] { color: #d8b968 !important; }
 [class~="bg-[#c9a227]"] { background-color: #c9a24a !important; }
@@ -104,14 +129,21 @@ a {
 [class~="text-[#071a3d]"] { color: #0a0a0a !important; }
 [class~="text-[#64748b]"] { color: #5f5a50 !important; }
 [class~="text-[#f4b400]"] { color: #c9a24a !important; }
-[class~="bg-[#fff5d6]"] { background-color: #eee6d2 !important; }
-[class~="border-[#e5e7eb]"] { border-color: rgba(201, 162, 74, 0.25) !important; }
+[class~="bg-[#fff5d6]"] { background-color: #e9e3d1 !important; }
+[class~="bg-[#fff7d6]"] { background-color: #e9e3d1 !important; }
+[class~="border-[#e5e7eb]"] { border-color: var(--border-subtle) !important; }
 [class~="bg-[#f4b400]"] { background-color: #c9a24a !important; }
 [class~="bg-[#dbe2ea]"] { background-color: #d7d0c2 !important; }
 [class~="border-[#f4b400]"] { border-color: #c9a24a !important; }
 [class~="hover\:border-[#f4b400]"]:hover { border-color: #c9a24a !important; }
 
-.font-display { letter-spacing: -0.015em; }
+.font-display {
+  font-family: 'Inter', Arial, Helvetica, sans-serif !important;
+  font-style: normal !important;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.italic { font-style: normal !important; }
 .gold-line { background-color: #c9a24a; }
 
 /* Keep supporting copy readable across the light premium surfaces. */

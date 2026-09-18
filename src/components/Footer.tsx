@@ -35,7 +35,7 @@ export function Footer() {
                 className="h-14 w-auto max-w-[170px] object-contain" />
               
             </span>
-            <p className="mt-5 font-display text-lg italic text-[#c9a227]">{brand.tagline}</p>
+            <p className="mt-5 font-display text-lg text-[#c9a227]">{brand.tagline}</p>
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/60">
               Premium residential guidance across Gurgaon — curated opportunities, transparent
               information and personal assistance from the first conversation to possession.

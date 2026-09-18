@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeftIcon, ArrowRightIcon, ArrowUpRightIcon, Building2Icon, ClipboardCheckIcon, CompassIcon, HandCoinsIcon, HomeIcon, MapPinIcon, PanelsTopLeftIcon, SearchCheckIcon, StoreIcon } from 'lucide-react';
 
-const services = [
+export const services = [
   ['Property Buying Assistance', 'A considered shortlist shaped around your requirement.', SearchCheckIcon],
   ['Property Selling Assistance', 'Clear positioning and support through the selling process.', HandCoinsIcon],
   ['Investment Advisory', 'Context for comparing opportunity, suitability and timing.', CompassIcon],
