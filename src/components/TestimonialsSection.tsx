@@ -73,13 +73,14 @@ export function TestimonialsSection({ fullPage = false }: TestimonialsSectionPro
 }
 
 function TestimonialCard({ item }: { item: (typeof testimonials)[number] }) {
+  const [expanded, setExpanded] = useState(false);
   const initials = item.name.split(' ').map((part) => part[0]).slice(0, 2).join('');
   return <article data-testimonial-card className="flex min-h-[300px] shrink-0 snap-start basis-[calc(100%-1rem)] flex-col rounded-[14px] border border-[#e5e7eb] bg-white p-6 shadow-[0_3px_14px_rgba(0,0,0,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_8px_22px_rgba(0,0,0,0.09)] sm:basis-[calc(50%-0.75rem)] xl:basis-[calc(33.333%-1rem)] sm:p-7">
     <div className="flex items-start justify-between gap-3">
       <div className="flex min-w-0 items-center gap-3"><span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#fff7d6] text-xs font-semibold text-[#b98200]">{initials}</span><div className="min-w-0"><strong className="block truncate text-sm font-semibold text-[#111827]">{item.name}</strong><span className="mt-0.5 block truncate text-xs text-[#6b7280]">{[item.clientType, item.location].filter(Boolean).join(' · ')}</span></div></div>
       <div className="flex shrink-0 gap-0.5 text-[#f4b400]" aria-label={`${item.rating} out of 5 stars`}>{[1, 2, 3, 4, 5].map((star) => <StarIcon key={star} className="h-3.5 w-3.5 fill-current" aria-hidden="true" />)}</div>
     </div>
-    <p className="mt-6 line-clamp-5 flex-1 text-sm leading-[1.65] text-[#4b5563]">{item.review}</p>
-    <div className="mt-5 flex items-center justify-between border-t border-[#e5e7eb] pt-4"><span className="h-0.5 w-9 bg-[#f4b400]" /><span className="text-[0.68rem] uppercase tracking-[0.12em] text-[#9ca3af]">Client review</span></div>
+    <p className={`mt-6 flex-1 text-sm leading-[1.65] text-[#4b5563] ${expanded ? '' : 'line-clamp-5'}`}>{item.review}</p>
+    <div className="mt-5 flex items-center justify-between border-t border-[#e5e7eb] pt-4"><span className="h-0.5 w-9 bg-[#f4b400]" /><div className="flex items-center gap-3"><span className="text-[0.68rem] uppercase tracking-[0.12em] text-[#9ca3af]">Client review</span><button type="button" onClick={() => setExpanded((value) => !value)} className="text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-[#b98200] transition-colors hover:text-[#111827]">{expanded ? 'Read less' : 'Read more'}</button></div></div>
   </article>;
 }

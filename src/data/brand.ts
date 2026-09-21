@@ -1,7 +1,7 @@
 export const brand = {
   name: 'Chauhan Realtors',
   tagline: 'Building Trust, Creating Future',
-  logo: "/image.png",
+  logo: "/logo_c-removebg-preview.png",
   founder: {
     name: 'Dharmendra Pratap Singh',
     role: 'Founder, Chauhan Realtors',
@@ -11,15 +11,15 @@ export const brand = {
     phoneDisplay: '+91 78952 96699'
   },
   whatsapp: { number: '919625868606', display: '+91 96258 68606' },
-  email: 'chauhanrealtors@gmail.com',
+  email: 'chauhansrealtors@gmail.com',
   office: {
-    lines: ['SVH Metro Street', 'Sector 84, Gurgaon', 'Haryana, India'],
-    mapQuery: 'SVH Metro Street, Sector 84, Gurgaon, Haryana'
+    lines: ['SVH Metro Street', 'Sector 84, Gurgaon'],
+    mapQuery: 'SVH Metro Street, Sector 84, Gurgaon'
   },
   social: [
-  { label: 'Facebook', handle: 'Chauhan Realtors', href: 'https://www.facebook.com/chauhanrealtors' },
-  { label: 'Instagram', handle: '@chauhanerealtors2023', href: 'https://www.instagram.com/chauhanerealtors2023/' },
-  { label: 'LinkedIn', handle: 'Chauhan Realtors', href: 'https://www.linkedin.com/company/chauhan-realtors' }]
+  { label: 'Facebook', handle: 'Chauhans Realtors', href: 'https://www.facebook.com/Chauhansrealtors' },
+  { label: 'Instagram', handle: '@chauhanerealtors2023', href: 'https://www.instagram.com/chauhanerealtors2023' },
+  { label: 'LinkedIn', handle: 'Chauhan Realtors', href: 'https://www.linkedin.com/in/chauhan-realtors-990908317/' }]
 
 };
 

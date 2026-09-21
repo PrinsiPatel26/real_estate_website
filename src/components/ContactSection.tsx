@@ -1,9 +1,15 @@
 import React from 'react';
-import { PhoneIcon, MailIcon, MapPinIcon, ExternalLinkIcon } from 'lucide-react';
+import { PhoneIcon, MailIcon, MapPinIcon, ExternalLinkIcon, FacebookIcon, InstagramIcon, LinkedinIcon } from 'lucide-react';
 import { brand, callLink, mailLink, mapsDirectionsLink } from '../data/brand';
 import { SectionHeading } from './SectionHeading';
 import { EnquiryForm } from './EnquiryForm';
 import { Reveal } from './Reveal';
+
+const socialIcon: Record<string, typeof FacebookIcon> = {
+  Facebook: FacebookIcon,
+  Instagram: InstagramIcon,
+  LinkedIn: LinkedinIcon
+};
 
 export function ContactSection() {
   return (
@@ -75,18 +81,17 @@ export function ContactSection() {
 
             <Reveal delay={0.1}>
               <h3 className="mt-8 eyebrow text-[#c9a227]">Follow</h3>
-              <ul className="mt-4 space-y-2">
+              <ul className="mt-4 flex items-center gap-5">
                 {brand.social.map((item) =>
                 <li key={item.label}>
                     <a
                     href={item.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="group inline-flex items-center gap-2 text-[0.85rem] text-[#666666] transition-colors duration-150 ease-lux hover:text-[#c9a227]">
+                    aria-label={`${brand.name} on ${item.label}`}
+                    className="group inline-flex items-center text-[#c9a227] transition-colors duration-150 ease-lux hover:text-[#d8b968]">
                     
-                      <span className="text-[#111111]">{item.label}</span>
-                      {item.handle}
-                      <ExternalLinkIcon className="h-3 w-3 opacity-0 transition-opacity duration-150 ease-lux group-hover:opacity-100" aria-hidden="true" />
+                      {React.createElement(socialIcon[item.label], { className: 'h-5 w-5', 'aria-hidden': true })}
                     </a>
                   </li>
                 )}

@@ -3,7 +3,6 @@ import { useSeo } from '../hooks/useSeo';
 import { brand, callLink, DISCLAIMER_SHORT } from '../data/brand';
 import { developerHighlights } from '../data/projects';
 import { FounderSection } from '../components/FounderSection';
-import { SectionHeading } from '../components/SectionHeading';
 import { ContactSection } from '../components/ContactSection';
 import { Reveal, GoldLine } from '../components/Reveal';
 import { TrustedDeveloperNetwork } from '../components/TrustedDeveloperNetwork';
@@ -101,31 +100,6 @@ export function About() {
       </section>
 
       <TrustedDeveloperNetwork />
-
-      <section
-        aria-labelledby="clients-heading"
-        className="bg-[#f8f8f6] py-20 sm:py-24">
-        
-        <div className="mx-auto max-w-shell px-5 lg:px-10">
-          <SectionHeading
-            id="clients-heading"
-            eyebrow="Client Stories"
-            lines={['In Their', 'Own Words.']}
-            align="center" />
-          
-          <Reveal delay={0.08}>
-            <div className="mx-auto mt-10 max-w-xl border border-[#e8e6e0] bg-white px-6 py-12 text-center">
-              <p className="font-display text-2xl font-medium text-[#c9a227]">
-                Client stories coming soon.
-              </p>
-              <p className="mx-auto mt-4 max-w-md text-[0.85rem] leading-relaxed text-[#666666]">
-                We publish testimonials only once a client has given us their words and their
-                consent. Nothing on this page is written on a buyer&rsquo;s behalf.
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
 
       <section aria-labelledby="developer-heading" className="bg-[#0d0d0d] py-16 text-white sm:py-24 lg:py-28">
         <div className="mx-auto max-w-shell px-5 lg:px-10">

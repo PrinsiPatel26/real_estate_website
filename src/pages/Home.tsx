@@ -65,7 +65,7 @@ export function Home() {
           </div>
 
           <div className="mt-14">
-            <ProjectGrid projects={projects} />
+            <ProjectGrid projects={projects.slice(0, 4)} featured />
           </div>
 
           <Reveal delay={0.05}>

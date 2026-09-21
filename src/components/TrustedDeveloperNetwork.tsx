@@ -15,18 +15,20 @@ const developers = [
 ] as const;
 
 const AUTOPLAY_MS = 3200;
+const developersPerCycle = developers.length;
+const initialIndex = developersPerCycle + developersPerCycle - 2;
+const slides = [...developers, ...developers, ...developers, ...developers];
 
 export function TrustedDeveloperNetwork() {
   const trackRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(initialIndex);
   const [trackOffset, setTrackOffset] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(true);
-  const slides = [developers[developers.length - 1], ...developers, developers[0]];
 
   const updateTrackOffset = () => {
     const track = trackRef.current;
-    const slide = track?.children[activeIndex + 1] as HTMLElement | undefined;
+    const slide = track?.children[activeIndex] as HTMLElement | undefined;
     if (slide) setTrackOffset(slide.offsetLeft);
   };
 
@@ -45,12 +47,12 @@ export function TrustedDeveloperNetwork() {
   const move = (direction: number) => setActiveIndex((index) => index + direction);
 
   const handleTransitionEnd = () => {
-    if (activeIndex === developers.length) {
+    if (activeIndex >= initialIndex + developersPerCycle) {
       setIsTransitioning(false);
-      setActiveIndex(0);
-    } else if (activeIndex === -1) {
+      setActiveIndex(initialIndex);
+    } else if (activeIndex <= initialIndex - developersPerCycle) {
       setIsTransitioning(false);
-      setActiveIndex(developers.length - 1);
+      setActiveIndex(initialIndex);
     }
   };
 
@@ -63,10 +65,10 @@ export function TrustedDeveloperNetwork() {
     }
   }, [isTransitioning]);
 
-  const displayIndex = ((activeIndex % developers.length) + developers.length) % developers.length;
+  const displayIndex = ((activeIndex % developersPerCycle) + developersPerCycle) % developersPerCycle;
 
   return (
-    <section aria-labelledby="trusted-developers-heading" className="overflow-hidden bg-[#fafaf8] py-20 sm:py-24 lg:py-28">
+    <section aria-labelledby="trusted-developers-heading" className="overflow-x-hidden bg-[#fafaf8] pb-12 pt-20 sm:pb-16 sm:pt-24 lg:pb-20 lg:pt-28">
       <div className="mx-auto max-w-shell px-5 lg:px-10">
         <div className="mx-auto max-w-2xl text-center">
           <p className="eyebrow text-[#c9a227]">Our Network</p>
