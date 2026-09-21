@@ -97,10 +97,10 @@ export function TrustedDeveloperNetwork() {
             <ArrowLeftIcon className="h-4 w-4" aria-hidden="true" />
           </button>
 
-          <div className="overflow-hidden px-1 py-2">
+          <div className="developer-mobile-viewport overflow-hidden px-1 py-2">
             <div
               ref={trackRef}
-              className="flex gap-4 sm:gap-5"
+              className="developer-mobile-track flex gap-4 sm:gap-5"
               style={{ transform: `translateX(-${trackOffset}px)`, transition: isTransitioning ? 'transform 500ms cubic-bezier(0.22, 1, 0.36, 1)' : 'none' }}
               onTransitionEnd={handleTransitionEnd}>
               {slides.map((developer, index) => (

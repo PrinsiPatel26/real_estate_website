@@ -37,7 +37,7 @@ export function Hero() {
         style={{ background: 'linear-gradient(to top, rgba(5,5,5,0.82) 0%, rgba(5,5,5,0.18) 100%)' }} />
       
 
-      <div className="mx-auto w-full max-w-shell px-5 lg:px-10">
+      <div className="mx-auto box-border min-w-0 w-full max-w-full max-w-shell px-5 lg:px-10">
         <motion.p
           className="eyebrow text-[#d4af37]"
           initial={reduce ? undefined : { opacity: 0, y: 14 }}
@@ -55,11 +55,11 @@ export function Hero() {
           transition={{ duration: 0.3, delay: 0.1, ease: LUX }} />
         
 
-        <h1 className="mt-7 max-w-4xl font-display text-[2.6rem] font-light leading-[0.98] tracking-[-0.04em] text-[#ffffff] sm:text-[4rem] lg:text-[5.4rem]">
+        <h1 className="mt-7 box-border w-full max-w-full min-w-0 font-display text-[clamp(2.6rem,6vw,5.4rem)] font-light leading-[0.98] tracking-[-0.04em] text-[#ffffff]">
           {heroContent.headingLines.map((line, index) =>
-          <span key={line} className="block overflow-hidden">
+          <span key={line} className="block max-w-full">
               <motion.span
-              className="block"
+              className="block max-w-full break-words"
               initial={reduce ? undefined : { y: '110%' }}
               animate={reduce ? undefined : { y: '0%' }}
               transition={{ duration: 0.3, delay: 0.14 + index * 0.07, ease: LUX }}>
@@ -84,14 +84,14 @@ export function Hero() {
         </motion.p>
 
         <motion.div
-          className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
+          className="mt-9 flex min-w-0 max-w-full flex-col gap-3 sm:flex-row sm:items-center"
           initial={reduce ? undefined : { opacity: 0, y: 16 }}
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.44, ease: LUX }}>
           
           <Link
             to="/projects"
-            className="group flex items-center justify-center gap-2 bg-[#d4af37] px-7 text-[0.7rem] uppercase tracking-[0.2em] text-[#111111] transition-colors duration-150 ease-lux hover:bg-[#e5c45a]"
+            className="group flex min-w-0 max-w-full items-center justify-center gap-2 bg-[#d4af37] px-7 text-[0.7rem] uppercase tracking-[0.2em] text-[#111111] transition-colors duration-150 ease-lux hover:bg-[#e5c45a] sm:w-auto"
             style={CTA_HEIGHT}>
             
             Explore Projects
@@ -102,7 +102,7 @@ export function Hero() {
           </Link>
           <a
             href={callLink(brand.founder.phone)}
-            className="flex items-center justify-center gap-2 border border-white/25 bg-[#050505]/30 px-7 text-[0.7rem] uppercase tracking-[0.2em] text-white transition-colors duration-150 ease-lux hover:border-[#d4af37] hover:text-[#d4af37]"
+            className="flex min-w-0 max-w-full items-center justify-center gap-2 border border-white/25 bg-[#050505]/30 px-7 text-[0.7rem] uppercase tracking-[0.2em] text-white transition-colors duration-150 ease-lux hover:border-[#d4af37] hover:text-[#d4af37] sm:w-auto"
             style={CTA_HEIGHT}>
             
             <PhoneIcon className="h-4 w-4" aria-hidden="true" />

@@ -48,9 +48,40 @@ body {
   overflow-x: hidden;
   letter-spacing: 0;
 }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 #root {
   max-width: 100%;
   overflow-x: clip;
+}
+
+@keyframes callNowPulse {
+  0%,
+  100% {
+    filter: brightness(1) drop-shadow(0 0 0 rgba(212, 175, 55, 0));
+  }
+  50% {
+    filter: brightness(1.08) drop-shadow(0 0 10px rgba(212, 175, 55, 0.32));
+  }
+}
+
+.call-button-pulse {
+  isolation: isolate;
+  animation: callNowPulse 2s ease-in-out infinite;
+}
+
+.call-button-pulse > svg {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .call-button-pulse {
+    animation: none;
+  }
 }
 h1,
 h2,
@@ -151,6 +182,92 @@ a {
 }
 .italic { font-style: normal !important; }
 .gold-line { background-color: #c9a24a; }
+
+.project-carousel-viewport {
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.project-carousel-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.testimonial-carousel-viewport {
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.testimonial-carousel-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.blog-carousel-viewport {
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.blog-carousel-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-card-rail {
+    display: flex;
+    gap: 16px;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-inline: 16px;
+    scroll-padding-inline: 16px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .mobile-card-rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-card-rail > * {
+    flex: 0 0 min(82vw, 380px) !important;
+    width: min(82vw, 380px) !important;
+    min-width: 0 !important;
+    max-width: 380px !important;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    overflow-wrap: break-word;
+  }
+
+  .developer-mobile-viewport {
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    padding-inline: 16px !important;
+    scroll-padding-inline: 16px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .developer-mobile-viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .developer-mobile-track {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .developer-mobile-track > * {
+    flex-basis: min(82vw, 380px) !important;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
 
 /* Keep supporting copy readable across the light premium surfaces. */
 [class~="text-[#666666]"] {

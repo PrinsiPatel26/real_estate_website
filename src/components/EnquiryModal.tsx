@@ -32,6 +32,7 @@ export function EnquiryModal({ open, onClose }: EnquiryModalProps) {
           initial={reduce ? undefined : { opacity: 0 }}
           animate={reduce ? undefined : { opacity: 1 }}
           exit={reduce ? undefined : { opacity: 0 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
           role="dialog"
           aria-modal="true"
           aria-labelledby="enquiry-modal-title"
@@ -42,7 +43,8 @@ export function EnquiryModal({ open, onClose }: EnquiryModalProps) {
             className="relative my-auto w-full max-w-5xl overflow-y-auto border border-[#e8e6e0] bg-white shadow-[0_25px_80px_rgba(17,17,17,0.12)] sm:max-h-[90vh]"
             initial={reduce ? undefined : { opacity: 0, y: 18, scale: 0.98 }}
             animate={reduce ? undefined : { opacity: 1, y: 0, scale: 1 }}
-            exit={reduce ? undefined : { opacity: 0, y: 18, scale: 0.98 }}>
+            exit={reduce ? undefined : { opacity: 0, y: 18, scale: 0.98 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}>
             <button
               type="button"
               onClick={onClose}

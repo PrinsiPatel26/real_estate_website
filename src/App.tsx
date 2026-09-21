@@ -20,6 +20,8 @@ import { Legal } from './pages/Legal';
 import { NotFound } from './pages/NotFound';
 import { FaqSection } from './components/FaqSection';
 
+const CALLBACK_POPUP_SHOWN_KEY = 'callbackPopupShown';
+
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -33,6 +35,23 @@ function Shell() {
   const isHome = pathname === '/';
   const [enquiryOpen, setEnquiryOpen] = React.useState(false);
 
+  React.useEffect(() => {
+    if (sessionStorage.getItem(CALLBACK_POPUP_SHOWN_KEY)) return;
+
+    const delay = Math.floor(Math.random() * 3000) + 2000;
+    const timer = window.setTimeout(() => {
+      sessionStorage.setItem(CALLBACK_POPUP_SHOWN_KEY, 'true');
+      setEnquiryOpen(true);
+    }, delay);
+
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  const openEnquiry = () => {
+    sessionStorage.setItem(CALLBACK_POPUP_SHOWN_KEY, 'true');
+    setEnquiryOpen(true);
+  };
+
   return (
     <div
       className="flex min-h-screen w-full flex-col bg-[#f8f8f6] text-[#111111]">
@@ -44,7 +63,7 @@ function Shell() {
         Skip to content
       </a>
 
-      <Navbar transparentOnTop={isHome} onEnquire={() => setEnquiryOpen(true)} />
+      <Navbar transparentOnTop={isHome} onEnquire={openEnquiry} />
 
       <main id="main" className="flex-1">
         <Routes>

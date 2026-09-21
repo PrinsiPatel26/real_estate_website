@@ -138,7 +138,7 @@ export function ProjectGallery({ images }: {images: GalleryImage[];}) {
 
   return (
     <>
-      <ul className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-3 sm:overflow-visible sm:px-0 lg:gap-4">
+      <ul className="mobile-card-rail gap-3 pb-2 sm:grid sm:grid-cols-3 sm:gap-3 sm:overflow-visible sm:px-0 sm:snap-none lg:gap-4">
         {images.map((image, index) =>
         <li
           key={image.src + index}

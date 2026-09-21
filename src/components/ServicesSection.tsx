@@ -15,7 +15,6 @@ export const services = [
 
 export function ServicesSection() {
   const primaryServices = services.slice(0, 3);
-  const primaryCarousel = useCarousel(primaryServices.length);
 
   return (
     <section id="services" className="overflow-hidden bg-white py-20 text-[#071a3d] sm:py-24 lg:py-28">
@@ -28,12 +27,21 @@ export function ServicesSection() {
           <p className="max-w-md text-base leading-relaxed text-[#64748b] lg:mb-1">Personal assistance from first conversation to a clear property decision.</p>
         </div>
 
-        <ServiceRail
-          label="Featured services"
-          items={primaryServices}
-          carousel={primaryCarousel}
-          cardClassName="basis-[calc(100%-1rem)] sm:basis-[calc(50%-0.75rem)] lg:basis-[calc(33.333%-1rem)]"
-          featured />
+        <div className="mt-12">
+          <div className="mb-4"><h3 className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#64748b]">Featured services</h3></div>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {primaryServices.map(([title, text, Icon], index) =>
+            <ServiceCard
+              key={title}
+              title={title}
+              text={text}
+              Icon={Icon}
+              index={index}
+              featured
+              className="w-full min-w-0" />
+            )}
+          </div>
+        </div>
 
       </div>
     </section>
@@ -94,7 +102,7 @@ function ServiceRail({ label, items, carousel, cardClassName, featured = false }
     <div className="mb-4"><h3 className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#64748b]">{label}</h3></div>
     <div className="relative">
       <button type="button" onClick={() => carousel.move(-1)} disabled={!carousel.canScrollLeft} aria-label={`Previous ${label.toLowerCase()}`} className="absolute left-0 top-1/2 z-10 hidden h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#e5e7eb] bg-white text-[#071a3d] shadow-[0_4px_16px_rgba(7,26,61,0.08)] transition hover:scale-105 hover:border-[#f4b400] disabled:pointer-events-none disabled:opacity-0 lg:flex"><ArrowLeftIcon className="h-5 w-5" aria-hidden="true" /></button>
-      <div ref={carousel.ref} className="flex snap-x snap-mandatory gap-5 overflow-x-auto px-1 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-6">
+      <div ref={carousel.ref} className="mobile-card-rail px-0 pb-2 sm:gap-6 lg:overflow-visible">
         {items.map(([title, text, Icon], index) => <ServiceCard key={title} title={title} text={text} Icon={Icon} index={index} featured={featured} className={cardClassName} />)}
       </div>
       <button type="button" onClick={() => carousel.move(1)} disabled={!carousel.canScrollRight} aria-label={`Next ${label.toLowerCase()}`} className="absolute right-0 top-1/2 z-10 hidden h-12 w-12 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#e5e7eb] bg-white text-[#071a3d] shadow-[0_4px_16px_rgba(7,26,61,0.08)] transition hover:scale-105 hover:border-[#f4b400] disabled:pointer-events-none disabled:opacity-0 lg:flex"><ArrowRightIcon className="h-5 w-5" aria-hidden="true" /></button>
@@ -110,7 +118,7 @@ function CarouselButton({ direction, onClick, disabled }: { direction: 'left' | 
 }
 
 function ServiceCard({ title, text, Icon, index, featured, className }: { title: string; text: string; Icon: Service[2]; index: number; featured: boolean; className: string }) {
-  return <article data-service-card className={`group flex shrink-0 snap-start flex-col rounded-[16px] border border-[#e5e7eb] bg-white p-7 shadow-[0_4px_16px_rgba(7,26,61,0.05)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_10px_26px_rgba(7,26,61,0.1)] ${featured ? `min-h-[340px] ${className} sm:p-8` : `min-h-[170px] ${className} p-5 sm:p-6`}`}>
+  return <article data-service-card className={`group flex shrink-0 snap-start flex-col rounded-[16px] border border-[#e5e7eb] bg-white p-7 shadow-[0_4px_16px_rgba(7,26,61,0.05)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_10px_26px_rgba(7,26,61,0.1)] ${featured ? `min-h-[280px] ${className} sm:p-8` : `min-h-[170px] ${className} p-5 sm:p-6`}`}>
     <div className="flex items-start justify-between"><span className={`flex items-center justify-center rounded-xl bg-[#fff5d6] text-[#071a3d] transition-transform duration-300 group-hover:scale-105 ${featured ? 'h-14 w-14' : 'h-10 w-10'}`}><Icon className={featured ? 'h-7 w-7' : 'h-5 w-5'} strokeWidth={1.6} aria-hidden="true" /></span>{featured && <span className="border-b border-[#f4b400]/40 pb-2 text-sm font-medium text-[#f4b400]">{String(index + 1).padStart(2, '0')}</span>}</div>
     <h4 className={`font-display font-semibold leading-tight text-[#071a3d] ${featured ? 'mt-7 max-w-[15rem] text-2xl uppercase sm:text-[1.7rem]' : 'mt-4 text-base uppercase'}`}>{title}</h4>
     <p className={`leading-relaxed text-[#64748b] ${featured ? 'mt-4 text-sm' : 'mt-2 text-xs'}`}>{text}</p>

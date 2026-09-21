@@ -50,7 +50,7 @@ export function Blog() {
 
         {remaining.length > 0 ? <section aria-labelledby="latest-insights-heading" className="mt-20 sm:mt-24">
           <div className="flex items-end justify-between gap-5 border-b border-[#b48c32]/25 pb-6"><div><p className="eyebrow text-[#c9a227]">The Journal</p><h2 id="latest-insights-heading" className="mt-4 font-display text-[2.4rem] font-medium leading-tight text-[#151515] sm:text-[3.5rem]">Latest Insights</h2></div><span className="hidden text-[0.7rem] uppercase tracking-[0.16em] text-[#78736a] sm:block">{remaining.length} articles</span></div>
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">{remaining.map((article) => <BlogCard key={article.slug} article={article} />)}</div>
+          <div className="mobile-card-rail mt-10 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:snap-none lg:grid-cols-3">{remaining.map((article) => <BlogCard key={article.slug} article={article} />)}</div>
         </section> : null}
       </div>
     </main>

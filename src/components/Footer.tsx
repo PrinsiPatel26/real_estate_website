@@ -28,11 +28,11 @@ export function Footer() {
       <div className="mx-auto max-w-shell px-5 py-16 lg:px-10 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <span className="inline-flex items-center rounded-sm bg-[#f5f3ee] px-3 py-2 ring-1 ring-[#d4af37]/30">
+            <span className="inline-flex h-12 w-fit items-center justify-center rounded-sm border border-[#d4af37]/20 bg-[#050505]/40 px-2 shadow-sm sm:h-14 lg:h-16">
               <img
-                src={brand.logo}
+                src="/logo_c-removebg-preview.png"
                 alt={`${brand.name} logo`}
-                className="h-14 w-auto max-w-[170px] object-contain" />
+                className="h-full w-auto max-w-[132px] object-contain sm:max-w-[158px] lg:max-w-[180px]" />
               
             </span>
             <p className="mt-5 font-display text-lg text-[#c9a227]">{brand.tagline}</p>

@@ -94,9 +94,13 @@ export function Navbar({ transparentOnTop = false, onEnquire }: NavbarProps) {
           <a
             href={callLink(brand.founder.phone)}
             aria-label="Call Chauhan Realtors"
-            className="hidden h-10 items-center gap-2 border border-[#d4af37]/40 bg-[#050505]/30 px-3 text-[0.62rem] uppercase tracking-[0.2em] text-white transition-colors duration-150 ease-lux hover:border-[#d4af37] hover:text-[#d4af37] lg:flex">
+            onClick={(event) => {
+              event.preventDefault();
+              onEnquire?.();
+            }}
+            className="call-button-pulse relative hidden h-11 items-center gap-2 overflow-hidden rounded-full border border-[#d4af37] bg-[#d4af37] px-5 text-[0.7rem] font-semibold tracking-[0.04em] text-[#111111] shadow-[0_3px_12px_rgba(212,175,55,0.18)] transition-[background-color,border-color,box-shadow,color,transform] duration-300 ease-lux hover:border-[#e5c45a] hover:bg-[#e5c45a] hover:text-[#111111] hover:shadow-[0_6px_18px_rgba(212,175,55,0.25)] hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4af37] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] active:bg-[#b89425] active:shadow-[0_3px_12px_rgba(212,175,55,0.2)] active:translate-y-0 lg:flex">
             <PhoneIcon className="h-4 w-4" aria-hidden="true" />
-            Call
+            <span className="relative z-[1]">Call Now</span>
           </a>
           <NavbarProjectSearch onNavigate={() => setOpen(false)} />
           <button
