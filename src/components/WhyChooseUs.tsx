@@ -27,9 +27,9 @@ export function WhyChooseUs() {
     <section
       id="why-chauhan"
       aria-labelledby="why-heading"
-      className="border-y border-[#e8e6e0] bg-[#f8f8f6] py-20 text-[#111111] sm:py-28 lg:py-32">
+      className="border-y border-[#e8e6e0] bg-[#f8f8f6] py-16 text-[#111111] sm:py-20 lg:py-24">
 
-      <div className="mx-auto grid max-w-[1300px] gap-14 px-5 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-20 lg:px-10">
+      <div className="mx-auto grid max-w-[1300px] gap-10 px-5 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16 lg:px-10">
         <div>
           <Reveal>
             <p className="text-[0.62rem] uppercase tracking-[0.24em] text-[#c9a24d]">Why Choose Chauhan Realtors</p>
@@ -50,11 +50,11 @@ export function WhyChooseUs() {
             </p>
           </Reveal>
 
-          <ol className="mt-10 space-y-0 sm:mt-12">
+          <ol className="mt-8 space-y-0 sm:mt-10">
             {whyChauhan.map((item, index) => {
               const Icon = benefitIcons[index];
               return (
-                <Reveal as="li" key={item.number} delay={0.14 + index * 0.08}>
+                <Reveal as="li" key={item.title} delay={0.14 + index * 0.08}>
                   <div className="group flex gap-4 border-b border-[#e7e3d8] py-5 first:border-t sm:gap-5 sm:py-6">
                     <Icon
                       className="mt-0.5 h-5 w-5 shrink-0 text-[#c9a24d] transition-transform duration-200 ease-lux group-hover:translate-x-1 group-hover:text-[#a98232]"

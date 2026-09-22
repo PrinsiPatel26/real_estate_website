@@ -20,8 +20,7 @@ export const aboutContent = {
   { title: 'Founder Led', text: 'Every enquiry is handled with the founder’s direct involvement.' },
   { title: 'Trust', text: 'We would rather lose a sale than overstate a project.' },
   { title: 'Transparency', text: 'What is verified is stated. What is not is labelled.' },
-  { title: 'Market Knowledge', text: 'A focused understanding of the Gurgaon residential market.' },
-  { title: 'Personalised Assistance', text: 'Shortlists built around your budget, family and timeline.' }]
+  { title: 'Market Knowledge', text: 'A focused understanding of the Gurgaon residential market.' }]
 
 };
 
@@ -33,12 +32,12 @@ export const founderContent = {
 };
 
 export const whyChauhan = [
-{ number: '01', title: 'Trust', text: 'Clear and transparent communication.' },
-{ number: '02', title: 'Curated Opportunities', text: 'Carefully selected property opportunities.' },
-{ number: '03', title: 'Personalised Guidance', text: 'Property recommendations based on buyer requirements.' },
-{ number: '04', title: 'Market Knowledge', text: 'Focused understanding of Gurgaon real estate.' },
-{ number: '05', title: 'Site Visit Assistance', text: 'End-to-end coordination for property visits.' },
-{ number: '06', title: 'Long-Term Relationships', text: 'We focus beyond a single transaction.' }];
+{ title: 'Trust', text: 'Clear and transparent communication.' },
+{ title: 'Curated Opportunities', text: 'Carefully selected property opportunities.' },
+{ title: 'Personalised Guidance', text: 'Property recommendations based on buyer requirements.' },
+{ title: 'Market Knowledge', text: 'Focused understanding of Gurgaon real estate.' },
+{ title: 'Site Visit Assistance', text: 'End-to-end coordination for property visits.' },
+{ title: 'Long-Term Relationships', text: 'We focus beyond a single transaction.' }];
 
 
 /** Corridors and areas only — no travel times are stated, because none are confirmed. */

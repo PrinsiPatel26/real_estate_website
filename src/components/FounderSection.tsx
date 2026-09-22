@@ -9,10 +9,10 @@ export function FounderSection() {
     <section
       id="founder"
       aria-labelledby="founder-heading"
-      className="border-y border-[#e8e6e0] bg-[#f8f8f6] py-14 text-[#111111] sm:py-20 lg:py-24">
+      className="border-y border-[#e8e6e0] bg-[#f8f8f6] py-12 text-[#111111] sm:py-16 lg:py-20">
       
       <div className="mx-auto max-w-shell px-5 lg:px-10">
-        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
+        <div className="grid items-center gap-8 md:grid-cols-2 md:gap-10 lg:gap-14">
           <div className="order-1">
             <Reveal>
               <p className="eyebrow text-[#c9a227]">{founderContent.eyebrow}</p>

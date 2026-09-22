@@ -8,9 +8,9 @@ import { Reveal, GoldLine } from './Reveal';
 
 export function AboutSection({ showLink = true }: {showLink?: boolean;}) {
   return (
-    <section id="about" aria-labelledby="about-heading" className="bg-white py-20 text-[#111111] sm:py-28 lg:py-32">
+    <section id="about" aria-labelledby="about-heading" className="bg-white py-16 text-[#111111] sm:py-20 lg:py-24">
       <div className="mx-auto max-w-shell px-5 lg:px-10">
-        <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-20">
+        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-16">
           <Reveal direction="left">
             <figure>
               <div className="border border-[#e8e6e0] bg-[#f8f8f6] p-2.5 sm:p-3">
@@ -40,7 +40,7 @@ export function AboutSection({ showLink = true }: {showLink?: boolean;}) {
               <p>{aboutContent.body}</p>
             </SectionHeading>
 
-            <ul className="mt-10 grid gap-x-8 gap-y-6 sm:grid-cols-2">
+            <ul className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
               {aboutContent.pillars.map((pillar, index) =>
               <Reveal as="li" key={pillar.title} delay={index * 0.04}>
                   <GoldLine width="1.75rem" />
@@ -56,7 +56,7 @@ export function AboutSection({ showLink = true }: {showLink?: boolean;}) {
             <Reveal delay={0.1}>
                 <Link
                 to="/about"
-                className="group mt-10 inline-flex items-center gap-2 border-b border-[#d4af37]/60 pb-1.5 text-[0.68rem] uppercase tracking-[0.2em] text-[#c9a227] transition-colors duration-150 ease-lux hover:border-[#c9a227] hover:text-[#111111]">
+                className="group mt-8 inline-flex items-center gap-2 border-b border-[#d4af37]/60 pb-1.5 text-[0.68rem] uppercase tracking-[0.2em] text-[#c9a227] transition-colors duration-150 ease-lux hover:border-[#c9a227] hover:text-[#111111]">
                 
                   More about the firm
                   <ArrowRightIcon

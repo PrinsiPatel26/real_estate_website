@@ -29,6 +29,7 @@
   --color-gold-light: #d8b968;
   --color-border: rgba(201, 162, 74, 0.25);
   --color-ink-strong: #0a0a0a;
+  --mobile-action-bar-height: 68px;
 }
 
 html {
@@ -56,6 +57,12 @@ body {
 #root {
   max-width: 100%;
   overflow-x: clip;
+}
+
+@media (max-width: 767px) {
+  .footer-inner {
+    padding-bottom: calc(var(--mobile-action-bar-height) + 16px + env(safe-area-inset-bottom));
+  }
 }
 
 @keyframes callNowPulse {
@@ -184,6 +191,9 @@ a {
 .gold-line { background-color: #c9a24a; }
 
 .project-carousel-viewport {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
   scrollbar-width: none;
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;

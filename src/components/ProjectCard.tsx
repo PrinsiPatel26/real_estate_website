@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import type { Project } from '../types/project';
-import { Reveal } from './Reveal';
 
 interface ProjectCardProps { project: Project; delay?: number; }
 
@@ -15,14 +14,14 @@ export function ProjectCard({ project, delay = 0 }: ProjectCardProps) {
   };
 
   return (
-    <Reveal as="article" data-project-card delay={delay} onClick={openProject} role="link" tabIndex={0} onKeyDown={(event) => {
+    <article data-project-card onClick={openProject} role="link" tabIndex={0} onKeyDown={(event) => {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
         navigate(`/projects/${project.slug}`);
       }
-    }} className="group box-border flex h-[360px] w-full min-w-0 max-w-none shrink-0 basis-full snap-start cursor-pointer flex-col break-words overflow-hidden border border-[#d4af37]/25 bg-[#151515] text-white transition-all duration-300 ease-lux hover:-translate-y-1 hover:border-[#c9a24a] hover:shadow-[0_18px_36px_rgba(0,0,0,0.18)] sm:basis-[calc(50%-0.5rem)] md:h-[384px] lg:basis-[calc(25%-0.75rem)]">
-      <Link to={`/projects/${project.slug}`} className="relative block aspect-[16/7.5] overflow-hidden" aria-label={`View details for ${project.name}`}>
-        <img src={project.card} alt={`${project.name} — ${project.location}`} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 ease-lux group-hover:scale-[1.03]" />
+    }} className="group box-border flex h-[360px] w-full min-w-0 max-w-none shrink-0 basis-full snap-start cursor-pointer flex-col break-words overflow-hidden border border-[#d4af37]/25 bg-[#151515] text-white transition-colors duration-300 ease-lux hover:border-[#c9a24a] sm:basis-[calc(50%-0.5rem)] md:h-[384px] lg:basis-[calc(25%-0.75rem)]">
+      <Link to={`/projects/${project.slug}`} className="relative block h-[150px] shrink-0 overflow-hidden md:h-[168px]" aria-label={`View details for ${project.name}`}>
+        <img src={project.card} alt={`${project.name} — ${project.location}`} loading="lazy" className="h-full w-full object-cover object-center" />
         <span aria-hidden="true" className="absolute inset-0 bg-black/5" />
         <span className="absolute left-3 top-3 border border-[#d4af37]/60 bg-[#0a0a0a]/85 px-2 py-1 text-[0.58rem] uppercase tracking-[0.08em] text-[#d8b968]">Residential</span>
       </Link>
@@ -35,7 +34,7 @@ export function ProjectCard({ project, delay = 0 }: ProjectCardProps) {
           <Link to={`/projects/${project.slug}`} className="group/link inline-flex shrink-0 items-center gap-2 text-[0.66rem] uppercase tracking-[0.16em] text-white transition-colors hover:text-[#d8b968]">View Details <ArrowRightIcon className="h-3.5 w-3.5 text-[#c9a24a] transition-transform duration-200 group-hover/link:translate-x-1" aria-hidden="true" /></Link>
         </div>
       </div>
-    </Reveal>
+    </article>
   );
 }
 
@@ -74,7 +73,7 @@ export function ProjectGrid({ projects, featured = false }: { projects: Project[
   return (
     <div className={`relative mx-auto w-full ${featured ? 'max-w-[78rem]' : 'max-w-[62rem]'}`}>
       <button type="button" onClick={() => move(-1)} disabled={!canScrollLeft} aria-label="Previous properties" className="absolute left-0 top-1/2 z-10 hidden h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[#d4af37]/60 bg-[#0a0a0a] text-[#d8b968] shadow-[0_5px_16px_rgba(0,0,0,0.18)] transition hover:border-[#d4af37] hover:bg-[#d4af37] hover:text-[#111111] disabled:pointer-events-none disabled:opacity-35 md:flex"><ArrowLeftIcon className="h-4 w-4" aria-hidden="true" /></button>
-      <div ref={viewportRef} className="project-carousel-viewport overflow-x-auto px-0 scroll-smooth md:px-6">
+      <div ref={viewportRef} className="project-carousel-viewport relative overflow-x-auto overflow-y-hidden px-0 scroll-smooth md:px-6">
         <div className="flex items-stretch gap-4">
           {projects.map((project, index) => <ProjectCard key={project.slug} project={project} delay={index * 0.04} />)}
         </div>

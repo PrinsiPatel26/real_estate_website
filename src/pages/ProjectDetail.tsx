@@ -159,7 +159,7 @@ export function ProjectDetail() {
                 <ul className="grid gap-px border border-[#e5e1d8] bg-[#e5e1d8] sm:grid-cols-2">
                   {project.highlights.map((item, index) =>
                   <Reveal as="li" key={item.title} delay={index * 0.04} className="group bg-white p-7 transition-colors duration-200 hover:bg-[#faf9f6] sm:p-8">
-                      <span className="text-[0.72rem] font-medium tracking-[0.2em] text-[#c9a227]">{String(index + 1).padStart(2, '0')}</span>
+                      <span className="inline-flex h-3.5 w-3.5 rotate-45 border border-[#c9a227]/70 bg-[#c9a227]/10" aria-hidden="true" />
                       <h3 className="mt-5 font-display text-[1.55rem] font-light leading-tight text-[#111111]">{item.title}</h3>
                       <p className="mt-3 text-[0.95rem] leading-[1.7] text-[#444444]">{item.text}</p>
                     </Reveal>

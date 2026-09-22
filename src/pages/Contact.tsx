@@ -25,15 +25,15 @@ export function Contact() {
       </div>
     </section>
 
-    <section id="contact" className="bg-[#f2efe8] py-16 text-[#151515] sm:py-24 lg:py-28">
-      <div className="mx-auto grid w-[calc(100%-2rem)] max-w-[1280px] gap-12 sm:w-[calc(100%-5rem)] lg:grid-cols-2 lg:gap-20">
+    <section id="contact" className="bg-[#f2efe8] py-14 text-[#151515] sm:py-20 lg:py-24">
+      <div className="mx-auto grid w-[calc(100%-2rem)] max-w-[1280px] gap-10 sm:w-[calc(100%-5rem)] lg:grid-cols-2 lg:gap-16">
         <div id="contact-info">
           <p className="eyebrow text-[#c9a227]">Get In Touch</p>
           <span className="mt-5 block h-px w-14 bg-[#c9a227]" aria-hidden="true" />
           <h2 className="mt-6 max-w-xl font-display text-[2.5rem] font-medium leading-[1.08] tracking-[-0.03em] sm:text-[3.7rem]">Let&apos;s Find Your <span className="block text-[#c9a227]">Next Address.</span></h2>
           <p className="mt-6 max-w-xl text-[1rem] leading-[1.75] text-[#4e4b45] sm:text-[1.08rem]">Tell us what you are looking for and we will respond with a considered shortlist — not a sales pitch.</p>
 
-          <div className="mt-10 divide-y divide-[#b48c32]/25 border-y border-[#b48c32]/25">
+          <div className="mt-8 divide-y divide-[#b48c32]/25 border-y border-[#b48c32]/25">
             <div className="flex gap-4 py-6"><MapPinIcon className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" aria-hidden="true" /><div><p className="eyebrow text-[#c9a227]">Location</p><address className="mt-3 text-[1rem] not-italic leading-relaxed text-[#4e4b45]">{brand.office.lines.map((line) => <span key={line} className="block">{line}</span>)}</address></div></div>
             <a href={callLink(brand.founder.phone)} className="group flex gap-4 py-6"><PhoneIcon className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" aria-hidden="true" /><div><p className="eyebrow text-[#c9a227]">Phone</p><p className="mt-3 text-[1rem] text-[#151515] transition-colors group-hover:text-[#c9a227]">{brand.founder.phoneDisplay}</p></div></a>
             <a href={mailLink()} className="group flex gap-4 py-6"><MailIcon className="mt-1 h-5 w-5 shrink-0 text-[#c9a227]" aria-hidden="true" /><div><p className="eyebrow text-[#c9a227]">Email</p><p className="mt-3 break-all text-[1rem] text-[#151515] transition-colors group-hover:text-[#c9a227]">{brand.email}</p></div></a>

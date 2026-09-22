@@ -18,7 +18,7 @@ export function About() {
 
   return (
     <>
-      <section className="bg-[#efeee9] pb-16 pt-28 sm:pb-20 sm:pt-32 lg:pb-24 lg:pt-36">
+      <section className="bg-[#efeee9] pb-12 pt-24 sm:pb-16 sm:pt-28 lg:pb-20 lg:pt-32">
         <div className="mx-auto grid max-w-shell items-stretch lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
           <div className="flex flex-col justify-center px-5 py-10 sm:px-8 lg:px-12 lg:py-14">
             <Reveal>
@@ -44,7 +44,7 @@ export function About() {
         </div>
       </section>
 
-      <section aria-labelledby="company-introduction-heading" className="bg-[#f3f0e9] py-14 sm:py-20 lg:py-24">
+      <section aria-labelledby="company-introduction-heading" className="bg-[#f3f0e9] py-12 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-shell px-5 lg:px-10">
           <div className="mx-auto max-w-5xl text-center">
             <Reveal>
@@ -64,11 +64,10 @@ export function About() {
             </Reveal>
           </div>
 
-          <div className="mx-auto mt-12 grid max-w-[1200px] gap-5 md:grid-cols-2 lg:mt-14 lg:grid-cols-4">
+          <div className="mx-auto mt-10 grid max-w-[1200px] gap-5 md:grid-cols-2 lg:mt-12 lg:grid-cols-4">
             {aboutContent.pillars.slice(0, 4).map((pillar, index) =>
-            <Reveal key={pillar.title} delay={index * 0.04} className="min-h-[185px] border border-[#b48c32]/25 bg-[#efeee9] p-7 text-left transition duration-300 hover:-translate-y-1 hover:border-[#c9a227]/60 sm:p-8">
-                <span className="mb-5 block h-px w-10 bg-[#c9a227]" aria-hidden="true" />
-                <p className="font-display text-[2.15rem] font-medium leading-none text-[#c9a227]">0{index + 1}</p>
+            <Reveal key={pillar.title} delay={index * 0.04} className="min-h-[160px] border border-[#b48c32]/25 bg-[#efeee9] p-6 text-left transition duration-300 hover:-translate-y-1 hover:border-[#c9a227]/60 sm:p-7">
+                <span className="mb-5 inline-flex h-4 w-4 rotate-45 items-center justify-center border border-[#c9a227]/70 bg-[#c9a227]/10" aria-hidden="true" />
                 <h3 className="mt-5 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-[#151515]">{pillar.title}</h3>
                 <p className="mt-3 text-[0.9rem] leading-[1.6] text-[#4e4b45]">{pillar.text}</p>
               </Reveal>)}
@@ -78,7 +77,7 @@ export function About() {
 
       <FounderSection />
 
-      <section aria-labelledby="guidance-heading" className="relative overflow-hidden bg-[#111111] py-16 text-white sm:py-24 lg:py-28">
+      <section aria-labelledby="guidance-heading" className="relative overflow-hidden bg-[#111111] py-14 text-white sm:py-20 lg:py-24">
         <div className="absolute inset-0 opacity-40" style={{ backgroundImage: `url(${brand.founder.photo})`, backgroundPosition: 'center', backgroundSize: 'cover' }} aria-hidden="true" />
         <div className="absolute inset-0 bg-[#111111]/55" aria-hidden="true" />
         <div className="relative mx-auto grid max-w-shell gap-12 px-5 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:items-end lg:px-10">

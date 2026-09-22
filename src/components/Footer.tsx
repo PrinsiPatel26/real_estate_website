@@ -25,7 +25,7 @@ const legalLinks = [
 export function Footer() {
   return (
     <footer className="border-t border-[#d4af37]/30 bg-[#0a0a0a] text-white">
-      <div className="mx-auto max-w-shell px-5 py-16 lg:px-10 lg:py-20">
+      <div className="footer-inner mx-auto max-w-shell px-5 py-16 lg:px-10 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <span className="inline-flex h-12 w-fit items-center justify-center rounded-sm border border-[#d4af37]/20 bg-[#050505]/40 px-2 shadow-sm sm:h-14 lg:h-16">
