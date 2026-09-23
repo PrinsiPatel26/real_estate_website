@@ -24,16 +24,18 @@ export function AdminLogin() {
       await login(email, password);
       navigate('/admin/dashboard', { replace: true });
     } catch (loginError: unknown) {
-      const message = loginError instanceof Error ? loginError.message : 'Unable to connect to authentication server';
+      const message = loginError instanceof Error ? loginError.message : 'Unable to connect to authentication server.';
 
-      if (message === 'Authentication service not found') {
+      if (message === 'Unable to connect to authentication server.') {
+        setError(message);
+      } else if (message === 'Authentication service not found') {
         setError('Authentication service not found');
-      } else if (message === 'Authentication service temporarily unavailable') {
-        setError('Authentication service temporarily unavailable');
+      } else if (message === 'Authentication server error') {
+        setError(message);
       } else if (message === 'Invalid email or password') {
         setError('Invalid email or password');
       } else {
-        setError(message || 'Unable to connect to authentication server');
+        setError(message || 'Unable to connect to authentication server.');
       }
     } finally {
       setSubmitting(false);
@@ -65,7 +67,7 @@ export function AdminLogin() {
         </label>
         {error ? <p role="alert" className="border border-red-900/20 bg-red-50 px-3 py-2.5 text-sm text-red-800">{error}</p> : null}
         <button type="submit" disabled={submitting} className="inline-flex h-12 w-full items-center justify-center gap-2 bg-[#c9a227] px-5 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#111111] transition-colors hover:bg-[#d8b968] disabled:cursor-wait disabled:opacity-70">
-          {submitting ? 'Loading...' : 'Login'}
+          {submitting ? 'Logging in...' : 'Login'}
           {!submitting ? <ArrowRightIcon className="h-4 w-4" aria-hidden="true" /> : null}
         </button>
       </form>

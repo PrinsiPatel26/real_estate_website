@@ -1,6 +1,5 @@
 import type { GalleryImage, Project, ProjectImageRole, ProjectImage } from '../types/project';
-
-const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api$/, '');
+import { API_BASE_URL } from '../services/api';
 
 export function resolveImageUrl(value: string | null | undefined): string {
   const nextValue = (value ?? '').trim();

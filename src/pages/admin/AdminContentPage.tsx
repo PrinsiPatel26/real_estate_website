@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowLeftIcon, PlusIcon, SaveIcon, Trash2Icon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { API_BASE_URL } from '../../services/api';
+import { AUTH_API_URL } from '../../services/api';
 import { useAdminAuth } from '../../admin/AdminAuthContext';
 
 type Pair = { title: string; text: string };
@@ -55,14 +55,14 @@ export function AdminContentPage() {
 
   useEffect(() => {
     if (!token) return;
-    fetch(`${API_BASE_URL}/content`).then((response) => response.json()).then((body) => setForm(normalizeContent(body.data || {}))).catch(() => setStatus('Unable to load website content.'));
+    fetch(`${AUTH_API_URL}/content`).then((response) => response.json()).then((body) => setForm(normalizeContent(body.data || {}))).catch(() => setStatus('Unable to load website content.'));
   }, [token]);
 
   const save = async () => {
     if (!token) return;
     setSaving(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/content`, { method: 'PUT', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify(form) });
+      const response = await fetch(`${AUTH_API_URL}/content`, { method: 'PUT', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify(form) });
       if (!response.ok) throw new Error();
       setStatus('Website content saved successfully.');
     } catch {

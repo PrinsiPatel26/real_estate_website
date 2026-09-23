@@ -1,15 +1,14 @@
-export const API_BASE_URL = (() => {
-  const configuredBaseUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL;
+const configuredBaseUrl = import.meta.env.VITE_API_URL?.trim();
+const isLocalhost = typeof window !== 'undefined'
+  && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
 
-  if (configuredBaseUrl) {
-    return configuredBaseUrl.replace(/\/$/, '');
-  }
+if (!configuredBaseUrl && !isLocalhost) {
+  throw new Error('VITE_API_URL is missing. Configure the deployed Express backend URL before building for production.');
+}
 
-  const currentHost = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
-  const isLocalhost = currentHost === 'localhost' || currentHost === '127.0.0.1';
+export const API_BASE_URL = (configuredBaseUrl || 'http://localhost:5000').replace(/\/$/, '');
 
-  return isLocalhost ? 'http://localhost:5000/api' : `${window.location.origin}/api`;
-})();
+export const AUTH_API_URL = `${API_BASE_URL.replace(/\/$/, '')}/api`;
 
 export interface AdminUser {
   id: string;
@@ -43,7 +42,7 @@ async function parseResponse<T>(response: Response): Promise<T> {
     }
 
     if (response.status >= 500) {
-      throw new Error('Authentication service temporarily unavailable');
+      throw new Error('Authentication server error');
     }
 
     throw new Error(body?.message || 'Request failed');
@@ -53,17 +52,22 @@ async function parseResponse<T>(response: Response): Promise<T> {
 }
 
 export async function loginAdmin(email: string, password: string) {
-  const response = await fetch(`${API_BASE_URL}/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
-  });
+  let response: Response;
+  try {
+    response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+  } catch {
+    throw new Error('Unable to connect to authentication server.');
+  }
 
   return parseResponse<AuthResponse>(response);
 }
 
 export async function getCurrentAdmin(token: string) {
-  const response = await fetch(`${API_BASE_URL}/auth/me`, {
+  const response = await fetch(`${AUTH_API_URL}/auth/me`, {
     headers: { Authorization: `Bearer ${token}` }
   });
 
@@ -71,12 +75,12 @@ export async function getCurrentAdmin(token: string) {
 }
 
 export async function getPublicCollection<T>(resource: string) {
-  const response = await fetch(`${API_BASE_URL}/${resource}`);
+  const response = await fetch(`${AUTH_API_URL}/${resource}`);
   return parseResponse<{ success: boolean; data: T[] }>(response);
 }
 
 export async function createEnquiry(payload: Record<string, unknown>) {
-  const response = await fetch(`${API_BASE_URL}/enquiries`, {
+  const response = await fetch(`${AUTH_API_URL}/enquiries`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
@@ -85,19 +89,19 @@ export async function createEnquiry(payload: Record<string, unknown>) {
 }
 
 export async function getAdminCollection<T>(resource: string, token: string) {
-  const response = await fetch(`${API_BASE_URL}/${resource}/admin/all`, { headers: { Authorization: `Bearer ${token}` } });
+  const response = await fetch(`${AUTH_API_URL}/${resource}/admin/all`, { headers: { Authorization: `Bearer ${token}` } });
   return parseResponse<{ success: boolean; data: T[] }>(response);
 }
 
 export async function createAdminRecord<T>(resource: string, payload: Record<string, unknown>, token: string) {
-  const response = await fetch(`${API_BASE_URL}/${resource}`, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify(payload) });
+  const response = await fetch(`${AUTH_API_URL}/${resource}`, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify(payload) });
   return parseResponse<{ success: boolean; data: T }>(response);
 }
 
 export function uploadProjectImage(file: File, token: string, onProgress?: (progress: number) => void) {
   return new Promise<{ success: boolean; data: { url: string; alt: string; isFeatured: boolean; order: number } }>((resolve, reject) => {
     const request = new XMLHttpRequest();
-    request.open('POST', `${API_BASE_URL}/uploads/project-image`);
+    request.open('POST', `${AUTH_API_URL}/uploads/project-image`);
     request.timeout = 60_000;
     request.setRequestHeader('Authorization', `Bearer ${token}`);
     request.upload.addEventListener('progress', (event) => {
@@ -128,16 +132,16 @@ export function uploadProjectImage(file: File, token: string, onProgress?: (prog
 }
 
 export async function updateAdminRecord<T>(resource: string, id: string, payload: Record<string, unknown>, token: string) {
-  const response = await fetch(`${API_BASE_URL}/${resource}/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify(payload) });
+  const response = await fetch(`${AUTH_API_URL}/${resource}/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify(payload) });
   return parseResponse<{ success: boolean; data: T }>(response);
 }
 
 export async function deleteAdminRecord(resource: string, id: string, token: string) {
-  const response = await fetch(`${API_BASE_URL}/${resource}/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
+  const response = await fetch(`${AUTH_API_URL}/${resource}/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
   return parseResponse<{ success: boolean }>(response);
 }
 
 export async function getDashboardStats(token: string) {
-  const response = await fetch(`${API_BASE_URL}/dashboard/stats`, { headers: { Authorization: `Bearer ${token}` } });
+  const response = await fetch(`${AUTH_API_URL}/dashboard/stats`, { headers: { Authorization: `Bearer ${token}` } });
   return parseResponse<{ success: boolean; data: { properties: number; projects: number; blogs: number; newEnquiries: number } }>(response);
 }
