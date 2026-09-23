@@ -1,4 +1,15 @@
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+export const API_BASE_URL = (() => {
+  const configuredBaseUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL;
+
+  if (configuredBaseUrl) {
+    return configuredBaseUrl.replace(/\/$/, '');
+  }
+
+  const currentHost = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
+  const isLocalhost = currentHost === 'localhost' || currentHost === '127.0.0.1';
+
+  return isLocalhost ? 'http://localhost:5000/api' : `${window.location.origin}/api`;
+})();
 
 export interface AdminUser {
   id: string;
@@ -23,6 +34,18 @@ async function parseResponse<T>(response: Response): Promise<T> {
   const body = await response.json().catch(() => null);
 
   if (!response.ok) {
+    if (response.status === 401) {
+      throw new Error('Invalid email or password');
+    }
+
+    if (response.status === 404) {
+      throw new Error('Authentication service not found');
+    }
+
+    if (response.status >= 500) {
+      throw new Error('Authentication service temporarily unavailable');
+    }
+
     throw new Error(body?.message || 'Request failed');
   }
 

@@ -23,8 +23,18 @@ export function AdminLogin() {
     try {
       await login(email, password);
       navigate('/admin/dashboard', { replace: true });
-    } catch {
-      setError('Invalid email or password');
+    } catch (loginError: unknown) {
+      const message = loginError instanceof Error ? loginError.message : 'Unable to connect to authentication server';
+
+      if (message === 'Authentication service not found') {
+        setError('Authentication service not found');
+      } else if (message === 'Authentication service temporarily unavailable') {
+        setError('Authentication service temporarily unavailable');
+      } else if (message === 'Invalid email or password') {
+        setError('Invalid email or password');
+      } else {
+        setError(message || 'Unable to connect to authentication server');
+      }
     } finally {
       setSubmitting(false);
     }
