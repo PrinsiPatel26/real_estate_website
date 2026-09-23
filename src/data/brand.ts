@@ -25,7 +25,7 @@ export const brand = {
 
 export const navigation = [
 { label: 'Home', to: '/' },
-{ label: 'Properties', to: '/properties' },
+{ label: 'Projects', to: '/properties' },
 { label: 'About', to: '/about' },
 { label: 'Services', to: '/services' },
 { label: 'Blog', to: '/blog' },

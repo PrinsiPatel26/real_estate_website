@@ -4,6 +4,7 @@ import { CheckIcon, AlertCircleIcon, Loader2Icon } from 'lucide-react';
 import { whatsappLink } from '../data/brand';
 import { configurationOptions, budgetOptions, callbackOptions } from '../data/site';
 import { LUX } from './Reveal';
+import { createEnquiry } from '../services/api';
 
 interface EnquiryFormProps {
   source?: string;
@@ -63,6 +64,7 @@ export function EnquiryForm({ source = 'website', id }: EnquiryFormProps) {
   const [values, setValues] = useState<Values>(emptyValues());
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<'idle' | 'opening' | 'done'>('idle');
+  const [submissionError, setSubmissionError] = useState('');
   const reduce = useReducedMotion();
 
   const update =
@@ -82,6 +84,7 @@ export function EnquiryForm({ source = 'website', id }: EnquiryFormProps) {
       return;
     }
     setStatus('opening');
+    setSubmissionError('');
     const whatsappMessage = [
       'Hello Chauhan Realtors,',
       '',
@@ -100,8 +103,23 @@ export function EnquiryForm({ source = 'website', id }: EnquiryFormProps) {
       'Thank you.'
     ].join('\n');
 
-    window.open(whatsappLink(whatsappMessage), '_blank', 'noopener,noreferrer');
-    setStatus('done');
+    try {
+      await createEnquiry({
+        fullName: values.fullName.trim(),
+        phone: values.phone.trim(),
+        email: values.email.trim(),
+        configuration: values.configuration,
+        budget: values.budget,
+        callbackTime: values.callbackTime,
+        message: values.message.trim(),
+        source
+      });
+      window.open(whatsappLink(whatsappMessage), '_blank', 'noopener,noreferrer');
+      setStatus('done');
+    } catch {
+      setSubmissionError('Unable to save your enquiry. Please try again.');
+      setStatus('idle');
+    }
   };
 
   if (status === 'done') {
@@ -283,6 +301,8 @@ export function EnquiryForm({ source = 'website', id }: EnquiryFormProps) {
         'Request a Callback'
         }
       </button>
+
+      {submissionError ? <p role="alert" className="mt-3 text-sm text-red-700">{submissionError}</p> : null}
 
       <p className="mt-4 text-[0.68rem] leading-relaxed text-[#666666]">
         By submitting this form you agree to be contacted about your property enquiry. We do not

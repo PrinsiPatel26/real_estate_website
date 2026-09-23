@@ -9,7 +9,8 @@ import {
   UserRoundCheckIcon } from
 'lucide-react';
 import { whyChauhan } from '../data/site';
-import { projects } from '../data/projects';
+import { useCmsData } from '../cms/CmsDataContext';
+import { getProjectCard } from '../utils/projectMedia';
 import { GoldLine, LUX, Reveal } from './Reveal';
 
 const benefitIcons = [
@@ -21,6 +22,7 @@ MapPinIcon,
 HandshakeIcon];
 
 export function WhyChooseUs() {
+  const { projects } = useCmsData();
   const reduce = useReducedMotion();
 
   return (
@@ -83,8 +85,8 @@ export function WhyChooseUs() {
           <div className="absolute -right-3 -top-3 h-20 w-20 border-r border-t border-[#c9a24d]/60 sm:-right-5 sm:-top-5 sm:h-28 sm:w-28" aria-hidden="true" />
           <div className="overflow-hidden rounded-[0_76px_76px_76px] border border-[#c9a24d]/60 bg-white p-1.5 shadow-[0_20px_55px_rgba(17,17,17,0.12)] sm:rounded-[0_110px_110px_110px] sm:p-2">
             <img
-              src={projects[0].card}
-              alt="Premium residential towers and landscaped surroundings at M3M GIC Forestia in Gurgaon"
+              src={getProjectCard(projects[0])}
+              alt={`${projects[0]?.name || 'Project'} image`}
               loading="lazy"
               className="h-[330px] w-full rounded-[0_68px_68px_68px] object-cover object-center transition-transform duration-700 ease-lux hover:scale-[1.02] sm:h-[460px] sm:rounded-[0_102px_102px_102px] lg:h-[560px]" />
           </div>

@@ -219,6 +219,11 @@ a {
   -webkit-overflow-scrolling: touch;
 }
 
+.blog-carousel-viewport article {
+  height: auto !important;
+  min-height: 460px;
+}
+
 .blog-carousel-viewport::-webkit-scrollbar {
   display: none;
 }

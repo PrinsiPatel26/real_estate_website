@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
-import { blogs } from '../data/blogs';
+import { useCmsData } from '../cms/CmsDataContext';
 import { useSeo } from '../hooks/useSeo';
 import { PageHeader } from '../components/PageHeader';
 
 export function BlogDetail() {
   const { slug } = useParams<{ slug: string }>();
+  const { blogs } = useCmsData();
   const article = blogs.find((item) => item.slug === slug);
   useSeo({ title: article ? `${article.title} | Chauhan Realtors` : 'Real Estate Insights | Chauhan Realtors', description: article?.excerpt ?? 'Real estate guidance from Chauhan Realtors.', image: article?.image });
   if (!article) return <Navigate to="/blog" replace />;

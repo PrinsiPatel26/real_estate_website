@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { SearchIcon, XIcon } from 'lucide-react';
-import { projects } from '../data/projects';
+import { useCmsData } from '../cms/CmsDataContext';
 import { LUX } from './Reveal';
 
 interface NavbarProjectSearchProps {
@@ -28,6 +28,7 @@ function searchableText(project: (typeof projects)[number]) {
 }
 
 export function NavbarProjectSearch({ onNavigate }: NavbarProjectSearchProps) {
+  const { projects } = useCmsData();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);

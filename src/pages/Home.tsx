@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRightIcon } from 'lucide-react';
 import { useSeo } from '../hooks/useSeo';
-import { projects, HERO_IMAGE } from '../data/projects';
+import { HERO_IMAGE } from '../data/projects';
+import { useCmsData } from '../cms/CmsDataContext';
 import { DISCLAIMER_VISUALS } from '../data/brand';
 import { Hero } from '../components/Hero';
 import { StatsStrip } from '../components/StatsStrip';
@@ -20,6 +21,7 @@ import { BlogSection } from '../components/BlogSection';
 import { Reveal } from '../components/Reveal';
 
 export function Home() {
+  const { projects } = useCmsData();
   useSeo({
     title: 'Chauhan Realtors | Premium Real Estate in Gurgaon',
     description:

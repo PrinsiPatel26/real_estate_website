@@ -1,4 +1,5 @@
 import React from 'react';
+import { Building2Icon, ClipboardListIcon, HandshakeIcon, PhoneCallIcon, Settings2Icon, UsersIcon } from 'lucide-react';
 import { useSeo } from '../hooks/useSeo';
 import { brand, callLink, DISCLAIMER_SHORT } from '../data/brand';
 import { developerHighlights } from '../data/projects';
@@ -7,6 +8,66 @@ import { ContactSection } from '../components/ContactSection';
 import { Reveal, GoldLine } from '../components/Reveal';
 import { TrustedDeveloperNetwork } from '../components/TrustedDeveloperNetwork';
 import { aboutContent, founderContent } from '../data/site';
+
+const teamMembers = [
+  {
+    name: 'Pratyaksh Sharma',
+    role: 'Sales Manager',
+    image: '/image111.jpeg',
+    imagePosition: 'center 20%',
+    alt: 'Pratyaksh Sharma - Sales Manager at Chauhan Realtors',
+    description: 'Pratyaksh leads sales operations and helps clients explore the right residential opportunities. With a focus on clear communication and understanding client requirements, he supports a smooth and transparent property-buying journey.',
+    responsibilities: [
+      ['Client Consultation', 'Understanding client requirements and preferences.', PhoneCallIcon],
+      ['Project Guidance', 'Helping clients evaluate relevant residential opportunities.', Building2Icon],
+      ['End-to-End Support', 'Supporting clients throughout the enquiry and site-visit journey.', HandshakeIcon]
+    ]
+  },
+  {
+    name: 'Sonali Sharma',
+    role: 'HR & Operation',
+    image: '/image122.jpeg',
+    imagePosition: 'center 18%',
+    alt: 'Sonali Sharma - HR & Operation at Chauhan Realtors',
+    description: 'Sonali manages HR and operational coordination at Chauhan Realtors, ensuring an organized workflow and a seamless experience across internal and client-facing processes. She focuses on team coordination, process efficiency and reliable support across key touchpoints.',
+    responsibilities: [
+      ['Team Management', 'Supporting coordination and a structured team environment.', UsersIcon],
+      ['Operations Coordination', 'Helping maintain smooth and efficient day-to-day processes.', Settings2Icon],
+      ['Client Support', 'Ensuring reliable coordination and timely operational assistance.', ClipboardListIcon]
+    ]
+  }
+] as const;
+
+const guidanceCards = [
+  {
+    number: '01',
+    image: '/c-1.png',
+    title: 'Curated Opportunities',
+    description: 'Relevant residential opportunities selected around your requirements, priorities and lifestyle.',
+    alt: 'Premium residential property representing curated opportunities'
+  },
+  {
+    number: '02',
+    image: '/c-2.jpeg',
+    title: 'Transparent Guidance',
+    description: 'Clear project information and practical guidance to help you understand your options before taking the next step.',
+    alt: 'Modern residential development representing transparent guidance'
+  },
+  {
+    number: '03',
+    image: '/c-3.jpeg',
+    title: 'Local Market Knowledge',
+    description: 'A focused understanding of residential locations, connectivity, developments and the factors that matter when evaluating a property.',
+    alt: 'Luxury residential community representing local market knowledge'
+  },
+  {
+    number: '04',
+    image: '/c-4.jpeg',
+    title: 'Client-First Support',
+    description: 'Personalized assistance from your first enquiry through project exploration, site visits and the next stage of your property journey.',
+    alt: 'Premium residential architecture representing client-first support'
+  }
+] as const;
 
 export function About() {
   useSeo({
@@ -39,7 +100,7 @@ export function About() {
             </Reveal>
           </div>
           <Reveal direction="right" className="min-h-[22rem] lg:min-h-[34rem]">
-            <img src={brand.founder.photo} alt={`${brand.founder.name}, founder of Chauhan Realtors`} className="h-full w-full object-cover object-top" />
+            <img src="/building.png" alt="Premium residential building - Chauhan Realtors" className="h-full w-full object-cover object-center" />
           </Reveal>
         </div>
       </section>
@@ -77,23 +138,73 @@ export function About() {
 
       <FounderSection />
 
-      <section aria-labelledby="guidance-heading" className="relative overflow-hidden bg-[#111111] py-14 text-white sm:py-20 lg:py-24">
-        <div className="absolute inset-0 opacity-40" style={{ backgroundImage: `url(${brand.founder.photo})`, backgroundPosition: 'center', backgroundSize: 'cover' }} aria-hidden="true" />
-        <div className="absolute inset-0 bg-[#111111]/55" aria-hidden="true" />
-        <div className="relative mx-auto grid max-w-shell gap-12 px-5 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:items-end lg:px-10">
-          <div>
-            <p className="eyebrow text-[#d4af37]">Your Next Move</p>
-            <span className="mt-5 block h-px w-14 bg-[#d4af37]" aria-hidden="true" />
-            <h2 id="guidance-heading" className="mt-6 max-w-3xl font-display text-[2.7rem] font-light leading-[1.02] !text-white sm:text-[4rem] lg:text-[4.75rem]">Every address deserves <span className="text-[#d4af37]">the right guidance.</span></h2>
-            <p className="mt-7 max-w-2xl text-[1rem] leading-relaxed text-white/70 sm:text-[1.08rem]">{founderContent.statement}</p>
-            <a href={callLink(brand.founder.phone)} className="mt-9 inline-flex h-12 items-center bg-[#c9a227] px-6 text-[0.68rem] uppercase tracking-[0.2em] text-[#111111] transition-colors hover:bg-[#d8b968]">Speak with the founder <span className="ml-3">→</span></a>
+      <section aria-labelledby="team-heading" className="border-b border-[#e8e6e0] bg-[#f3f0e9] py-16 text-[#111111] sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-10">
+          <Reveal className="mx-auto max-w-[780px] text-center">
+            <p className="eyebrow text-[#c9a227]">Our Team</p>
+            <GoldLine className="mx-auto mt-5" width="3.5rem" />
+            <h2 id="team-heading" className="mt-7 font-display text-[2.7rem] font-medium leading-[0.98] text-[#151515] sm:text-[4rem] lg:text-[4.6rem]">A Dedicated Team,<span className="block text-[#c9a227]">A Stronger Tomorrow.</span></h2>
+            <p className="mx-auto mt-6 max-w-[700px] text-[1rem] leading-[1.8] text-[#5f5a52] sm:text-[1.08rem]">Our team works with a shared vision - to help you find the right residential opportunities with clarity, honesty and personalized support.</p>
+          </Reveal>
+
+          <div className="mt-12 space-y-10 lg:space-y-12">
+            {teamMembers.map((member, index) => (
+              <Reveal key={member.name} delay={index * 0.08} className={`flex flex-col gap-6 border-t border-[#b48c32]/30 pt-8 lg:flex-row lg:items-start lg:gap-10 ${index === 1 ? 'lg:flex-row-reverse' : ''}`}>
+                <div className={`${index === 1 ? 'lg:pl-0' : 'lg:pr-0'} w-full lg:w-[38%]`}>
+                  <img src={member.image} alt={member.alt} loading="lazy" style={{ objectPosition: member.imagePosition }} className="h-[340px] w-full object-cover sm:h-[430px] lg:h-[460px]" />
+                </div>
+
+                <div className="flex-1 self-center lg:self-stretch">
+                  <p className="text-[0.66rem] font-semibold uppercase tracking-[0.22em] text-[#c9a227]">{member.role}</p>
+                  <h3 className="mt-4 font-display text-[2.2rem] font-medium leading-[1.02] text-[#151515] sm:text-[2.8rem] lg:text-[3.4rem]">{member.name}</h3>
+                  <p className="mt-5 max-w-[680px] text-[0.98rem] leading-[1.8] text-[#5f5a52]">{member.description}</p>
+
+                  <div className="mt-8 space-y-5">
+                    {member.responsibilities.map(([title, text, Icon], responsibilityIndex) => (
+                      <div key={title} className="flex gap-4 border-t border-[#c9a227]/20 pt-4 first:border-t-0 first:pt-0">
+                        <span className="pt-1 font-display text-[1.7rem] leading-none text-[#c9a227]">{String(responsibilityIndex + 1).padStart(2, '0')}</span>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3">
+                            <Icon className="h-4 w-4 text-[#c9a227]" strokeWidth={1.5} aria-hidden="true" />
+                            <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-[#151515]">{title}</p>
+                          </div>
+                          <p className="mt-2 text-[0.9rem] leading-[1.6] text-[#5f5a52]">{text}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
           </div>
-          <div className="grid grid-cols-3 gap-4 border-t border-white/15 pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-            {aboutContent.pillars.slice(1, 4).map((pillar) =>
-            <div key={pillar.title}>
-                <p className="text-[0.62rem] uppercase tracking-[0.16em] text-[#d4af37]">{pillar.title}</p>
-                <p className="mt-3 text-[0.78rem] leading-relaxed text-white/65">{pillar.text}</p>
-              </div>)}
+        </div>
+      </section>
+
+      <section aria-labelledby="guidance-heading" className="bg-[#f3f0e9] py-20 text-[#111111] sm:py-24 lg:py-28">
+        <div className="mx-auto max-w-[1180px] px-5 sm:px-8 lg:px-10">
+          <Reveal className="mx-auto max-w-[760px] text-center">
+            <p className="eyebrow text-[#c9a227]">Your Next Move</p>
+            <h2 id="guidance-heading" className="mt-6 font-display text-[2.4rem] font-light leading-[1.02] tracking-[-0.03em] text-[#111111] sm:text-[3.2rem] lg:text-[4.4rem]">
+              Guidance That Goes
+              <span className="block text-[#c9a227]">Beyond The Transaction.</span>
+            </h2>
+            <p className="mx-auto mt-6 max-w-[700px] text-[0.98rem] leading-[1.8] text-[#4e4b45] sm:text-[1.06rem]">
+              At Chauhan Realtors, we focus on making every property decision clearer — from discovering the right opportunity to understanding the project and taking the next step with confidence.
+            </p>
+          </Reveal>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {guidanceCards.map((card, index) => (
+              <Reveal key={card.title} delay={index * 0.05} className="group overflow-hidden border border-[#b48c32]/35 bg-[#f7f4ed] transition-all duration-400 hover:border-[#c9a227]/70">
+                <div className="overflow-hidden bg-[#e7e0d2]">
+                  <img src={card.image} alt={card.alt} loading="lazy" className="aspect-[16/10] w-full object-cover transition-transform duration-400 group-hover:scale-[1.02]" />
+                </div>
+                <div className="p-5 sm:p-6">
+                  <h3 className="text-[0.88rem] font-semibold uppercase tracking-[0.18em] text-[#111111]">{card.title}</h3>
+                  <p className="mt-3 text-[0.92rem] leading-[1.7] text-[#4e4b45]">{card.description}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>

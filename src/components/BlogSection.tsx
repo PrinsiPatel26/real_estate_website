@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
-import { blogs } from '../data/blogs';
+import { useCmsData } from '../cms/CmsDataContext';
 import { BlogCard } from './BlogCard';
 
 export function BlogSection() {
+  const { blogs } = useCmsData();
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(blogs.length > 1);

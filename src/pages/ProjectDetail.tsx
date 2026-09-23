@@ -9,7 +9,7 @@ import {
   InfoIcon } from
 'lucide-react';
 import { useSeo } from '../hooks/useSeo';
-import { projectBySlug, projects } from '../data/projects';
+import { useCmsData } from '../cms/CmsDataContext';
 import {
   brand,
   callLink,
@@ -24,6 +24,7 @@ import { ProjectGallery } from '../components/Lightbox';
 import { Reveal, GoldLine } from '../components/Reveal';
 import { ProjectGrid } from '../components/ProjectCard';
 import { BrochureLeadModal } from '../components/BrochureLeadModal';
+import { getProjectGallery, getProjectHero, normalizeProjectImages } from '../utils/projectMedia';
 
 const confidenceLabel: Record<Confidence, string> = {
   verified: 'Confirmed in supplied material',
@@ -61,7 +62,8 @@ function Block({
 
 export function ProjectDetail() {
   const { slug } = useParams<{slug: string;}>();
-  const project = slug ? projectBySlug(slug) : undefined;
+  const { projects } = useCmsData();
+  const project = slug ? projects.find((item) => item.slug === slug) : undefined;
   const formRef = useRef<HTMLDivElement>(null);
   const [brochureOpen, setBrochureOpen] = useState(false);
 
@@ -71,7 +73,7 @@ export function ProjectDetail() {
     project.name + ' | Chauhan Realtors, Gurgaon' :
     'Project | Chauhan Realtors',
     description: project ? project.tagline : 'Premium residential projects across Gurgaon.',
-    image: project ? project.card : undefined
+    image: project ? getProjectHero(project as any) : undefined
   });
 
   if (!project) return <Navigate to="/projects" replace />;
@@ -88,7 +90,7 @@ export function ProjectDetail() {
         eyebrow={project.developer}
         title={project.name}
         intro={project.tagline}
-        image={project.card}
+        image={getProjectHero(project as any)}
         crumbs={[
         { label: 'Home', to: '/' },
         { label: 'Projects', to: '/projects' },
@@ -212,7 +214,7 @@ export function ProjectDetail() {
               </Block>
 
               <Block title="Gallery" id="gallery">
-                <ProjectGallery images={project.gallery} />
+                <ProjectGallery images={getProjectGallery(project as any)} />
                 <p className="mt-4 text-[0.75rem] leading-relaxed text-[#666666]">
                   {DISCLAIMER_VISUALS}
                 </p>
@@ -309,7 +311,7 @@ export function ProjectDetail() {
               </h2>
             </Reveal>
             <div className="mt-8">
-              <ProjectGrid projects={others} />
+              <ProjectGrid projects={others} staticGrid />
             </div>
           </section>
         </div>

@@ -8,7 +8,7 @@ import {
   LinkedinIcon } from
 'lucide-react';
 import { brand, navigation, callLink, mailLink, DISCLAIMER_SHORT } from '../data/brand';
-import { projects } from '../data/projects';
+import { useCmsData } from '../cms/CmsDataContext';
 
 const socialIcon: Record<string, typeof FacebookIcon> = {
   Facebook: FacebookIcon,
@@ -23,6 +23,7 @@ const legalLinks = [
 
 
 export function Footer() {
+  const { projects } = useCmsData();
   return (
     <footer className="border-t border-[#d4af37]/30 bg-[#0a0a0a] text-white">
       <div className="footer-inner mx-auto max-w-shell px-5 py-16 lg:px-10 lg:py-20">

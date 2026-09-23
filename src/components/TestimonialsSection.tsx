@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeftIcon, ArrowRightIcon, StarIcon } from 'lucide-react';
-import { testimonials } from '../data/testimonials';
+import { useCmsData } from '../cms/CmsDataContext';
 
 interface TestimonialsSectionProps {
   fullPage?: boolean;
 }
 
 export function TestimonialsSection({ fullPage = false }: TestimonialsSectionProps) {
+  const { testimonials } = useCmsData();
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(testimonials.length > 1);

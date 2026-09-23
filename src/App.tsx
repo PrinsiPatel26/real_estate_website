@@ -19,6 +19,12 @@ import { Reviews } from './pages/Reviews';
 import { Legal } from './pages/Legal';
 import { NotFound } from './pages/NotFound';
 import { FaqSection } from './components/FaqSection';
+import { AdminAuthProvider } from './admin/AdminAuthContext';
+import { ProtectedRoute } from './components/admin/ProtectedRoute';
+import { AdminLogin } from './pages/admin/AdminLogin';
+import { AdminDashboard } from './pages/admin/AdminDashboard';
+import { AdminResourcePage } from './pages/admin/AdminResourcePage';
+import { CmsDataProvider } from './cms/CmsDataContext';
 
 const CALLBACK_POPUP_SHOWN_KEY = 'callbackPopupShown';
 
@@ -33,9 +39,11 @@ function ScrollToTop() {
 function Shell() {
   const { pathname } = useLocation();
   const isHome = pathname === '/';
+  const isAdminRoute = pathname.startsWith('/admin');
   const [enquiryOpen, setEnquiryOpen] = React.useState(false);
 
   React.useEffect(() => {
+    if (isAdminRoute) return;
     if (sessionStorage.getItem(CALLBACK_POPUP_SHOWN_KEY)) return;
 
     const delay = Math.floor(Math.random() * 3000) + 2000;
@@ -45,16 +53,16 @@ function Shell() {
     }, delay);
 
     return () => window.clearTimeout(timer);
-  }, []);
+  }, [isAdminRoute]);
 
   const openEnquiry = () => {
     sessionStorage.setItem(CALLBACK_POPUP_SHOWN_KEY, 'true');
     setEnquiryOpen(true);
   };
 
-  return (
-    <div
-      className="flex min-h-screen w-full flex-col bg-[#f8f8f6] text-[#111111]">
+  return <AdminAuthProvider>
+    <CmsDataProvider>
+    <div className="flex min-h-screen w-full flex-col bg-[#f8f8f6] text-[#111111]">
       
       <a
         href="#main"
@@ -63,10 +71,21 @@ function Shell() {
         Skip to content
       </a>
 
-      <Navbar transparentOnTop={isHome} onEnquire={openEnquiry} />
-
-      <main id="main" className="flex-1">
+      {isAdminRoute ? <main className="flex-1">
         <Routes>
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/projects" element={<AdminResourcePage />} />
+            <Route path="/admin/blogs" element={<AdminResourcePage />} />
+          </Route>
+          <Route path="*" element={<AdminLogin />} />
+        </Routes>
+      </main> : <>
+        <Navbar transparentOnTop={isHome} onEnquire={openEnquiry} />
+        <main id="main" className="flex-1">
+          <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
@@ -82,16 +101,19 @@ function Shell() {
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/legal/:doc" element={<Legal />} />
           <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
+          </Routes>
+        </main>
 
-      <FaqSection />
-      <Footer />
+        <FaqSection />
+        <Footer />
 
-      <WhatsAppButton />
-      <MobileBottomCTA />
-      <EnquiryModal open={enquiryOpen} onClose={() => setEnquiryOpen(false)} />
-    </div>);
+        <WhatsAppButton />
+        <MobileBottomCTA />
+        <EnquiryModal open={enquiryOpen} onClose={() => setEnquiryOpen(false)} />
+      </>}
+    </div>
+    </CmsDataProvider>
+  </AdminAuthProvider>;
 
 }
 
