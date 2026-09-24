@@ -4,6 +4,7 @@ import { projects as fallbackProjects } from '../data/projects';
 import { testimonials as fallbackTestimonials, Testimonial } from '../data/testimonials';
 import type { Project } from '../types/project';
 import { getPublicCollection } from '../services/api';
+import { resolveImageUrl } from '../utils/projectMedia';
 
 interface CmsDataContextValue {
   projects: Project[];
@@ -55,7 +56,7 @@ function normalizeBlogRecord(record: BlogArticle & Record<string, unknown>): Blo
     content,
     author: String(record.author ?? 'Chauhan Realtors'),
     readTime: String(record.readTime ?? ''),
-    image: String(record.image ?? '')
+    image: resolveImageUrl(String(record.image ?? ''))
   } as BlogArticle;
 }
 

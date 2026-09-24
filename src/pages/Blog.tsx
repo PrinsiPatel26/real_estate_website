@@ -7,16 +7,15 @@ import { useCmsData } from '../cms/CmsDataContext';
 import { BlogCard } from '../components/BlogCard';
 import { Reveal } from '../components/Reveal';
 
-const categories = ['All', 'Property Guide', 'Gurgaon', 'Investment', 'Home Buying', 'Market Insights', 'Legal & Documentation'];
-
 export function Blog() {
   const { blogs } = useCmsData();
   const [category, setCategory] = useState('All');
+  const categories = ['All', ...Array.from(new Set(blogs.map((article) => article.category).filter(Boolean)))];
 
   useSeo({ title: 'Real Estate Insights | Chauhan Realtors', description: 'Market perspectives, property guidance and practical insights for smarter real estate decisions.' });
   const filtered = category === 'All' ? blogs : blogs.filter((article) => article.category === category);
-  const featured = filtered[0];
-  const remaining = filtered.slice(1);
+  const featured = filtered.find((article) => article.isFeatured) || filtered[0];
+  const remaining = filtered.filter((article) => article !== featured);
 
 
   return <>

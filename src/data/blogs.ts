@@ -8,6 +8,7 @@ export interface BlogArticle {
   readTime: string;
   image: string;
   content: string[];
+  isFeatured?: boolean;
 }
 
 const images = {
