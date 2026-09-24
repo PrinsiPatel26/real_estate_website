@@ -112,7 +112,12 @@ export function createContentRouter(Model, { slug = false } = {}) {
       const validation = validationMessage(error);
       if (duplicate) return res.status(409).json({ success: false, message: duplicateSlugMessage(Model) });
       if (validation) return res.status(400).json({ success: false, message: validation });
-      return res.status(500).json({ success: false, message: Model.modelName === 'Project' ? 'Failed to create project.' : 'Unable to create content' });
+      return res.status(500).json({
+        success: false,
+        message: Model.modelName === 'Project'
+          ? (error instanceof Error ? error.message : 'Failed to create project.')
+          : 'Unable to create content'
+      });
     }
   });
 
