@@ -18,22 +18,10 @@ export function ApproachSection() {
           <h2 className="mt-4 font-display text-[2.5rem] font-medium leading-[1.08] !text-white sm:text-[3.5rem]">A clearer way forward.</h2>
         </div>
         <div className="mt-10 flex flex-col gap-6 md:gap-8 lg:gap-0">
-          <div className="mx-auto hidden w-full max-w-5xl items-center justify-between gap-2 sm:gap-4 lg:flex lg:gap-6">
-            {steps.map((_, index) => (
-              <React.Fragment key={index}>
-                <span className="h-2.5 w-2.5 rounded-full bg-[#d4af37] shadow-[0_0_0_4px_rgba(212,175,55,0.12)]" aria-hidden="true" />
-                {index < steps.length - 1 && <span className="hidden h-px flex-1 bg-[#d4af37]/35 lg:block" aria-hidden="true" />}
-              </React.Fragment>
-            ))}
-          </div>
-          <ol className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-5">
+          <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
             {steps.map(([title, text], index) => (
               <Reveal as="li" key={title} delay={index * 0.06} className="relative border border-white/12 bg-white/[0.02] p-5 text-left lg:p-6">
-                <div className="hidden items-center gap-3 lg:flex">
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#d4af37]" aria-hidden="true" />
-                  <span className="h-px flex-1 bg-[#d4af37]/30" aria-hidden="true" />
-                </div>
-                <h3 className="mt-0 font-display text-2xl font-medium !text-white lg:mt-5">{title}</h3>
+                <h3 className="mt-0 font-display text-2xl font-medium !text-white">{title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-white/60">{text}</p>
               </Reveal>
             ))}
