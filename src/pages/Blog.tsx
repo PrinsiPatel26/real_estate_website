@@ -16,11 +16,12 @@ export function Blog() {
   const filtered = category === 'All' ? blogs : blogs.filter((article) => article.category === category);
   const featured = filtered.find((article) => article.isFeatured) || filtered[0];
   const remaining = filtered.filter((article) => article !== featured);
+  const fallbackFor = (article: typeof blogs[number]) => fallbackBlogs.find((fallback) => fallback.slug === article.slug)?.image || fallbackBlogs[0].image;
 
 
   return <>
     <section className="relative flex min-h-[48svh] items-end overflow-hidden bg-[#0b0b0b] pb-14 pt-32 text-white sm:pb-20 lg:min-h-[52svh] lg:pb-24">
-      <img src={blogs[0]?.image || fallbackBlogs[0].image} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-30" />
+      <img src={blogs[0]?.image || fallbackBlogs[0].image} onError={(event) => { const fallback = blogs[0] ? fallbackFor(blogs[0]) : fallbackBlogs[0].image; if (event.currentTarget.src !== new URL(fallback, window.location.origin).href) event.currentTarget.src = fallback; }} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-30" />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.9),rgba(0,0,0,0.52)_65%,rgba(0,0,0,0.75))]" aria-hidden="true" />
       <div className="relative mx-auto w-[calc(100%-2rem)] max-w-[1280px] sm:w-[calc(100%-5rem)]">
         <p className="eyebrow text-[#d4af37]">Real Estate Insights</p>
@@ -40,7 +41,7 @@ export function Blog() {
 
         {featured ? <Reveal>
           <article className="mt-12 grid overflow-hidden border border-[#b48c32]/25 bg-[#f7f5f0] lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-            <Link to={`/blog/${featured.slug}`} className="group block overflow-hidden"><img src={featured.image} alt={featured.title} className="aspect-[16/10] h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" /></Link>
+            <Link to={`/blog/${featured.slug}`} className="group block overflow-hidden"><img src={featured.image} onError={(event) => { const fallback = fallbackFor(featured); if (event.currentTarget.src !== new URL(fallback, window.location.origin).href) event.currentTarget.src = fallback; }} alt={featured.title} className="aspect-[16/10] h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" /></Link>
             <div className="flex flex-col justify-center p-7 sm:p-10 lg:p-12">
               <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-[#c9a227]">{featured.category}</p>
               <h2 className="mt-5 font-display text-[2rem] font-medium leading-[1.12] text-[#151515] sm:text-[2.7rem]"><Link to={`/blog/${featured.slug}`} className="transition-colors hover:text-[#c9a227]">{featured.title}</Link></h2>
