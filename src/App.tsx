@@ -77,8 +77,8 @@ function Shell() {
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            <Route path="/admin/projects" element={<AdminResourcePage />} />
-            <Route path="/admin/blogs" element={<AdminResourcePage />} />
+            <Route path="/admin/projects" element={<AdminResourcePage resource="projects" />} />
+            <Route path="/admin/blogs" element={<AdminResourcePage resource="blogs" />} />
           </Route>
           <Route path="*" element={<AdminLogin />} />
         </Routes>

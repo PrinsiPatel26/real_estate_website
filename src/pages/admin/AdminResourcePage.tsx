@@ -105,8 +105,9 @@ const defaultProjectDraft = (): ProjectFormValue => normalizeProjectRecord({
   seoKeywords: ''
 });
 
-export function AdminResourcePage() {
-  const { resource = 'projects' } = useParams<{ resource: string }>();
+export function AdminResourcePage({ resource: resourceOverride }: { resource?: 'projects' | 'blogs' }) {
+  const params = useParams<{ resource: string }>();
+  const resource = resourceOverride || params.resource || 'projects';
   const { token } = useAdminAuth();
   const navigate = useNavigate();
   const [records, setRecords] = useState<RecordValue[]>([]);
