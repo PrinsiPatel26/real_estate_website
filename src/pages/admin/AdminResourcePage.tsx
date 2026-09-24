@@ -209,15 +209,6 @@ export function AdminResourcePage({ resource: resourceOverride }: { resource?: '
   const handleProjectSubmit = async (payload: ProjectFormValue) => {
     if (!token) return;
 
-    const projectSlug = String(payload.slug || '').trim().toLowerCase();
-    if (!payload._id && projectSlug) {
-      const duplicateProject = records.some((record) => String(record.slug || '').trim().toLowerCase() === projectSlug);
-      if (duplicateProject) {
-        setError('Project slug already exists. Use a different slug.');
-        return;
-      }
-    }
-
     setSaving(true);
     setError('');
     try {

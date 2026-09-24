@@ -14,6 +14,34 @@ function normalizeSlug(value) {
   return typeof value === 'string' ? value.trim().toLowerCase() : value;
 }
 
+function slugify(value) {
+  return normalizeSlug(value)
+    ?.replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .replace(/-{2,}/g, '-');
+}
+
+async function generateUniqueProjectSlug(Model, name) {
+  const baseSlug = slugify(name);
+  let candidate = baseSlug;
+  let suffix = 2;
+
+  while (candidate && await Model.exists({ slug: candidate })) {
+    candidate = `${baseSlug}-${suffix}`;
+    suffix += 1;
+  }
+
+  return candidate;
+}
+
+function isSlugDuplicateError(error) {
+  return error?.code === 11000 && (
+    error?.keyPattern?.slug === 1
+    || error?.keyValue?.slug !== undefined
+    || String(error?.index || '').toLowerCase().includes('slug')
+  );
+}
+
 function duplicateSlugMessage(Model) {
   return Model.modelName === 'Project'
     ? 'Project slug already exists. Use a different slug.'
@@ -57,8 +85,12 @@ export function createContentRouter(Model, { slug = false } = {}) {
     try {
       const payload = cleanPayload(req.body);
       if (slug) {
-        payload.slug = normalizeSlug(payload.slug);
-        if (payload.slug) {
+        if (Model.modelName === 'Project') {
+          payload.slug = await generateUniqueProjectSlug(Model, payload.name || payload.title);
+        } else {
+          payload.slug = normalizeSlug(payload.slug);
+        }
+        if (payload.slug && Model.modelName !== 'Project') {
           const existingRecord = await Model.findOne({ slug: payload.slug });
           if (existingRecord) {
             return res.status(409).json({ success: false, message: duplicateSlugMessage(Model) });
@@ -69,8 +101,9 @@ export function createContentRouter(Model, { slug = false } = {}) {
       const record = await Model.create(payload);
       return res.status(201).json({ success: true, data: record });
     } catch (error) {
-      const message = error?.code === 11000 ? duplicateSlugMessage(Model) : 'Unable to create content';
-      return res.status(error?.code === 11000 ? 409 : 400).json({ success: false, message });
+      const duplicate = isSlugDuplicateError(error);
+      const message = duplicate ? duplicateSlugMessage(Model) : 'Unable to create content';
+      return res.status(duplicate ? 409 : 400).json({ success: false, message });
     }
   });
 
@@ -91,8 +124,9 @@ export function createContentRouter(Model, { slug = false } = {}) {
       if (!record) return res.status(404).json({ success: false, message: 'Content not found' });
       return res.json({ success: true, data: record });
     } catch (error) {
-      const message = error?.code === 11000 ? duplicateSlugMessage(Model) : 'Unable to update content';
-      return res.status(error?.code === 11000 ? 409 : 400).json({ success: false, message });
+      const duplicate = isSlugDuplicateError(error);
+      const message = duplicate ? duplicateSlugMessage(Model) : 'Unable to update content';
+      return res.status(duplicate ? 409 : 400).json({ success: false, message });
     }
   });
 
