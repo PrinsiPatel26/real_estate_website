@@ -6,6 +6,10 @@ if (!configuredBaseUrl && !isLocalhost) {
   throw new Error('VITE_API_URL is missing. Configure the deployed Express backend URL before building for production.');
 }
 
+if (configuredBaseUrl && !/^https?:\/\/[^/]+/i.test(configuredBaseUrl)) {
+  throw new Error('VITE_API_URL must be a complete http(s) URL for the deployed Express backend.');
+}
+
 export const API_BASE_URL = (configuredBaseUrl || 'http://localhost:5000').replace(/\/$/, '');
 
 export const AUTH_API_URL = `${API_BASE_URL.replace(/\/$/, '')}/api`;

@@ -5,8 +5,20 @@ import react from '@vitejs/plugin-react'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
 
-  if (mode === 'production' && !env.VITE_API_URL?.trim()) {
-    throw new Error('VITE_API_URL is required for production builds. Set it to the deployed Express backend URL.');
+  if (mode === 'production') {
+    const apiUrl = env.VITE_API_URL?.trim();
+    if (!apiUrl) {
+      throw new Error('VITE_API_URL is required for production builds. Set it to the deployed Express backend URL.');
+    }
+
+    try {
+      const parsedApiUrl = new URL(apiUrl);
+      if (!['http:', 'https:'].includes(parsedApiUrl.protocol) || !parsedApiUrl.host) {
+        throw new Error('invalid URL');
+      }
+    } catch {
+      throw new Error('VITE_API_URL must be a complete http(s) URL for the deployed Express backend.');
+    }
   }
 
   return {
