@@ -44,7 +44,7 @@ export function Navbar({ transparentOnTop = false, onEnquire }: NavbarProps) {
       
       <div className="mx-auto flex h-[72px] max-w-shell items-center justify-between gap-4 px-5 sm:h-[78px] lg:h-[82px] lg:px-10">
         <Link to="/" className="flex shrink-0 items-center gap-3" aria-label={`${brand.name} — home`}>
-          <span className="flex h-12 items-center justify-center rounded-sm border border-[#d4af37]/20 bg-[#050505]/40 px-2 shadow-sm sm:h-14 lg:h-16">
+          <span className="flex h-12 items-center justify-center px-0 sm:h-14 lg:h-16">
             <img
               src={brand.logo}
               alt={`${brand.name} logo`}

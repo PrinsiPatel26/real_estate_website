@@ -29,7 +29,7 @@ export function Footer() {
       <div className="footer-inner mx-auto max-w-shell px-5 py-16 lg:px-10 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <span className="inline-flex h-12 w-fit items-center justify-center rounded-sm border border-[#d4af37]/20 bg-[#050505]/40 px-2 shadow-sm sm:h-14 lg:h-16">
+            <span className="inline-flex h-12 w-fit items-center justify-center sm:h-14 lg:h-16">
               <img
                 src="/logo_c-removebg-preview.png"
                 alt={`${brand.name} logo`}
@@ -49,7 +49,7 @@ export function Footer() {
                     <a
                       href={item.href}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       aria-label={`${brand.name} on ${item.label} — ${item.handle}`}
                       className="flex h-10 w-10 items-center justify-center border border-[#d4af37]/30 text-[#d8b968] transition-colors duration-150 ease-lux hover:border-[#d4af37] hover:bg-[#c9a24a] hover:text-[#0a0a0a]">
                       
@@ -128,7 +128,10 @@ export function Footer() {
         <div className="mt-14 border-t border-[#d4af37]/25 pt-8">
           <p className="max-w-4xl text-[0.7rem] leading-relaxed text-white/45">{DISCLAIMER_SHORT}</p>
           <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-[0.7rem] text-white/45">© 2026 Chauhan Realtors. All Rights Reserved.</p>
+            <p className="text-[0.7rem] text-white/45">
+              © 2026 Chauhan Realtors. All Rights Reserved. | Site by:{' '}
+              <a href="https://maxreachglobal.in/" target="_blank" rel="noopener noreferrer" className="text-[#d8b968] underline-offset-2 hover:underline">MG</a>
+            </p>
             <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
               {legalLinks.map((item) =>
               <li key={item.to}>

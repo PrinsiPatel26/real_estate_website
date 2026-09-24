@@ -23,21 +23,8 @@ export function Hero() {
         
         <img src={HERO_IMAGE} alt="" className="h-full w-full object-cover object-center" />
       </motion.div>
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[#050505]/30" />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            'linear-gradient(90deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.62) 42%, rgba(0,0,0,0.42) 100%), linear-gradient(180deg, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.12) 100%)'
-        }} />
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 -z-10 h-2/3"
-        style={{ background: 'linear-gradient(to top, rgba(5,5,5,0.82) 0%, rgba(5,5,5,0.18) 100%)' }} />
-      
-
       <div className="mx-auto box-border min-w-0 w-full max-w-full max-w-shell px-5 lg:px-10">
+
         <motion.p
           className="eyebrow text-[#d4af37]"
           initial={reduce ? undefined : { opacity: 0, y: 14 }}

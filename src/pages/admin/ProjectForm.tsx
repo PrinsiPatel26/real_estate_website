@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowDownIcon, ArrowUpIcon, ImagePlusIcon, PlusIcon, SaveIcon, Trash2Icon, XIcon } from 'lucide-react';
 import { useAdminAuth } from '../../admin/AdminAuthContext';
 import { uploadProjectImage } from '../../services/api';
-import { buildProjectInitialData } from './projectFormUtils';
+import { buildProjectInitialData } from './projectFormUtils.ts';
 
 export type HighlightItem = { title: string; text: string };
 export type FactItem = { label: string; value: string; confidence: 'verified' | 'reference' | 'onRequest' };
@@ -107,52 +107,6 @@ function normalizeImageList(value: unknown): ImageItem[] {
     })
     .filter(Boolean)
     .map((image, index) => ({ ...(image as ImageItem), order: Number((image as ImageItem).order || index + 1) })) as ImageItem[];
-}
-
-function normalizeHighlightList(value: unknown): HighlightItem[] {
-  if (!Array.isArray(value)) return [{ title: '', text: '' }];
-
-  const next = value
-    .map((item) => {
-      if (!item || typeof item !== 'object') return null;
-      const record = item as Record<string, unknown>;
-      const title = String(record.title ?? '').trim();
-      const text = String(record.text ?? '').trim();
-      if (!title && !text) return null;
-      return { title, text };
-    })
-    .filter(Boolean) as HighlightItem[];
-
-  return next.length ? next : [{ title: '', text: '' }];
-}
-
-function normalizeStringList(value: unknown): string[] {
-  if (!Array.isArray(value)) return [''];
-
-  const next = value
-    .map((item) => (typeof item === 'string' ? item.trim() : String(item ?? '').trim()))
-    .filter(Boolean);
-
-  return next.length ? next : [''];
-}
-
-function normalizeFactList(value: unknown): FactItem[] {
-  if (!Array.isArray(value)) return [{ label: '', value: '', confidence: 'reference' }];
-  const next = value.map((item) => {
-    const record = item && typeof item === 'object' ? item as Record<string, unknown> : {};
-    const confidence = record.confidence === 'verified' || record.confidence === 'onRequest' ? record.confidence : 'reference';
-    return { label: String(record.label ?? '').trim(), value: String(record.value ?? '').trim(), confidence } as FactItem;
-  }).filter((item) => item.label || item.value);
-  return next.length ? next : [{ label: '', value: '', confidence: 'reference' }];
-}
-
-function normalizeFloorPlanList(value: unknown): FloorPlanItem[] {
-  if (!Array.isArray(value)) return [{ label: '', note: '' }];
-  const next = value.map((item) => {
-    const record = item && typeof item === 'object' ? item as Record<string, unknown> : {};
-    return { label: String(record.label ?? '').trim(), note: String(record.note ?? '').trim() };
-  }).filter((item) => item.label || item.note);
-  return next.length ? next : [{ label: '', note: '' }];
 }
 
 export function normalizeProjectRecord(record: Partial<ProjectFormValue> = {}): ProjectFormValue {

@@ -7,8 +7,8 @@ export const brand = {
     role: 'Founder, Chauhan Realtors',
     designation: 'Founder',
     photo: "/image-1.png",
-    phone: '+917895296699',
-    phoneDisplay: '+91 78952 96699'
+    phone: '9625868606',
+    phoneDisplay: '+91 96258 68606'
   },
   whatsapp: { number: '919625868606', display: '+91 96258 68606' },
   email: 'chauhansrealtors@gmail.com',
@@ -19,7 +19,7 @@ export const brand = {
   social: [
   { label: 'Facebook', handle: 'Chauhans Realtors', href: 'https://www.facebook.com/Chauhansrealtors' },
   { label: 'Instagram', handle: '@chauhanerealtors2023', href: 'https://www.instagram.com/chauhanerealtors2023' },
-  { label: 'LinkedIn', handle: 'Chauhan Realtors', href: 'https://www.linkedin.com/in/chauhan-realtors-990908317/' }]
+  { label: 'LinkedIn', handle: 'Chauhan Realtors', href: 'https://www.linkedin.com/company/chauhan-realtors/' }]
 
 };
 

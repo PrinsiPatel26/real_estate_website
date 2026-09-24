@@ -2,16 +2,22 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 
 const developers = [
-  { name: 'DLF', logo: '/developers/download.png' },
-  { name: 'M3M', logo: '/developers/download-1.png' },
-  { name: 'Trump Towers', logo: '/developers/download-2.png' },
-  { name: 'Godrej Properties', logo: '/developers/godrej-properties-logo.png' },
-  { name: 'Smartworld', logo: '/developers/smartworl.png' },
-  { name: 'Whiteland', logo: '/developers/Whiteland-logo-1.png' },
-  { name: 'Elan', logo: '/developers/elan-logo.png' },
-  { name: 'BPTP', logo: '/developers/BPTP-scaled.webp' },
-  { name: 'Emaar', logo: '/developers/Emaar-Properties-Logo-e1713776008292.png' },
-  { name: 'Ashiana', logo: '/developers/ashiana-amarah-logo-img11012a.png' }
+  { name: 'Signature Global', logo: '/developers/download.png' },
+  { name: 'Max Estates', logo: '/developers/download-1.png' },
+  { name: 'SOBHA', logo: '/developers/download-2.png' },
+  { name: 'Ganga Realty', logo: '/developers/godrej-properties-logo.png' },
+  { name: 'Ganga Properties', logo: '/developers/smartworl.png' },
+  { name: 'Adani Realty', logo: '/developers/Whiteland-logo-1.png' },
+  { name: 'Shapoorji Pallonji', logo: '/developers/elan-logo.png' },
+  { name: 'Laburnum Developers', logo: '/developers/BPTP-scaled.webp' },
+  { name: 'Trusted Developer', logo: '/c-5.jpeg' },
+  { name: 'Trusted Developer', logo: '/c-6.jpeg' },
+  { name: 'Trusted Developer', logo: '/c-7.jpeg' },
+  { name: 'Trusted Developer', logo: '/c-8.jpeg' },
+  { name: 'Trusted Developer', logo: '/c-9.jpeg' },
+  { name: 'Trusted Developer', logo: '/c-10.jpeg' },
+  { name: 'Trusted Developer', logo: '/c-11.jpeg' },
+  { name: 'Trusted Developer', logo: '/c-12.jpeg' }
 ] as const;
 
 const AUTOPLAY_MS = 3200;
@@ -104,9 +110,9 @@ export function TrustedDeveloperNetwork() {
               style={{ transform: `translateX(-${trackOffset}px)`, transition: isTransitioning ? 'transform 500ms cubic-bezier(0.22, 1, 0.36, 1)' : 'none' }}
               onTransitionEnd={handleTransitionEnd}>
               {slides.map((developer, index) => (
-                <div key={`${developer.name}-${index}`} className="flex min-w-0 shrink-0 basis-[78%] sm:basis-[calc(33.333%-0.85rem)] lg:basis-[calc(20%-1rem)]">
+                <div key={`${developer.logo}-${index}`} className="flex min-w-0 shrink-0 basis-[78%] sm:basis-[calc(33.333%-0.85rem)] lg:basis-[calc(20%-1rem)]">
                   <div className="flex aspect-[1.8/1] w-full items-center justify-center border border-[#d4af37]/20 bg-[#f1f0ec] p-5 shadow-[0_8px_24px_rgba(17,17,17,0.04)] sm:p-6">
-                    <img src={developer.logo} alt={`${developer.name} logo`} loading="lazy" className="h-full w-full object-contain" />
+                    <img src={developer.logo} alt={developer.name} loading="lazy" className="h-full w-full object-contain" />
                   </div>
                 </div>
               ))}
@@ -125,10 +131,10 @@ export function TrustedDeveloperNetwork() {
         <div className="mt-6 flex items-center justify-center gap-2" aria-label="Developer carousel pagination">
           {developers.map((developer, index) => (
             <button
-              key={developer.name}
+              key={`${developer.logo}-${index}`}
               type="button"
               onClick={() => setActiveIndex(index)}
-              aria-label={`Show ${developer.name}`}
+              aria-label={`Show ${developer.name} ${index + 1}`}
               aria-current={displayIndex === index ? 'true' : undefined}
               className={`h-1.5 rounded-full transition-all duration-300 ${displayIndex === index ? 'w-6 bg-[#c9a227]' : 'w-1.5 bg-[#c9a227]/30 hover:bg-[#c9a227]/60'}`} />
           ))}

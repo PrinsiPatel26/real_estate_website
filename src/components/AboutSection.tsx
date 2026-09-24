@@ -21,12 +21,9 @@ export function AboutSection({ showLink = true }: {showLink?: boolean;}) {
                   className="aspect-[4/3] w-full rounded-sm object-cover" />
                 
               </div>
-              <figcaption className="mt-5 flex items-baseline gap-4">
+              <figcaption className="mt-5 flex items-center gap-4">
                 <span className="block h-px w-8 shrink-0 bg-[#c9a227]" aria-hidden="true" />
-                <span className="text-[0.78rem] leading-relaxed text-[#666666]">
-                  <span className="block text-[#111111]">{brand.founder.name}</span>
-                  {brand.founder.role}
-                </span>
+                <span className="text-[0.78rem] leading-relaxed text-[#666666]">{brand.founder.role}</span>
               </figcaption>
             </figure>
           </Reveal>

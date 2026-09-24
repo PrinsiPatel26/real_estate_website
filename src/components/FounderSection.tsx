@@ -80,9 +80,6 @@ export function FounderSection() {
                   className="aspect-[3/2] w-full rounded-sm object-cover" />
                 
               </div>
-              <figcaption className="mt-4 text-center text-[0.62rem] uppercase tracking-[0.2em] text-[#666666]">
-                {brand.founder.name} <span className="px-1 text-[#c9a227]">|</span> {brand.founder.designation}
-              </figcaption>
             </figure>
           </Reveal>
         </div>

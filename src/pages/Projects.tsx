@@ -18,6 +18,23 @@ function priceInLakhs(value: string | undefined): number | null {
   return amount > 1000 ? amount / 100000 : amount;
 }
 
+function normalizeProjectStatus(value: string | undefined): string {
+  const raw = String(value ?? '').trim();
+  if (!raw) return 'Unknown';
+
+  const normalized = raw.toLowerCase().replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
+
+  if (normalized.includes('ready to move') || normalized.includes('ready tomove') || normalized.includes('ready_to_move') || normalized.includes('readytomove')) {
+    return 'Ready to Move';
+  }
+
+  if (normalized.includes('under construction') || normalized.includes('underconstruction')) {
+    return 'Under Construction';
+  }
+
+  return raw;
+}
+
 export function Projects() {
   const { projects } = useCmsData();
   const [search, setSearch] = useState('');
@@ -26,14 +43,15 @@ export function Projects() {
   const [budget, setBudget] = useState('All');
 
   const projectTypes = useMemo(() => ['All', ...Array.from(new Set(projects.map((project) => getProjectType(project)).filter(Boolean)))], [projects]);
-  const projectStatuses = useMemo(() => ['All', ...Array.from(new Set(projects.map((project) => String(project.status || '').trim()).filter(Boolean)))], [projects]);
+  const projectStatuses = useMemo(() => ['All', ...Array.from(new Set(projects.map((project) => normalizeProjectStatus(project.status)).filter(Boolean)))], [projects]);
   const filteredProjects = useMemo(() => {
     const query = search.trim().toLowerCase();
     return projects.filter((project) => {
       const searchable = [project.name, project.title, project.developer, project.location, project.tagline, project.shortDescription].filter(Boolean).join(' ').toLowerCase();
       const price = priceInLakhs(project.price);
       const matchesBudget = budget === 'All' || (budget === 'under-150' && price !== null && price < 150) || (budget === '150-250' && price !== null && price >= 150 && price <= 250) || (budget === '250-400' && price !== null && price > 250 && price <= 400) || (budget === 'over-400' && price !== null && price > 400);
-      return (!query || searchable.includes(query)) && (type === 'All' || getProjectType(project) === type) && (status === 'All' || String(project.status || '').trim() === status) && matchesBudget;
+      const normalizedStatus = normalizeProjectStatus(project.status);
+      return (!query || searchable.includes(query)) && (type === 'All' || getProjectType(project) === type) && (status === 'All' || normalizedStatus === status) && matchesBudget;
     });
   }, [budget, projects, search, status, type]);
   useSeo({
@@ -61,7 +79,7 @@ export function Projects() {
             <input id="project-search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search projects..." className="h-11 w-full border border-[#b48c32]/30 bg-[#fbfaf6] px-3 text-sm outline-none focus:border-[#c9a227]" />
             <div className="mt-4 grid gap-3 md:grid-cols-3">
               <label><span className="mb-2 block text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-[#7a7368]">Category</span><select value={type} onChange={(event) => setType(event.target.value)} className="h-11 w-full border border-[#b48c32]/30 bg-[#fbfaf6] px-3 text-sm outline-none focus:border-[#c9a227]"><option value="All">All Categories</option>{projectTypes.filter((item) => item !== 'All').map((item) => <option key={item} value={item}>{item}</option>)}</select></label>
-              <label><span className="mb-2 block text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-[#7a7368]">Status</span><select value={status} onChange={(event) => setStatus(event.target.value)} className="h-11 w-full border border-[#b48c32]/30 bg-[#fbfaf6] px-3 text-sm outline-none focus:border-[#c9a227]"><option value="All">All Status</option>{projectStatuses.filter((item) => item !== 'All').map((item) => <option key={item} value={item}>{item}</option>)}</select></label>
+              <label><span className="mb-2 block text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-[#7a7368]">Status</span><select value={status} onChange={(event) => setStatus(event.target.value)} className="h-11 w-full border border-[#b48c32]/30 bg-[#fbfaf6] px-3 text-sm outline-none focus:border-[#c9a227]"><option value="All">All Status</option><option value="Ready to Move">Ready to Move</option><option value="Under Construction">Under Construction</option>{projectStatuses.filter((item) => item !== 'All' && item !== 'Ready to Move' && item !== 'Under Construction').map((item) => <option key={item} value={item}>{item}</option>)}</select></label>
               <label><span className="mb-2 block text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-[#7a7368]">Budget</span><select value={budget} onChange={(event) => setBudget(event.target.value)} className="h-11 w-full border border-[#b48c32]/30 bg-[#fbfaf6] px-3 text-sm outline-none focus:border-[#c9a227]"><option value="All">Any Price</option><option value="under-150">Under ₹1.5 Cr</option><option value="150-250">₹1.5 Cr - ₹2.5 Cr</option><option value="250-400">₹2.5 Cr - ₹4 Cr</option><option value="over-400">Above ₹4 Cr</option></select></label>
             </div>
           </div>
