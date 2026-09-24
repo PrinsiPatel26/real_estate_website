@@ -38,15 +38,15 @@ async function parseResponse<T>(response: Response): Promise<T> {
 
   if (!response.ok) {
     if (response.status === 401) {
-      throw new Error('Invalid email or password');
+      throw new Error(body?.message || 'Invalid email or password');
     }
 
     if (response.status === 404) {
-      throw new Error('Authentication service not found');
+      throw new Error(body?.message || 'Request not found');
     }
 
     if (response.status >= 500) {
-      throw new Error('Authentication server error');
+      throw new Error(body?.message || 'Server error');
     }
 
     throw new Error(body?.message || 'Request failed');
