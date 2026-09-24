@@ -210,14 +210,12 @@ export function AdminResourcePage({ resource: resourceOverride }: { resource?: '
     if (!token) return;
 
     const projectSlug = String(payload.slug || '').trim().toLowerCase();
-    const duplicateProject = records.find((record) => {
-      if (payload._id && record._id === payload._id) return false;
-      return String(record.slug || '').trim().toLowerCase() === projectSlug;
-    });
-
-    if (duplicateProject) {
-      setError(`Project slug "${projectSlug}" already exists. Use a different slug.`);
-      return;
+    if (!payload._id && projectSlug) {
+      const duplicateProject = records.some((record) => String(record.slug || '').trim().toLowerCase() === projectSlug);
+      if (duplicateProject) {
+        setError('Project slug already exists. Use a different slug.');
+        return;
+      }
     }
 
     setSaving(true);
@@ -227,7 +225,8 @@ export function AdminResourcePage({ resource: resourceOverride }: { resource?: '
         await updateAdminRecord('projects', payload._id, payload, token);
         setNotice('Project updated successfully.');
       } else {
-        await createAdminRecord('projects', payload, token);
+        const { _id: _ignoredId, id: _ignoredLegacyId, ...createPayload } = payload;
+        await createAdminRecord('projects', createPayload, token);
         setNotice('Project created successfully.');
       }
 
