@@ -50,7 +50,8 @@ export function Projects() {
         title="Five addresses, each considered on its own terms."
         intro="We do not force the same level of detail onto every project. Where developer material supports a specification we present it; where a figure is a market reference, it is labelled as one."
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Projects' }]}
-        image={getProjectCard(projects[0]) || fallbackProjects[0].card} />
+        image={getProjectCard(projects[0]) || fallbackProjects[0].card}
+        fallbackImage={fallbackProjects[0].card} />
       
 
       <section aria-label="All projects" className="bg-white py-14 sm:py-16 lg:py-20">

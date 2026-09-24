@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { XIcon, ChevronLeftIcon, ChevronRightIcon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import type { GalleryImage } from '../types/project';
+import { projects as fallbackProjects } from '../data/projects';
 import { LUX } from './Reveal';
 
 interface LightboxProps {
@@ -156,9 +157,11 @@ export function ProjectGallery({ images }: {images: GalleryImage[];}) {
               src={image.src}
               alt={image.alt}
               loading="lazy"
-              className={`w-full object-cover transition-transform duration-300 ease-lux group-hover:scale-[1.05] ${
-              index === 0 ? 'aspect-[4/3] sm:h-full' : 'aspect-[4/3]'}`
-              } />
+              className={`w-full object-cover transition-transform duration-300 ease-lux group-hover:scale-[1.05] ${index === 0 ? 'aspect-[4/3] sm:h-full' : 'aspect-[4/3]'}`}
+              onError={(event) => {
+                const fallback = fallbackProjects[index % fallbackProjects.length]?.card;
+                if (fallback && event.currentTarget.src !== new URL(fallback, window.location.origin).href) event.currentTarget.src = fallback;
+              }} />
             
               <span
               aria-hidden="true"

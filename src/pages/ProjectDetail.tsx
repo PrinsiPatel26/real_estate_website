@@ -25,6 +25,7 @@ import { Reveal, GoldLine } from '../components/Reveal';
 import { ProjectGrid } from '../components/ProjectCard';
 import { BrochureLeadModal } from '../components/BrochureLeadModal';
 import { getProjectGallery, getProjectHero, normalizeProjectImages } from '../utils/projectMedia';
+import { projects as fallbackProjects } from '../data/projects';
 
 const confidenceLabel: Record<Confidence, string> = {
   verified: 'Confirmed in supplied material',
@@ -91,6 +92,7 @@ export function ProjectDetail() {
         title={project.name}
         intro={project.tagline}
         image={getProjectHero(project as any)}
+          fallbackImage={fallbackProjects.find((item) => item.slug === project.slug)?.card || fallbackProjects[0].card}
         crumbs={[
         { label: 'Home', to: '/' },
         { label: 'Projects', to: '/projects' },

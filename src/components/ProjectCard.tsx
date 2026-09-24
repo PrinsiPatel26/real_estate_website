@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import type { Project } from '../types/project';
+import { projects as fallbackProjects } from '../data/projects';
 import { getProjectCard, getProjectPriceLabel, getProjectShortDescription, getProjectTagline, getProjectTitle, getProjectType } from '../utils/projectMedia';
 
 interface ProjectCardProps { project: Project; }
@@ -22,7 +23,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       }
     }} className="group box-border flex min-h-[360px] h-auto w-full min-w-0 max-w-none shrink-0 basis-full snap-start cursor-pointer flex-col break-words overflow-hidden border border-[#d4af37]/25 bg-[#151515] text-white transition-colors duration-300 ease-lux hover:border-[#c9a24a] sm:basis-[calc(50%-0.5rem)] md:min-h-[384px] lg:basis-[calc(25%-0.75rem)]">
       <Link to={`/projects/${project.slug}`} className="relative block h-[150px] shrink-0 overflow-hidden md:h-[168px]" aria-label={`View details for ${getProjectTitle(project as any)}`}>
-        <img src={getProjectCard(project as any)} alt={`${getProjectTitle(project as any)} — ${project.location}`} loading="lazy" className="h-full w-full object-cover object-center" onError={(event) => { event.currentTarget.style.display = 'none'; }} />
+          <img src={getProjectCard(project as any)} alt={`${getProjectTitle(project as any)} — ${project.location}`} loading="lazy" className="h-full w-full object-cover object-center" onError={(event) => { const fallback = fallbackProjects.find((item) => item.slug === project.slug)?.card || fallbackProjects[0].card; if (event.currentTarget.src !== new URL(fallback, window.location.origin).href) event.currentTarget.src = fallback; }} />
         <span aria-hidden="true" className="absolute inset-0 bg-black/5" />
         <span className="absolute left-3 top-3 border border-[#d4af37]/60 bg-[#0a0a0a]/85 px-2 py-1 text-[0.58rem] uppercase tracking-[0.08em] text-[#d8b968]">{getProjectType(project as any)}</span>
       </Link>
