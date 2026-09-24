@@ -209,6 +209,17 @@ export function AdminResourcePage({ resource: resourceOverride }: { resource?: '
   const handleProjectSubmit = async (payload: ProjectFormValue) => {
     if (!token) return;
 
+    const projectSlug = String(payload.slug || '').trim().toLowerCase();
+    const duplicateProject = records.find((record) => {
+      if (payload._id && record._id === payload._id) return false;
+      return String(record.slug || '').trim().toLowerCase() === projectSlug;
+    });
+
+    if (duplicateProject) {
+      setError(`Project slug "${projectSlug}" already exists. Use a different slug.`);
+      return;
+    }
+
     setSaving(true);
     setError('');
     try {
@@ -223,7 +234,10 @@ export function AdminResourcePage({ resource: resourceOverride }: { resource?: '
       setProjectDraft(null);
       await load();
     } catch (submitError) {
-      setError(submitError instanceof Error ? submitError.message : 'Unable to save project.');
+      const message = submitError instanceof Error ? submitError.message : 'Unable to save project.';
+      setError(message === 'A record with this identifier already exists'
+        ? 'Project slug already exists. Use a different slug.'
+        : message);
     } finally {
       setSaving(false);
     }
