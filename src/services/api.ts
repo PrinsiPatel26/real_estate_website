@@ -1,18 +1,15 @@
 const configuredBaseUrl = import.meta.env.VITE_API_URL?.trim();
-const isLocalhost = typeof window !== 'undefined'
-  && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
 
-if (!configuredBaseUrl && !isLocalhost) {
-  throw new Error('VITE_API_URL is missing. Configure the deployed Express backend URL before building for production.');
+if (!configuredBaseUrl) {
+  throw new Error('VITE_API_URL is missing. Create a local .env.local with VITE_API_URL=http://localhost:5000.');
 }
 
-if (configuredBaseUrl && !/^https?:\/\/[^/]+/i.test(configuredBaseUrl)) {
-  throw new Error('VITE_API_URL must be a complete http(s) URL for the deployed Express backend.');
+if (!/^https?:\/\/[^/]+/i.test(configuredBaseUrl)) {
+  throw new Error('VITE_API_URL must be a complete http(s) URL for the Express backend.');
 }
 
-export const API_BASE_URL = (configuredBaseUrl || 'http://localhost:5000').replace(/\/$/, '');
-
-export const AUTH_API_URL = `${API_BASE_URL.replace(/\/$/, '')}/api`;
+export const API_BASE_URL = configuredBaseUrl.replace(/\/+$/, '');
+export const AUTH_API_URL = `${API_BASE_URL}/api`;
 
 export interface AdminUser {
   id: string;
@@ -33,73 +30,126 @@ interface MeResponse {
   admin: AdminUser;
 }
 
-async function parseResponse<T>(response: Response): Promise<T> {
-  const body = await response.json().catch(() => null);
+async function requestJson<T>(url: string, options: RequestInit = {}, timeoutMs = 15000): Promise<T> {
+  const start = Date.now();
+  const controller = new AbortController();
 
-  if (!response.ok) {
-    if (response.status === 401) {
-      throw new Error(body?.message || 'Invalid email or password');
+  const timeout = window.setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    if (import.meta.env.DEV) {
+      console.log('[AUTH] Request started', { url, timestamp: new Date().toISOString() });
     }
 
-    if (response.status === 404) {
-      throw new Error(body?.message || 'Request not found');
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+    });
+
+    const contentType = response.headers.get('content-type') || '';
+    let body: unknown = null;
+
+    if (contentType.includes('application/json')) {
+      body = await response.json().catch(() => null);
+    } else {
+      const text = await response.text();
+      body = text || null;
     }
 
-    if (response.status >= 500) {
-      throw new Error(body?.message || 'Server error');
+    if (import.meta.env.DEV) {
+      console.log('[AUTH] Response received', {
+        url,
+        status: response.status,
+        duration: `${Date.now() - start}ms`,
+      });
     }
 
-    throw new Error(body?.message || 'Request failed');
+    if (!response.ok) {
+      const message = typeof body === 'object' && body !== null && 'message' in body
+        ? String((body as { message?: string }).message || 'Request failed')
+        : typeof body === 'string' && body
+          ? body
+          : 'Request failed';
+
+      if (response.status === 401) {
+        throw new Error(message || 'Invalid email or password');
+      }
+
+      if (response.status === 403) {
+        throw new Error(message || 'Authentication is not permitted');
+      }
+
+      if (response.status === 404) {
+        throw new Error(message || 'Request not found');
+      }
+
+      if (response.status >= 500) {
+        throw new Error(message || 'Authentication server error');
+      }
+
+      throw new Error(message || 'Request failed');
+    }
+
+    return body as T;
+  } catch (error) {
+    if (error instanceof DOMException && error.name === 'AbortError') {
+      throw new Error('Authentication server took too long to respond.');
+    }
+
+    if (error instanceof TypeError) {
+      throw new Error('Unable to connect to authentication server. Please make sure the server is running.');
+    }
+
+    if (error instanceof Error) {
+      throw error;
+    }
+
+    throw new Error('Authentication server error');
+  } finally {
+    window.clearTimeout(timeout);
   }
-
-  return body as T;
 }
 
 export async function loginAdmin(email: string, password: string) {
-  let response: Response;
-  try {
-    response = await fetch(`${API_BASE_URL}/api/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
-    });
-  } catch {
-    throw new Error('Unable to connect to authentication server.');
-  }
+  const normalizedEmail = email.trim().toLowerCase();
 
-  return parseResponse<AuthResponse>(response);
+  return requestJson<AuthResponse>(`${API_BASE_URL}/api/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: normalizedEmail, password }),
+  });
 }
 
 export async function getCurrentAdmin(token: string) {
-  const response = await fetch(`${AUTH_API_URL}/auth/me`, {
-    headers: { Authorization: `Bearer ${token}` }
+  return requestJson<MeResponse>(`${AUTH_API_URL}/auth/me`, {
+    headers: { Authorization: `Bearer ${token}` },
   });
-
-  return parseResponse<MeResponse>(response);
 }
 
 export async function getPublicCollection<T>(resource: string) {
-  const response = await fetch(`${AUTH_API_URL}/${resource}`);
-  return parseResponse<{ success: boolean; data: T[] }>(response);
+  return requestJson<{ success: boolean; data: T[] }>(`${AUTH_API_URL}/${resource}`);
 }
 
 export async function createEnquiry(payload: Record<string, unknown>) {
-  const response = await fetch(`${AUTH_API_URL}/enquiries`, {
+  return requestJson<{ success: boolean; data: { id: string } }>(`${AUTH_API_URL}/enquiries`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
   });
-  return parseResponse<{ success: boolean; data: { id: string } }>(response);
 }
 
 export async function getAdminCollection<T>(resource: string, token: string) {
-  const response = await fetch(`${AUTH_API_URL}/${resource}/admin/all`, { headers: { Authorization: `Bearer ${token}` } });
-  return parseResponse<{ success: boolean; data: T[] }>(response);
+  return requestJson<{ success: boolean; data: T[] }>(`${AUTH_API_URL}/${resource}/admin/all`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 }
 
 export async function createAdminRecord<T>(resource: string, payload: Record<string, unknown>, token: string) {
-  const response = await fetch(`${AUTH_API_URL}/${resource}`, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify(payload) });
-  return parseResponse<{ success: boolean; data: T }>(response);
+  return requestJson<{ success: boolean; data: T }>(`${AUTH_API_URL}/${resource}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload),
+  });
 }
 
 export function uploadProjectImage(file: File, token: string, onProgress?: (progress: number) => void) {
@@ -136,16 +186,22 @@ export function uploadProjectImage(file: File, token: string, onProgress?: (prog
 }
 
 export async function updateAdminRecord<T>(resource: string, id: string, payload: Record<string, unknown>, token: string) {
-  const response = await fetch(`${AUTH_API_URL}/${resource}/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify(payload) });
-  return parseResponse<{ success: boolean; data: T }>(response);
+  return requestJson<{ success: boolean; data: T }>(`${AUTH_API_URL}/${resource}/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload),
+  });
 }
 
 export async function deleteAdminRecord(resource: string, id: string, token: string) {
-  const response = await fetch(`${AUTH_API_URL}/${resource}/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
-  return parseResponse<{ success: boolean }>(response);
+  return requestJson<{ success: boolean }>(`${AUTH_API_URL}/${resource}/${id}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` },
+  });
 }
 
 export async function getDashboardStats(token: string) {
-  const response = await fetch(`${AUTH_API_URL}/dashboard/stats`, { headers: { Authorization: `Bearer ${token}` } });
-  return parseResponse<{ success: boolean; data: { properties: number; projects: number; blogs: number; newEnquiries: number } }>(response);
+  return requestJson<{ success: boolean; data: { properties: number; projects: number; blogs: number; newEnquiries: number } }>(`${AUTH_API_URL}/dashboard/stats`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 }

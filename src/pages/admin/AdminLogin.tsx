@@ -17,25 +17,32 @@ export function AdminLogin() {
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!normalizedEmail || !password) {
+      setError('Invalid email or password');
+      return;
+    }
+
     setError('');
     setSubmitting(true);
 
     try {
-      await login(email, password);
+      await login(normalizedEmail, password);
       navigate('/admin/dashboard', { replace: true });
     } catch (loginError: unknown) {
-      const message = loginError instanceof Error ? loginError.message : 'Unable to connect to authentication server.';
+      const message = loginError instanceof Error ? loginError.message : 'Unable to connect to authentication server. Please make sure the server is running.';
 
-      if (message === 'Unable to connect to authentication server.') {
-        setError(message);
-      } else if (message === 'Authentication service not found') {
-        setError('Authentication service not found');
-      } else if (message === 'Authentication server error') {
-        setError(message);
-      } else if (message === 'Invalid email or password') {
+      if (message === 'Invalid email or password' || message === 'Authentication required') {
         setError('Invalid email or password');
+      } else if (message === 'Authentication is not permitted') {
+        setError('Authentication is not permitted');
+      } else if (message === 'Authentication server error') {
+        setError('Authentication server error');
+      } else if (message === 'Authentication server took too long to respond.') {
+        setError('Authentication server took too long to respond.');
       } else {
-        setError(message || 'Unable to connect to authentication server.');
+        setError(message || 'Unable to connect to authentication server. Please make sure the server is running.');
       }
     } finally {
       setSubmitting(false);

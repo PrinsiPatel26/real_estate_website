@@ -34,6 +34,19 @@ async function generateUniqueProjectSlug(Model, name) {
   return candidate;
 }
 
+async function generateUniqueProjectId(Model, slug) {
+  const baseId = slug || `project-${Date.now()}`;
+  let candidate = baseId;
+  let suffix = 2;
+
+  while (await Model.exists({ id: candidate })) {
+    candidate = `${baseId}-${suffix}`;
+    suffix += 1;
+  }
+
+  return candidate;
+}
+
 function isSlugDuplicateError(error) {
   return error?.code === 11000 && (
     error?.keyPattern?.slug === 1
@@ -93,6 +106,7 @@ export function createContentRouter(Model, { slug = false } = {}) {
       if (slug) {
         if (Model.modelName === 'Project') {
           payload.slug = await generateUniqueProjectSlug(Model, payload.name || payload.title);
+          payload.id = await generateUniqueProjectId(Model, payload.slug);
         } else {
           payload.slug = normalizeSlug(payload.slug);
         }

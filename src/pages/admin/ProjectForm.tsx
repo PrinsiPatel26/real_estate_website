@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowDownIcon, ArrowUpIcon, ImagePlusIcon, PlusIcon, SaveIcon, Trash2Icon, XIcon } from 'lucide-react';
 import { useAdminAuth } from '../../admin/AdminAuthContext';
 import { uploadProjectImage } from '../../services/api';
+import { buildProjectInitialData } from './projectFormUtils';
 
 export type HighlightItem = { title: string; text: string };
 export type FactItem = { label: string; value: string; confidence: 'verified' | 'reference' | 'onRequest' };
@@ -152,46 +153,6 @@ function normalizeFloorPlanList(value: unknown): FloorPlanItem[] {
     return { label: String(record.label ?? '').trim(), note: String(record.note ?? '').trim() };
   }).filter((item) => item.label || item.note);
   return next.length ? next : [{ label: '', note: '' }];
-}
-
-export function buildProjectInitialData(initialData: Partial<ProjectFormValue> = {}): ProjectFormValue {
-  return {
-    _id: initialData._id,
-    id: initialData.id,
-    name: initialData.name ?? '',
-    slug: initialData.slug ?? '',
-    developer: initialData.developer ?? '',
-    location: initialData.location ?? '',
-    city: initialData.city ?? '',
-    projectType: initialData.projectType ?? 'Residential',
-    status: initialData.status ?? 'Upcoming',
-    price: initialData.price ?? '',
-    priceLabel: initialData.priceLabel ?? '',
-    minimumPrice: initialData.minimumPrice ?? '',
-    maximumPrice: initialData.maximumPrice ?? '',
-    shortDescription: initialData.shortDescription ?? '',
-    description: initialData.description ?? '',
-    configuration: initialData.configuration ?? '',
-    area: initialData.area ?? '',
-    possession: initialData.possession ?? '',
-    address: initialData.address ?? '',
-    overview: Array.isArray(initialData.overview) ? initialData.overview : [''],
-    facts: normalizeFactList(initialData.facts),
-    connectivity: normalizeStringList(initialData.connectivity),
-    floorPlans: normalizeFloorPlanList(initialData.floorPlans),
-    verificationNote: initialData.verificationNote ?? '',
-    highlights: normalizeHighlightList(initialData.highlights),
-    amenities: normalizeStringList(initialData.amenities),
-    features: normalizeStringList(initialData.features),
-    isFeatured: Boolean(initialData.isFeatured),
-    isPublished: initialData.isPublished !== false,
-    seoTitle: initialData.seoTitle ?? '',
-    seoDescription: initialData.seoDescription ?? '',
-    seoKeywords: initialData.seoKeywords ?? '',
-    ...initialData,
-    images: normalizeImageList(initialData.images ?? initialData.gallery ?? []),
-    gallery: normalizeImageList(initialData.gallery ?? initialData.images ?? [])
-  };
 }
 
 export function normalizeProjectRecord(record: Partial<ProjectFormValue> = {}): ProjectFormValue {

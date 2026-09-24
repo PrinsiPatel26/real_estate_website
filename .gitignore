@@ -10,7 +10,15 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
-*.local
+
+# Secret environment files
+.env
+.env.local
+.env.*.local
+.env.*
+backend/.env
+backend/.env.local
+backend/.env.*.local
 
 # Editor directories and files
 .vscode/*
@@ -24,8 +32,3 @@ dist-ssr
 *.sw?
 
 .vercel
-.env*
-backend/.env
-
-.vercel
-.env*
