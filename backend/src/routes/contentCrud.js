@@ -42,6 +42,12 @@ function isSlugDuplicateError(error) {
   );
 }
 
+function validationMessage(error) {
+  if (error?.name !== 'ValidationError') return null;
+  const fields = Object.values(error.errors || {}).map((field) => field.message).filter(Boolean);
+  return fields.length ? `Project validation failed: ${fields.join('; ')}` : 'Project validation failed.';
+}
+
 function duplicateSlugMessage(Model) {
   return Model.modelName === 'Project'
     ? 'Project slug already exists. Use a different slug.'
@@ -101,9 +107,12 @@ export function createContentRouter(Model, { slug = false } = {}) {
       const record = await Model.create(payload);
       return res.status(201).json({ success: true, data: record });
     } catch (error) {
+      console.error(`CREATE ${Model.modelName} ERROR:`, error);
       const duplicate = isSlugDuplicateError(error);
-      const message = duplicate ? duplicateSlugMessage(Model) : 'Unable to create content';
-      return res.status(duplicate ? 409 : 400).json({ success: false, message });
+      const validation = validationMessage(error);
+      if (duplicate) return res.status(409).json({ success: false, message: duplicateSlugMessage(Model) });
+      if (validation) return res.status(400).json({ success: false, message: validation });
+      return res.status(500).json({ success: false, message: Model.modelName === 'Project' ? 'Failed to create project.' : 'Unable to create content' });
     }
   });
 
