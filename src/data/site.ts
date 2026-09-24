@@ -35,8 +35,7 @@ export const whyChauhan = [
 { title: 'Trust', text: 'Clear and transparent communication.' },
 { title: 'Curated Opportunities', text: 'Carefully selected property opportunities.' },
 { title: 'Personalised Guidance', text: 'Property recommendations based on buyer requirements.' },
-{ title: 'Market Knowledge', text: 'Focused understanding of Gurgaon real estate.' },
-{ title: 'Site Visit Assistance', text: 'End-to-end coordination for property visits.' }];
+{ title: 'Market Knowledge', text: 'Focused understanding of Gurgaon real estate.' }];
 
 
 /** Corridors and areas only — no travel times are stated, because none are confirmed. */
