@@ -18,9 +18,10 @@ export function ApproachSection() {
           <h2 className="mt-4 font-display text-[2.5rem] font-medium leading-[1.08] !text-white sm:text-[3.5rem]">A clearer way forward.</h2>
         </div>
         <div className="mt-10 flex flex-col gap-6 md:gap-8 lg:gap-0">
-          <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
+          <ol className="grid gap-3 md:grid-cols-3 lg:grid-cols-5">
             {steps.map(([title, text], index) => (
-              <Reveal as="li" key={title} delay={index * 0.06} className="relative border border-white/12 bg-white/[0.02] p-5 text-left lg:p-6">
+              <Reveal as="li" key={title} delay={index * 0.06} className="group relative border border-white/15 bg-[#121212] p-5 text-left transition duration-300 hover:-translate-y-1 hover:border-[#c9a227]/70 hover:bg-[#171717] lg:p-6">
+                <span className="text-[0.65rem] font-semibold tracking-[0.18em] text-[#c9a227]">{String(index + 1).padStart(2, '0')}</span>
                 <h3 className="mt-0 font-display text-2xl font-medium !text-white">{title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-white/60">{text}</p>
               </Reveal>

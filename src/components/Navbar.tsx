@@ -29,8 +29,10 @@ export function Navbar({ transparentOnTop = false, onEnquire }: NavbarProps) {
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
+    document.body.classList.toggle('mobile-menu-open', open);
     return () => {
       document.body.style.overflow = '';
+      document.body.classList.remove('mobile-menu-open');
     };
   }, [open]);
 
@@ -38,7 +40,7 @@ export function Navbar({ transparentOnTop = false, onEnquire }: NavbarProps) {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-200 ease-lux ${
+      className={`fixed inset-x-0 top-0 transition-all duration-200 ease-lux ${open ? 'z-[10000]' : 'z-50'} ${
       solid ? 'border-b border-[#d4af37]/25 bg-[#0a0a0a] shadow-[0_10px_30px_rgba(0,0,0,0.2)]' : 'border-b border-[#d4af37]/25 bg-[rgba(10,10,10,0.84)] backdrop-blur-md'}
       `}>
       
@@ -117,7 +119,7 @@ export function Navbar({ transparentOnTop = false, onEnquire }: NavbarProps) {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? 'Close menu' : 'Open menu'}
-            className="flex h-10 w-10 items-center justify-center border border-[#d4af37]/40 bg-[#050505]/30 text-white transition-colors duration-150 ease-lux hover:border-[#d4af37] hover:text-[#d4af37] lg:hidden">
+            className="flex h-14 w-14 shrink-0 items-center justify-center border border-[#d4af37]/40 bg-[#050505]/30 text-white transition-colors duration-150 ease-lux hover:border-[#d4af37] hover:text-[#d4af37] lg:hidden">
             
             {open ? <XIcon className="h-4 w-4" aria-hidden="true" /> : <MenuIcon className="h-4 w-4" aria-hidden="true" />}
           </button>
@@ -132,9 +134,9 @@ export function Navbar({ transparentOnTop = false, onEnquire }: NavbarProps) {
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
           exit={reduce ? undefined : { opacity: 0, y: -8 }}
           transition={{ duration: 0.2, ease: LUX }}
-          className="max-h-[calc(100vh-68px)] overflow-y-auto border-t border-[#d4af37]/15 bg-[#050505]/95 lg:hidden">
+          className="pointer-events-none fixed inset-0 z-[9999] h-[100dvh] min-h-[100dvh] max-w-[100vw] overflow-hidden border-t border-[#d4af37]/15 bg-[#050505]/[.98] lg:hidden">
           
-            <nav aria-label="Mobile" className="px-5 pb-8 pt-4">
+            <nav aria-label="Mobile" className="pointer-events-auto mt-[72px] h-[calc(100%-72px)] overflow-x-hidden overflow-y-auto px-5 pb-8 pt-4">
               <ul className="divide-y divide-[#d4af37]/15">
                 {navigation.map((item) =>
               <li key={item.to}>

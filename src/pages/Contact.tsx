@@ -15,9 +15,9 @@ export function Contact() {
 
   return <>
     <section className="relative flex min-h-[48svh] items-end overflow-hidden bg-[#0b0b0b] pb-14 pt-32 text-white sm:pb-20 lg:min-h-[52svh] lg:pb-24">
-      <img src={projects[0].card} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-30" />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.9),rgba(0,0,0,0.55)_62%,rgba(0,0,0,0.76))]" aria-hidden="true" />
-      <div className="relative mx-auto w-[calc(100%-2rem)] max-w-[1280px] sm:w-[calc(100%-5rem)]">
+      <img src={projects[0].card} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover" />
+      <div className="image-overlay image-overlay-left" aria-hidden="true" />
+      <div className="relative z-10 mx-auto w-[calc(100%-2rem)] max-w-[1280px] sm:w-[calc(100%-5rem)]">
         <p className="eyebrow text-[#d4af37]">Contact</p>
         <span className="mt-5 block h-px w-16 bg-[#d4af37]" aria-hidden="true" />
         <h1 className="mt-7 max-w-4xl font-display text-[3rem] font-medium leading-[1.05] tracking-[-0.03em] !text-white sm:text-[4.5rem] lg:text-[5.5rem]">Let&apos;s Find Your <span className="text-[#d4af37]">Next Address.</span></h1>

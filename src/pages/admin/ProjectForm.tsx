@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowDownIcon, ArrowUpIcon, ImagePlusIcon, PlusIcon, SaveIcon, Trash2Icon, XIcon } from 'lucide-react';
 import { useAdminAuth } from '../../admin/AdminAuthContext';
-import { uploadProjectImage } from '../../services/api';
+import { getCategories, uploadProjectImage, type Category } from '../../services/api';
 import { buildProjectInitialData } from './projectFormUtils.ts';
 
 export type HighlightItem = { title: string; text: string };
@@ -538,11 +538,17 @@ function ImageManager({ label, value, onChange }: { label: string; value: ImageI
 export function ProjectForm({ mode, initialData, onCancel, onSubmit, submitting }: ProjectFormProps) {
   const [formData, setFormData] = useState<ProjectFormValue>(() => normalizeProjectRecord(initialData));
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [categories, setCategories] = useState<Category[]>([]);
   const previousAutoSlug = useRef('');
 
   useEffect(() => {
     setFormData(normalizeProjectRecord(initialData));
   }, [initialData]);
+
+  const { token } = useAdminAuth();
+  useEffect(() => {
+    getCategories().then((response) => setCategories(response.data)).catch(() => setCategories([]));
+  }, [token]);
 
   const updateField = (field: keyof ProjectFormValue, value: string | boolean | string[] | HighlightItem[] | FactItem[] | FloorPlanItem[] | ImageItem[]) => {
     setFormData((current) => {
@@ -636,12 +642,11 @@ export function ProjectForm({ mode, initialData, onCancel, onSubmit, submitting 
               </div>
 
               <div>
-                <label className={labelClass}>Project Type</label>
+                <label className={labelClass}>Category</label>
                 <select value={String(formData.projectType ?? 'Residential')} onChange={(event) => updateField('projectType', event.target.value)} className={fieldClass}>
-                  <option value="Residential">Residential</option>
-                  <option value="Commercial">Commercial</option>
-                  <option value="Plot">Plot</option>
-                  <option value="Other">Other</option>
+                  <option value="">Select category</option>
+                  {categories.map((category) => <option key={category._id} value={category.name}>{category.name}</option>)}
+                  {String(formData.projectType ?? '') && !categories.some((category) => category.name === formData.projectType) ? <option value={String(formData.projectType)}>{String(formData.projectType)} (legacy)</option> : null}
                 </select>
               </div>
 

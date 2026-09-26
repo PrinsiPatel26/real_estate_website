@@ -3,7 +3,7 @@ import { blogs as fallbackBlogs, BlogArticle } from '../data/blogs';
 import { projects as fallbackProjects } from '../data/projects';
 import { testimonials as fallbackTestimonials, Testimonial } from '../data/testimonials';
 import type { Project } from '../types/project';
-import { getPublicCollection } from '../services/api';
+import { getCategories, getPublicCollection, type Category } from '../services/api';
 import { resolveImageUrl } from '../utils/projectMedia';
 
 interface CmsDataContextValue {
@@ -12,6 +12,7 @@ interface CmsDataContextValue {
   testimonials: Testimonial[];
   loading: boolean;
   error: string | null;
+  categories: Category[];
 }
 
 function normalizeProjectRecord(record: Partial<Project> & Record<string, unknown>): Project {
@@ -66,6 +67,7 @@ const CmsDataContext = createContext<CmsDataContextValue>({
   testimonials: fallbackTestimonials,
   loading: true,
   error: null
+  ,categories: []
 });
 
 export function CmsDataProvider({ children }: { children: React.ReactNode }) {
@@ -74,6 +76,7 @@ export function CmsDataProvider({ children }: { children: React.ReactNode }) {
   const [testimonials, setTestimonials] = useState<Testimonial[]>(fallbackTestimonials);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
     let active = true;
@@ -81,12 +84,14 @@ export function CmsDataProvider({ children }: { children: React.ReactNode }) {
       getPublicCollection<Project>('projects'),
       getPublicCollection<BlogArticle>('blogs'),
       getPublicCollection<Testimonial>('testimonials')
+      ,getCategories()
     ])
-      .then(([projectResponse, blogResponse, testimonialResponse]) => {
+      .then(([projectResponse, blogResponse, testimonialResponse, categoryResponse]) => {
         if (!active) return;
         setProjects(projectResponse.data.map((project) => normalizeProjectRecord(project as Partial<Project> & Record<string, unknown>)));
         setBlogs(blogResponse.data.map((blog) => normalizeBlogRecord(blog as BlogArticle & Record<string, unknown>)));
         setTestimonials(testimonialResponse.data);
+        setCategories(categoryResponse.data);
       })
       .catch(() => {
         if (active) setError('Unable to load the latest website content.');
@@ -100,7 +105,7 @@ export function CmsDataProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  return <CmsDataContext.Provider value={{ projects, blogs, testimonials, loading, error }}>{children}</CmsDataContext.Provider>;
+  return <CmsDataContext.Provider value={{ projects, blogs, testimonials, loading, error, categories }}>{children}</CmsDataContext.Provider>;
 }
 
 export function useCmsData() {

@@ -36,13 +36,13 @@ function normalizeProjectStatus(value: string | undefined): string {
 }
 
 export function Projects() {
-  const { projects } = useCmsData();
+  const { projects, categories } = useCmsData();
   const [search, setSearch] = useState('');
   const [type, setType] = useState('All');
   const [status, setStatus] = useState('All');
   const [budget, setBudget] = useState('All');
 
-  const projectTypes = useMemo(() => ['All', ...Array.from(new Set(projects.map((project) => getProjectType(project)).filter(Boolean)))], [projects]);
+  const projectTypes = useMemo(() => categories.length ? ['All', ...categories.map((category) => category.name)] : ['All', ...Array.from(new Set(projects.map((project) => getProjectType(project)).filter(Boolean)))], [categories, projects]);
   const projectStatuses = useMemo(() => ['All', ...Array.from(new Set(projects.map((project) => normalizeProjectStatus(project.status)).filter(Boolean)))], [projects]);
   const filteredProjects = useMemo(() => {
     const query = search.trim().toLowerCase();

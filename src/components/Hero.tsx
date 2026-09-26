@@ -13,7 +13,7 @@ export function Hero() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="relative isolate flex min-h-[100svh] w-full flex-col justify-end overflow-hidden bg-[#050505] pb-10 pt-28 sm:pb-14">
+    <section className="relative isolate flex min-h-[clamp(560px,100svh,680px)] w-full flex-col justify-end overflow-hidden bg-[#050505] pb-[calc(1.5rem+var(--mobile-action-bar-height))] pt-20 sm:min-h-[clamp(600px,78svh,680px)] sm:pb-14 sm:pt-28">
       <motion.div
         aria-hidden="true"
         className="absolute inset-0 -z-20"
@@ -23,7 +23,8 @@ export function Hero() {
         
         <img src={HERO_IMAGE} alt="" className="h-full w-full object-cover object-center" />
       </motion.div>
-      <div className="mx-auto box-border min-w-0 w-full max-w-full max-w-shell px-5 lg:px-10">
+      <div aria-hidden="true" className="image-overlay image-overlay-left" />
+      <div className="relative z-10 mx-auto box-border min-w-0 w-full max-w-full max-w-shell px-5 lg:px-10">
 
         <motion.p
           className="eyebrow text-[#d4af37]"

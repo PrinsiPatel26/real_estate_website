@@ -24,17 +24,11 @@ export function PageHeader({ eyebrow, title, intro, crumbs, image, fallbackImage
   useEffect(() => setImageSource(image), [image]);
 
   return (
-    <section className="relative isolate overflow-hidden border-b border-[#e8e6e0] bg-white pb-12 pt-28 text-[#111111] sm:pb-16 sm:pt-32 lg:pt-36">
+    <section className="relative isolate overflow-hidden border-b border-[#e8e6e0] bg-white pb-10 pt-24 text-[#111111] sm:pb-16 sm:pt-32 lg:pt-36">
       {imageSource ?
       <>
           <img src={imageSource} onError={() => fallbackImage && imageSource !== fallbackImage && setImageSource(fallbackImage)} alt="" aria-hidden="true" className="absolute inset-0 -z-20 h-full w-full object-cover" />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 -z-10"
-            style={{
-              background:
-                'linear-gradient(90deg, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.30) 45%, rgba(0,0,0,0.12) 100%)'
-            }} />
+          <div aria-hidden="true" className="image-overlay image-overlay-left" />
         </> :
       null}
 
@@ -67,7 +61,7 @@ export function PageHeader({ eyebrow, title, intro, crumbs, image, fallbackImage
           <GoldLine className="mt-5" width="3.5rem" />
         </Reveal>
         <Reveal delay={0.08}>
-          <h1 className={`mt-6 max-w-3xl font-display text-[2.3rem] font-light leading-[1.02] tracking-[-0.03em] ${imageSource ? 'text-white' : 'text-[#111111]'} sm:text-[3.2rem] lg:text-[4rem]`}>
+          <h1 className={`mt-6 max-w-3xl font-display text-[clamp(2.1rem,9vw,3rem)] font-light leading-[1.02] tracking-[-0.03em] ${imageSource ? 'text-white' : 'text-[#111111]'} sm:text-[3.2rem] lg:text-[4rem]`}>
             {title}
           </h1>
         </Reveal>

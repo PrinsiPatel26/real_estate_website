@@ -18,6 +18,15 @@ export interface AdminUser {
   role: 'admin';
 }
 
+export interface Category {
+  _id: string;
+  name: string;
+  slug: string;
+  status?: 'active' | 'inactive';
+  propertyCount?: number;
+  createdAt?: string;
+}
+
 interface AuthResponse {
   success: boolean;
   message: string;
@@ -128,6 +137,34 @@ export async function getCurrentAdmin(token: string) {
 
 export async function getPublicCollection<T>(resource: string) {
   return requestJson<{ success: boolean; data: T[] }>(`${AUTH_API_URL}/${resource}`);
+}
+
+export async function getCategories() {
+  return requestJson<{ success: boolean; data: Category[] }>(`${AUTH_API_URL}/categories`);
+}
+
+export async function getAdminCategories(token: string) {
+  return requestJson<{ success: boolean; data: Category[] }>(`${AUTH_API_URL}/categories/admin/all`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
+export async function createCategory(payload: { name: string; status: 'active' | 'inactive' }, token: string) {
+  return requestJson<{ success: boolean; data: Category }>(`${AUTH_API_URL}/categories`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify(payload)
+  });
+}
+
+export async function updateCategory(id: string, payload: { name: string; status: 'active' | 'inactive' }, token: string) {
+  return requestJson<{ success: boolean; data: Category }>(`${AUTH_API_URL}/categories/${id}`, {
+    method: 'PUT', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }, body: JSON.stringify(payload)
+  });
+}
+
+export async function deleteCategory(id: string, token: string) {
+  return requestJson<{ success: boolean }>(`${AUTH_API_URL}/categories/${id}`, {
+    method: 'DELETE', headers: { Authorization: `Bearer ${token}` }
+  });
 }
 
 export async function createEnquiry(payload: Record<string, unknown>) {

@@ -126,7 +126,7 @@ export function NavbarProjectSearch({ onNavigate }: NavbarProjectSearchProps) {
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
         aria-label={open ? 'Close project search' : 'Search projects'}
-        className="flex h-10 w-10 shrink-0 items-center justify-center border border-gold/30 text-gold transition-colors duration-150 ease-lux hover:border-gold hover:bg-gold hover:text-ink-900 sm:hidden">
+        className="flex h-14 w-14 shrink-0 items-center justify-center border border-gold/30 text-gold transition-colors duration-150 ease-lux hover:border-gold hover:bg-gold hover:text-ink-900 sm:hidden">
         {open ? <XIcon className="h-4 w-4" aria-hidden="true" /> : <SearchIcon className="h-4 w-4" aria-hidden="true" />}
       </button>
 

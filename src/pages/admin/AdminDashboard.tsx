@@ -7,6 +7,7 @@ import { getDashboardStats } from '../../services/api';
 const navigation = [
   ['Dashboard', BarChart3Icon, '/admin/dashboard'],
   ['Projects', FolderKanbanIcon, '/admin/projects'],
+  ['Categories', FolderKanbanIcon, '/admin/categories'],
   ['Blogs', FileTextIcon, '/admin/blogs']
 ] as const;
 

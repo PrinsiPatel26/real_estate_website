@@ -24,6 +24,7 @@ import { ProtectedRoute } from './components/admin/ProtectedRoute';
 import { AdminLogin } from './pages/admin/AdminLogin';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 import { AdminResourcePage } from './pages/admin/AdminResourcePage';
+import { Categories } from './pages/admin/Categories';
 import { CmsDataProvider } from './cms/CmsDataContext';
 
 const CALLBACK_POPUP_SHOWN_KEY = 'callbackPopupShown';
@@ -62,7 +63,7 @@ function Shell() {
 
   return <AdminAuthProvider>
     <CmsDataProvider>
-    <div className="flex min-h-screen w-full flex-col bg-[#f8f8f6] text-[#111111]">
+    <div className="site-shell flex min-h-screen w-full flex-col bg-[#f8f8f6] text-[#111111]">
       
       <a
         href="#main"
@@ -78,6 +79,7 @@ function Shell() {
           <Route element={<ProtectedRoute />}>
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/projects" element={<AdminResourcePage resource="projects" />} />
+            <Route path="/admin/categories" element={<Categories />} />
             <Route path="/admin/blogs" element={<AdminResourcePage resource="blogs" />} />
           </Route>
           <Route path="*" element={<AdminLogin />} />

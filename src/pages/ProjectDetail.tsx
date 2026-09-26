@@ -128,7 +128,7 @@ export function ProjectDetail() {
               href={whatsappLink(siteVisitMessage(project.name))}
               target="_blank"
               rel="noreferrer"
-              className="flex h-14 items-center justify-center gap-2 border border-[#c9a227] px-7 text-[0.72rem] uppercase tracking-[0.2em] text-[#c9a227] transition-all duration-200 ease-lux hover:-translate-y-0.5 hover:bg-[#c9a227] hover:text-[#111111]">
+              className="flex h-14 w-full items-center justify-center gap-2 border border-[#c9a227] px-4 text-[0.68rem] uppercase tracking-[0.16em] text-[#c9a227] transition-all duration-200 ease-lux hover:-translate-y-0.5 hover:bg-[#c9a227] hover:text-[#111111] sm:w-auto sm:px-7 sm:text-[0.72rem] sm:tracking-[0.2em]">
               
               <CalendarCheckIcon className="h-4 w-4" aria-hidden="true" />
               Schedule Site Visit
@@ -136,7 +136,7 @@ export function ProjectDetail() {
             <button
               type="button"
               onClick={() => setBrochureOpen(true)}
-              className="flex h-14 items-center justify-center gap-2 border border-[#111111]/20 px-7 text-[0.72rem] uppercase tracking-[0.2em] text-[#111111] transition-all duration-200 ease-lux hover:-translate-y-0.5 hover:border-[#c9a227] hover:text-[#c9a227]">
+              className="flex h-14 w-full items-center justify-center gap-2 border border-[#111111]/20 px-4 text-[0.68rem] uppercase tracking-[0.16em] text-[#111111] transition-all duration-200 ease-lux hover:-translate-y-0.5 hover:border-[#c9a227] hover:text-[#c9a227] sm:w-auto sm:px-7 sm:text-[0.72rem] sm:tracking-[0.2em]">
               
               <DownloadIcon className="h-4 w-4" aria-hidden="true" />
               Download Brochure
@@ -145,10 +145,10 @@ export function ProjectDetail() {
         </div>
       </div>
 
-      <div className="bg-[#faf9f6] pb-28 pt-20 sm:pb-32 sm:pt-24">
+      <div className="bg-[#faf9f6] pb-24 pt-14 sm:pb-32 sm:pt-24">
         <div className="mx-auto max-w-shell px-5 lg:px-10">
-          <div className="grid gap-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] lg:gap-16">
-            <div className="space-y-24">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] lg:gap-16">
+            <div className="space-y-16 sm:space-y-24">
               <Block title="Overview" id="overview">
                 <div className="max-w-3xl space-y-6">
                   {project.overview.map((paragraph) =>

@@ -17,8 +17,10 @@ import { Project } from './models/Project.js';
 import { Property } from './models/Property.js';
 import { Service } from './models/Service.js';
 import { Testimonial } from './models/Testimonial.js';
+import { Category } from './models/Category.js';
 
 import { createContentRouter } from './routes/contentCrud.js';
+import categoryRoutes from './routes/category.routes.js';
 
 const app = express();
 
@@ -80,7 +82,10 @@ let databasePromise;
 
 async function initializeDatabase() {
   if (!databasePromise) {
-    databasePromise = connectDatabase().catch((error) => {
+    databasePromise = connectDatabase().then(() => Category.bulkWrite([
+      { updateOne: { filter: { name: 'Commercial' }, update: { $setOnInsert: { name: 'Commercial', slug: 'commercial', status: 'active' } }, upsert: true } },
+      { updateOne: { filter: { name: 'Residential' }, update: { $setOnInsert: { name: 'Residential', slug: 'residential', status: 'active' } }, upsert: true } }
+    ])).catch((error) => {
       databasePromise = undefined;
       throw error;
     });
@@ -111,6 +116,8 @@ app.use('/api/health', healthRoutes);
 ------------------------------------------------------- */
 
 app.use('/api/auth', authRoutes);
+
+app.use('/api/categories', categoryRoutes);
 
 /* -------------------------------------------------------
    Uploads

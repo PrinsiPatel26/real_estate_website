@@ -7,8 +7,8 @@ const INQUIRY_MESSAGE = 'Hello Chauhan Realtors, I would like to make a property
 
 export function MobileBottomCTA() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[9998] border-t border-[#d4af37]/25 bg-[#05080a]/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-10px_30px_rgba(0,0,0,0.22)] backdrop-blur-md md:hidden">
-      <div className="mx-auto grid h-[68px] max-w-xl grid-cols-3">
+    <div className="mobile-action-bar fixed inset-x-0 bottom-0 z-[9998] border-t border-[#d4af37]/25 bg-[#05080a]/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-10px_30px_rgba(0,0,0,0.22)] backdrop-blur-md md:hidden">
+      <div className="mx-auto grid min-h-[68px] max-w-xl grid-cols-3">
         <a
           href={whatsappLink()}
           target="_blank"
