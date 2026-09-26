@@ -28,10 +28,14 @@ export function Navbar({ transparentOnTop = false, onEnquire }: NavbarProps) {
   useEffect(() => setOpen(false), [location.pathname]);
 
   useEffect(() => {
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousDocumentOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = open ? 'hidden' : '';
+    document.documentElement.style.overflow = open ? 'hidden' : '';
     document.body.classList.toggle('mobile-menu-open', open);
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousDocumentOverflow;
       document.body.classList.remove('mobile-menu-open');
     };
   }, [open]);
@@ -63,7 +67,7 @@ export function Navbar({ transparentOnTop = false, onEnquire }: NavbarProps) {
           </span>
         </Link>
 
-        <nav aria-label="Primary" className="hidden lg:block">
+          <nav aria-label="Primary" className="hidden md:block">
           <ul className="flex items-center gap-7">
             {navigation.map((item) =>
             <li key={item.to}>
@@ -100,7 +104,7 @@ export function Navbar({ transparentOnTop = false, onEnquire }: NavbarProps) {
               event.preventDefault();
               onEnquire?.();
             }}
-            className="call-button-pulse relative hidden h-11 items-center gap-2 overflow-hidden rounded-full border border-[#d4af37] bg-[#d4af37] px-5 text-[0.7rem] font-semibold tracking-[0.04em] text-[#111111] shadow-[0_3px_12px_rgba(212,175,55,0.18)] transition-[background-color,border-color,box-shadow,color,transform] duration-300 ease-lux hover:border-[#e5c45a] hover:bg-[#e5c45a] hover:text-[#111111] hover:shadow-[0_6px_18px_rgba(212,175,55,0.25)] hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4af37] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] active:bg-[#b89425] active:shadow-[0_3px_12px_rgba(212,175,55,0.2)] active:translate-y-0 lg:flex">
+            className="call-button-pulse relative hidden h-11 items-center gap-2 overflow-hidden rounded-full border border-[#d4af37] bg-[#d4af37] px-5 text-[0.7rem] font-semibold tracking-[0.04em] text-[#111111] shadow-[0_3px_12px_rgba(212,175,55,0.18)] transition-[background-color,border-color,box-shadow,color,transform] duration-300 ease-lux hover:border-[#e5c45a] hover:bg-[#e5c45a] hover:text-[#111111] hover:shadow-[0_6px_18px_rgba(212,175,55,0.25)] hover:-translate-y-px focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4af37] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] active:bg-[#b89425] active:shadow-[0_3px_12px_rgba(212,175,55,0.2)] active:translate-y-0 md:flex">
             <PhoneIcon className="h-4 w-4" aria-hidden="true" />
             <span className="relative z-[1]">Call Now</span>
           </a>
@@ -109,7 +113,7 @@ export function Navbar({ transparentOnTop = false, onEnquire }: NavbarProps) {
             type="button"
             onClick={onEnquire}
             aria-label="Open enquiry form"
-            className="hidden h-10 items-center border border-[#d4af37] bg-[#d4af37] px-5 text-[0.68rem] uppercase tracking-[0.2em] text-[#111111] transition-colors duration-150 ease-lux hover:bg-[#e5c45a] sm:flex">
+            className="hidden h-10 items-center border border-[#d4af37] bg-[#d4af37] px-5 text-[0.68rem] uppercase tracking-[0.2em] text-[#111111] transition-colors duration-150 ease-lux hover:bg-[#e5c45a] md:flex">
 
             Schedule a Visit
           </button>
@@ -119,7 +123,7 @@ export function Navbar({ transparentOnTop = false, onEnquire }: NavbarProps) {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? 'Close menu' : 'Open menu'}
-            className="flex h-14 w-14 shrink-0 items-center justify-center border border-[#d4af37]/40 bg-[#050505]/30 text-white transition-colors duration-150 ease-lux hover:border-[#d4af37] hover:text-[#d4af37] lg:hidden">
+            className="flex h-14 w-14 shrink-0 items-center justify-center border border-[#d4af37]/40 bg-[#050505]/30 text-white transition-colors duration-150 ease-lux hover:border-[#d4af37] hover:text-[#d4af37] md:hidden">
             
             {open ? <XIcon className="h-4 w-4" aria-hidden="true" /> : <MenuIcon className="h-4 w-4" aria-hidden="true" />}
           </button>
@@ -134,10 +138,26 @@ export function Navbar({ transparentOnTop = false, onEnquire }: NavbarProps) {
           animate={reduce ? undefined : { opacity: 1, y: 0 }}
           exit={reduce ? undefined : { opacity: 0, y: -8 }}
           transition={{ duration: 0.2, ease: LUX }}
-          className="pointer-events-none fixed inset-0 z-[9999] h-[100dvh] min-h-[100dvh] max-w-[100vw] overflow-hidden border-t border-[#d4af37]/15 bg-[#050505]/[.98] lg:hidden">
+          className="mobile-menu-overlay pointer-events-none fixed inset-0 z-[99999] h-[100dvh] min-h-[100dvh] max-w-[100vw] overflow-hidden border-t border-[#d4af37]/15 bg-[#080808] md:hidden">
           
-            <nav aria-label="Mobile" className="pointer-events-auto mt-[72px] h-[calc(100%-72px)] overflow-x-hidden overflow-y-auto px-5 pb-8 pt-4">
-              <ul className="divide-y divide-[#d4af37]/15">
+          <div className="pointer-events-auto absolute inset-x-0 top-0 z-[100000] flex h-[72px] items-center justify-between border-b border-[#d4af37]/15 bg-[#080808] px-5">
+            <Link to="/" onClick={() => setOpen(false)} className="flex min-w-0 shrink items-center" aria-label={`${brand.name} — home`}>
+              <img src={brand.logo} alt={`${brand.name} logo`} className="h-12 w-auto max-w-[132px] object-contain" />
+            </Link>
+            <div className="flex shrink-0 items-center gap-3">
+              <NavbarProjectSearch onNavigate={() => setOpen(false)} />
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                aria-label="Close navigation menu"
+                className="flex h-12 w-12 items-center justify-center border border-[#d4af37]/55 bg-[#080808] text-white transition-colors duration-150 hover:bg-[#d4af37] hover:text-[#111111] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d4af37]">
+                <XIcon className="h-6 w-6" aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+          
+            <nav aria-label="Mobile" className="mobile-menu-content pointer-events-auto mt-[72px] flex h-[calc(100%-72px)] flex-col overflow-hidden px-5 pb-8 pt-4">
+              <ul className="mobile-menu-list flex min-h-0 flex-1 flex-col divide-y divide-[#d4af37]/15">
                 {navigation.map((item) =>
               <li key={item.to}>
                     <NavLink
@@ -151,7 +171,7 @@ export function Navbar({ transparentOnTop = false, onEnquire }: NavbarProps) {
                   </li>
               )}
               </ul>
-              <div className="mt-6 grid gap-3">
+              <div className="mobile-menu-actions mt-6 grid shrink-0 gap-3">
                 <button
                 type="button"
                 onClick={onEnquire}

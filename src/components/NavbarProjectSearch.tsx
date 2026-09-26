@@ -94,7 +94,7 @@ export function NavbarProjectSearch({ onNavigate }: NavbarProjectSearchProps) {
 
   return (
     <>
-      <div className="relative hidden items-center gap-2 sm:flex">
+      <div className="relative hidden items-center gap-2 md:flex">
         <motion.div
           initial={false}
           animate={{ width: open ? 260 : 0, opacity: open ? 1 : 0 }}
@@ -126,7 +126,7 @@ export function NavbarProjectSearch({ onNavigate }: NavbarProjectSearchProps) {
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
         aria-label={open ? 'Close project search' : 'Search projects'}
-        className="flex h-14 w-14 shrink-0 items-center justify-center border border-gold/30 text-gold transition-colors duration-150 ease-lux hover:border-gold hover:bg-gold hover:text-ink-900 sm:hidden">
+          className="flex h-14 w-14 shrink-0 items-center justify-center border border-gold/30 text-gold transition-colors duration-150 ease-lux hover:border-gold hover:bg-gold hover:text-ink-900 md:hidden">
         {open ? <XIcon className="h-4 w-4" aria-hidden="true" /> : <SearchIcon className="h-4 w-4" aria-hidden="true" />}
       </button>
 
@@ -137,7 +137,7 @@ export function NavbarProjectSearch({ onNavigate }: NavbarProjectSearchProps) {
             animate={reduce ? undefined : { opacity: 1, y: 0 }}
             exit={reduce ? undefined : { opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: LUX }}
-            className="absolute inset-x-0 top-full border-t border-[#e8e6e0] bg-white p-4 shadow-[0_20px_60px_rgba(17,17,17,0.08)] sm:hidden">
+            className="absolute inset-x-0 top-full border-t border-[#e8e6e0] bg-white p-4 shadow-[0_20px_60px_rgba(17,17,17,0.08)] md:hidden">
             <div className="relative">
               <SearchIcon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#c9a227]" aria-hidden="true" />
               <input
